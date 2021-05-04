@@ -25,17 +25,17 @@ public class UnicProcessController extends Thread implements IUnicProcessControl
     @Override
     public void run() {
         try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(1000, 9000 + 1));
+            Thread.sleep(ThreadLocalRandom.current().nextInt(1000, 2000 + 1));
             int randomNumberInt = randomNumber.nextInt(2);
             if (randomNumberInt == 1) {
-                Exception error = interruptProvider.getRandomInterrupt();
+                String error = interruptProvider.getRandomInterrupt();
                 process.setExceeption(error);
-                throw error;
+                throw new Exception();
             }
         } catch (Exception e) {
-            System.out.println("---------- EXCEPTION ---------");
+            System.out.println("---------- INTERRUPT ---------");
             System.out.println("ID DO PROCESSO: " +process.getId());
-            System.out.println(e.toString());
+            System.out.println(process.getException());
             System.out.println("------------------------------");
             hasException = true;
         }

@@ -85,8 +85,8 @@ public class ProcessController implements IProcessController{
     }
 
     private void runProcess(Process process) {
-        processArrayExecution.add(process);
         processArrayReady.remove(process);
+        processArrayExecution.add(process);
         UnicProcessController unicProcessController = new UnicProcessController(process);
         unicProcessController.start();
         try {
@@ -106,7 +106,7 @@ public class ProcessController implements IProcessController{
 
     private void runInterrupt(Process process) {
         try {
-            Thread.sleep(ThreadLocalRandom.current().nextInt(1000, 9000 + 1));
+            Thread.sleep(ThreadLocalRandom.current().nextInt(1000, 3000 + 1));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

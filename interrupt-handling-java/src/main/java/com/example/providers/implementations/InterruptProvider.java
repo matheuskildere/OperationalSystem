@@ -8,25 +8,22 @@ import java.util.List;
 import com.example.providers.IInterruptProvider;
 
 public class InterruptProvider implements IInterruptProvider {
-    private List<Exception> exceptionsList;
+    private List<String> interruptList;
 
     public InterruptProvider(){
-        exceptionsList = new ArrayList<Exception>();
+        interruptList = new ArrayList<String>();
         createList();
     }
 
     @Override
-    public Exception getRandomInterrupt() {
-        return exceptionsList.get(getRandomNumber(exceptionsList.size() - 1));
+    public String getRandomInterrupt() {
+        return interruptList.get(getRandomNumber(interruptList.size() - 1));
     }
     
     private void createList(){
-        exceptionsList.add(new FileNotFoundException());
-        exceptionsList.add(new ParseException("ParseException", 2));
-        exceptionsList.add(new InterruptedException());
-        exceptionsList.add(new NullPointerException());
-        exceptionsList.add(new ArrayIndexOutOfBoundsException());
-        exceptionsList.add(new NumberFormatException());
+        interruptList.add("Retorno do disco rigido");
+        interruptList.add("Retorno do mouse");
+        interruptList.add("Retorno do teclado");
     }
 
     private int getRandomNumber(int length){

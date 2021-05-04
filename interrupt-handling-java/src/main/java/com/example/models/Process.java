@@ -6,7 +6,7 @@ public class Process implements Comparable<Process>{
     private int id;
     private int status;
     private int priority;
-    private Exception exception;
+    private String exception;
 
     public int getId() {
         return this.id;
@@ -16,11 +16,11 @@ public class Process implements Comparable<Process>{
         this.id = id;
     }
 
-    public Exception getException() {
+    public String getException() {
         return this.exception;
     }
 
-    public void setExceeption(Exception exception) {
+    public void setExceeption(String exception) {
         this.exception = exception;
     }
 
