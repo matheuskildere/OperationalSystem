@@ -1,7 +1,5 @@
 package com.example.models;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class Process implements Comparable<Process>{
     static int numberOfProcess = 0;
 
@@ -26,6 +24,10 @@ public class Process implements Comparable<Process>{
         this.exception = exception;
     }
 
+    public boolean hasExceeption() {
+        return this.exception != null;
+    }
+
     public int getStatus() {
         return this.status;
     }
@@ -40,14 +42,6 @@ public class Process implements Comparable<Process>{
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public void incrementPriority() {
-        priority++;
-    }
-
-    public void decrementPriority() {
-        priority--;
     }
 
     @Override

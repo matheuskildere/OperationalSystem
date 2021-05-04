@@ -19,7 +19,7 @@ public class InterruptProvider implements IInterruptProvider {
     public Exception getRandomInterrupt() {
         return exceptionsList.get(getRandomNumber(exceptionsList.size() - 1));
     }
-
+    
     private void createList(){
         exceptionsList.add(new FileNotFoundException());
         exceptionsList.add(new ParseException("ParseException", 2));
