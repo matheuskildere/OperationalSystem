@@ -11,42 +11,31 @@ import com.example.models.Process;
 public class ProcessController implements IProcessController{
     private List<Process> processArray = new ArrayList<>();
     private List<Process> processArrayReady = new ArrayList<>();
-    private List<Process> processArrayExecution = new ArrayList<>();
     private List<Process> processArrayFinished = new ArrayList<>();
     
     private Random randomNumber = new Random();
 
     private Scanner input = new Scanner(System.in);
-    private long quantum;
     private int processNumber;
-    private int maxDurationProcess;
-    private int minDurationProcess;
     
     public ProcessController(){}
     
     @Override
     public void run() {
-        System.out.print("Quantum lenght:(1000ms) ");
-        quantum = input.nextLong();
         System.out.print("Number of processes:(10) ");
         processNumber = input.nextInt();
-        System.out.print("Min duration of process:(1000ms) ");
-        minDurationProcess = input.nextInt();
-        System.out.print("Max duration of process:(9000ms) ");
-        maxDurationProcess = input.nextInt();
         createProcess();
 
-        for (int i = 0; i < processNumber; i++) {
-            if (!processArrayReady.isEmpty()) {
-                Process processIndex0 = processArrayReady();
-                runProcess(processIndex0, quantum);
-            }
+        for (int i = 0 ; i < processNumber; i++) {
+            Process processIndex0 = processArrayReady();
+            runProcess(processIndex0);
         }
+        
     }
 
     private void createProcess() {
-        for(int k=0; k<processNumber; k++){
-            Process process = new Process(randomNumber.nextInt(20), minDurationProcess, maxDurationProcess);
+        for(int k=0; k< processNumber; k++){
+            Process process = new Process(randomNumber.nextInt(20));
             processArray.add(process);
             processArrayReady.add(process);
         }
@@ -54,13 +43,17 @@ public class ProcessController implements IProcessController{
 
     private Process processArrayReady() {
         Collections.sort(processArrayReady);
+        // for (Process process : processArrayReady) {
+        //     System.out.println(process.getId()+"--"+process.getPriority());
+        // }
         return processArrayReady.get(0);
     }
 
-    private void runProcess(Process process, long quantum) {
+    private void runProcess(Process process) {
+        System.out.println("\n=====================================");
+        System.out.println("CURRENT PROCESS: " + process.getId());
         processArrayReady.remove(process);
-        processArrayExecution.add(process);
-        UnicProcessController unicProcessController = new UnicProcessController(process, quantum);
+        UnicProcessController unicProcessController = new UnicProcessController(process);
         unicProcessController.start();
         try {
             unicProcessController.join();
@@ -69,11 +62,11 @@ public class ProcessController implements IProcessController{
         }
         if (unicProcessController.wasInterrupted()) {
             Process processInterrupted = unicProcessController.getProcess();
-            processArrayExecution.remove(process);
             processArrayReady.add(processInterrupted);
+            processNumber++;
         }else{
-            processArrayExecution.remove(process);
             processArrayFinished.add(process);
+            System.out.println("FINISHED");
         }
     }
 }

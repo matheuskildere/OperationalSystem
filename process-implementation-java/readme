@@ -1,0 +1,5 @@
+This project was made for the Operating Systems discipline of the Software Engineering course.
+
+
+It consists of a simulation of process scheduling through priority scheduling.
+In priority scheduling, each process receives a priority and the execution of the processes is carried out according to the priority of the same, those that have the same priority will be executed in order of arrival.

@@ -8,8 +8,16 @@ public class Process implements Comparable<Process>{
     private int id;
     private int status;
     private int priority;
-    private long executionTime;
     private String interrupt;
+    private int operateTime;
+
+    public int getOperateTime() {
+        return this.operateTime;
+    }
+
+    public void setOperateTime(int operateTime) {
+        this.operateTime = operateTime;
+    }
 
     public String getInterrupt() {
         return this.interrupt;
@@ -21,14 +29,6 @@ public class Process implements Comparable<Process>{
 
     public int getId() {
         return this.id;
-    }
-
-    public long getExecutionTime() {
-        return executionTime;
-    }
-
-    public void setExecutionTime(long executionTime) {
-        this.executionTime = executionTime;
     }
 
     public void setId(int id) {
@@ -70,11 +70,11 @@ public class Process implements Comparable<Process>{
         }
     }
 
-    public Process(int priority, int minDuration, int maxDuration) {
+    public Process(int priority) {
         this.id = numberOfProcess;
         this.status = 0;
         this.priority = priority;
-        this.executionTime = ThreadLocalRandom.current().nextInt(minDuration, maxDuration + 1);
         numberOfProcess++;
+        operateTime = ThreadLocalRandom.current().nextInt(1000, 6000 + 1);
     }
 }

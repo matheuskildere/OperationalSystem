@@ -13,29 +13,27 @@ public class UnicProcessController extends Thread implements IUnicProcessControl
     
     private Random randomNumber = new Random();
     private Process process;
-    private long quantum;
     private boolean wasInterrupted = false;
 
-    public UnicProcessController(Process process, long quantum){
+    public UnicProcessController(Process process){
         interruptProvider = new InterruptProvider();
         this.process = process;
-        this.quantum = quantum;
         process.setStatus(1);
     }
 
     @Override
     public void run() {
         try {
-            Thread.sleep(quantum / 2);
-            process.setExecutionTime(process.getExecutionTime() - quantum / 2);
+            Thread.sleep(process.getOperateTime()/2);
+            process.setOperateTime(process.getOperateTime()/2);
             int randomNumberInt = randomNumber.nextInt(2);
             if (randomNumberInt == 1) {
                 String interrupt = interruptProvider.getRandomInterrupt();
                 process.setInterrupt(interrupt);
                 throw new Exception();
             }
-            Thread.sleep(quantum / 2);
-            process.setExecutionTime(process.getExecutionTime() - quantum / 2);
+            Thread.sleep(process.getOperateTime()/2);
+            process.setOperateTime(0);
         } catch (Exception e) {
             System.out.println("---------- INTERRUPT ---------");
             System.out.println("PROCESS ID: " +process.getId());
