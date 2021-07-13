@@ -1,4 +1,4 @@
-class AppImages {
+class AppIllustrations {
   static const path = "assets/illustrations";
 
   static String get cameraPana => "$path/cameraPana.svg";

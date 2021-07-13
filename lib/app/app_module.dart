@@ -6,7 +6,6 @@ class AppModule extends Module {
   List<Bind> get binds => [];
 
   @override
-  List<ModularRoute> get routes => [
-    ModuleRoute('/splash', module: SplashModule())
-  ];
+  List<ModularRoute> get routes =>
+      [ModuleRoute('/splash', module: SplashModule())];
 }
