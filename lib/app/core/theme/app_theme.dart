@@ -40,7 +40,7 @@ final textButtonThemeData = TextButtonThemeData(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         padding: MaterialStateProperty.all(
             EdgeInsets.symmetric(horizontal: 16, vertical: 18)),
-        elevation: MaterialStateProperty.all(6),
+        elevation: MaterialStateProperty.all(4),
         shadowColor: MaterialStateProperty.all(Colors.black.withOpacity(0.80)),
         textStyle: MaterialStateProperty.all(
             AppTypography.buttonText.copyWith(color: Colors.white))));
