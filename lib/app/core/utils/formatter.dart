@@ -15,15 +15,4 @@ class Formatter {
         .replaceAll('-', '')
         .trim();
   }
-
-  static String removeDiacritics(String word) {
-    var withDia =
-        'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
-    var withoutDia =
-        'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
-    for (int i = 0; i < withDia.length; i++) {
-      word = word.replaceAll(withDia[i], withoutDia[i]);
-    }
-    return word;
-  }
 }

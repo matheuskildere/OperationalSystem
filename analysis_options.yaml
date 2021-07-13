@@ -1,0 +1,10 @@
+include: package:lint/analysis_options.yaml
+
+linter:
+  rules:
+    prefer_const_constructors: false
+    prefer_const_declarations: false
+    avoid_classes_with_only_static_members: false
+    prefer_const_literals_to_create_immutables: false
+    invalid_assignment: false
+    avoid_print: false

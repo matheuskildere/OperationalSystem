@@ -24,11 +24,11 @@ extension AppIconsExt on String {
   }) {
     return AppIcon(
       icon: this,
-      fit: fit!,
-      color: color!,
-      width: width!,
-      height: height!,
-      onTap: onTap!,
+      fit: fit,
+      color: color,
+      width: width,
+      height: height,
+      onTap: onTap,
     );
   }
 }
