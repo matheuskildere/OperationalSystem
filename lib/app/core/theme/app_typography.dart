@@ -16,17 +16,17 @@ class AppTypography {
 
   static TextStyle h2 = const TextStyle(
     fontSize: 25,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w300,
   );
 
   static TextStyle bodyText = const TextStyle(
     fontSize: 20,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w300,
   );
 
   static TextStyle labelText = const TextStyle(
     fontSize: 18,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
   );
 
   static TextStyle buttonText = const TextStyle(
