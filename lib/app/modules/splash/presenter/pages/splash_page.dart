@@ -1,6 +1,9 @@
+import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
+import 'package:feelps/app/modules/components/scaffold/default_scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -11,13 +14,26 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
+  void initState() {
+    Future.delayed(Duration(seconds: 2), () {
+      Modular.to.pushNamed(AppRoutes.oborading);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
-      child: AppIcon(
-        icon: AppImages.logoPretaSemFundo,
-        appIconType: AppIconType.png,
-        height: AppColumns.column6(context: context),
-        width: AppColumns.column6(context: context),
+      child: DefaultScaffold(
+        withScroll: false,
+        body: Center(
+          child: AppIcon(
+            icon: AppImages.logoPretaSemFundo,
+            appIconType: AppIconType.png,
+            height: AppColumns.column6(context: context),
+            width: AppColumns.column6(context: context),
+          ),
+        ),
       ),
     );
   }
