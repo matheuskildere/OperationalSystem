@@ -5,23 +5,12 @@ enum AppIconType { svg, png }
 
 class AppIcons {
   static const path = "assets/icons";
-  static const arrowRight = '$path/arrowRight.svg';
-  static const arrowLeft = '$path/arrowLeft.svg';
-  static const backDialog = '$path/backDialog.svg';
-  static const cameraAdd = '$path/cameraAdd.svg';
-  static const checkBoxUnchecked = '$path/checkboxUnchecked.svg';
-  static const checkmark = '$path/checkmark.svg';
-  static const eyeOpened = '$path/eyeOpened.svg';
-  static const eyeClosed = '$path/eyeClosed.svg';
-  static const headset = '$path/headset.svg';
-  static const leaf = '$path/leaf.svg';
-  static const leafUnic = '$path/leafUnic.svg';
-  static const list = '$path/list.svg';
-  static const locale = '$path/locale.svg';
-  static const map = '$path/map.svg';
-  static const person = '$path/person.svg';
-  static const search = '$path/search.svg';
-  static const whatsapp = '$path/whatsapp.svg';
+  static const arrowBack = '$path/arrowBack.svg';
+  static const checkCircle = '$path/checkCircle.svg';
+  static const close = '$path/close.svg';
+  static const deliveryDining = '$path/deliveryDining.svg';
+  static const deliveryDiningRounded = '$path/deliveryDiningRounded.svg';
+  static const warning = '$path/warning.svg';
 }
 
 extension AppIconsExt on String {

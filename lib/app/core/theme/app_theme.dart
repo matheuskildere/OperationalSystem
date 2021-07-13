@@ -5,7 +5,7 @@ import 'app_colors.dart';
 
 final theme = ThemeData(
     backgroundColor: AppColors.background,
-    fontFamily: 'Baloo2',
+    fontFamily: 'Roboto',
     textTheme: AppTypography.textTheme,
     primaryColor: AppColors.primary,
     buttonColor: AppColors.primary,
