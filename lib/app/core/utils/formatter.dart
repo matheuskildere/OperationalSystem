@@ -15,4 +15,11 @@ class Formatter {
         .replaceAll('-', '')
         .trim();
   }
+
+  static String cpfWithOutFormatter(String cpf) {
+    return cpf
+        .replaceAll('.', '')
+        .replaceAll('-', '')
+        .trim();
+  }
 }

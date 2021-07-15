@@ -11,15 +11,15 @@ class RegisterRequest extends Deliveryman {
   final String cpf;
   final String photoBase64;
   
-  const RegisterRequest(
-    this.email,
-    this.password,
-    this.fullName,
-    this.phoneNumber,
-    this.birthday,
-    this.cpf,
-    this.photoBase64,
-  ): super(birthday: birthday, cpf: cpf, email: email,
+  const RegisterRequest({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.phoneNumber,
+    required this.birthday,
+    required this.cpf,
+    required this.photoBase64,
+  }): super(birthday: birthday, cpf: cpf, email: email,
     fullName: fullName, password: password,
     phoneNumber: phoneNumber, photoBase64: photoBase64);
 

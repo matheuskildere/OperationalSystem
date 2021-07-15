@@ -69,13 +69,135 @@ mixin _$RegisterController on _RegisterController, Store {
     });
   }
 
+  final _$emailAtom = Atom(name: '_RegisterController.email');
+
+  @override
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  final _$passwordAtom = Atom(name: '_RegisterController.password');
+
+  @override
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
+    });
+  }
+
+  final _$confirmPasswordAtom =
+      Atom(name: '_RegisterController.confirmPassword');
+
+  @override
+  String? get confirmPassword {
+    _$confirmPasswordAtom.reportRead();
+    return super.confirmPassword;
+  }
+
+  @override
+  set confirmPassword(String? value) {
+    _$confirmPasswordAtom.reportWrite(value, super.confirmPassword, () {
+      super.confirmPassword = value;
+    });
+  }
+
+  final _$photoAtom = Atom(name: '_RegisterController.photo');
+
+  @override
+  File? get photo {
+    _$photoAtom.reportRead();
+    return super.photo;
+  }
+
+  @override
+  set photo(File? value) {
+    _$photoAtom.reportWrite(value, super.photo, () {
+      super.photo = value;
+    });
+  }
+
+  final _$dialogDataAtom = Atom(name: '_RegisterController.dialogData');
+
+  @override
+  DialogDataEntity? get dialogData {
+    _$dialogDataAtom.reportRead();
+    return super.dialogData;
+  }
+
+  @override
+  set dialogData(DialogDataEntity? value) {
+    _$dialogDataAtom.reportWrite(value, super.dialogData, () {
+      super.dialogData = value;
+    });
+  }
+
+  final _$makeRegisterAsyncAction =
+      AsyncAction('_RegisterController.makeRegister');
+
+  @override
+  Future<void> makeRegister() {
+    return _$makeRegisterAsyncAction.run(() => super.makeRegister());
+  }
+
+  final _$getImageAsyncAction = AsyncAction('_RegisterController.getImage');
+
+  @override
+  Future<void> getImage({bool isFromGalery = true}) {
+    return _$getImageAsyncAction
+        .run(() => super.getImage(isFromGalery: isFromGalery));
+  }
+
+  final _$_RegisterControllerActionController =
+      ActionController(name: '_RegisterController');
+
+  @override
+  void formValidation() {
+    final _$actionInfo = _$_RegisterControllerActionController.startAction(
+        name: '_RegisterController.formValidation');
+    try {
+      return super.formValidation();
+    } finally {
+      _$_RegisterControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void formValidation2() {
+    final _$actionInfo = _$_RegisterControllerActionController.startAction(
+        name: '_RegisterController.formValidation2');
+    try {
+      return super.formValidation2();
+    } finally {
+      _$_RegisterControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 fullName: ${fullName},
 cpf: ${cpf},
 phoneNumber: ${phoneNumber},
-birthday: ${birthday}
+birthday: ${birthday},
+email: ${email},
+password: ${password},
+confirmPassword: ${confirmPassword},
+photo: ${photo},
+dialogData: ${dialogData}
     ''';
   }
 }

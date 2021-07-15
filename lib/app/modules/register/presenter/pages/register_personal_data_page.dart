@@ -1,9 +1,9 @@
-import 'package:feelps/app/modules/components/button/default_back_button.dart';
+import 'package:feelps/app/core/theme/app_routes.dart';
+import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:feelps/app/modules/components/components.dart';
-import 'package:feelps/app/modules/components/text/default_text_field.dart';
-import 'package:feelps/app/modules/components/text/title_subtitle_component.dart';
 import 'package:flutter/material.dart';
 import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
+import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RegisterPersonalDataPage extends StatefulWidget {
@@ -14,6 +14,7 @@ class RegisterPersonalDataPage extends StatefulWidget {
 }
 
 class _RegisterPersonalDataPageState extends ModularState<RegisterPersonalDataPage, RegisterController> {
+  final dateTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
@@ -27,23 +28,56 @@ class _RegisterPersonalDataPageState extends ModularState<RegisterPersonalDataPa
           const SizedBox(height: 40,),
           DefaultTextField(
             labelText: "Nome completo",
-            onChanged: (value)=> controller.fullName
+            action: TextInputAction.next,
+            onChanged: (value)=> controller.fullName = value
           ),
           const SizedBox(height: 20,),
           DefaultTextField(
             labelText: "CPF",
+            mask: '000.000.000-00',
+            action: TextInputAction.next,
+            onChanged: (value)=> controller.cpf = value,
           ),
           const SizedBox(height: 20,),
           DefaultTextField(
             labelText: "Número de celular",
+            mask: '(00) 00000-0000',
+            onChanged: (value)=> controller.phoneNumber = value,
           ),
           const SizedBox(height: 20,),
           DefaultTextField(
-            labelText: "Data de nascimento",
+            labelText: 'Data de nascimento',
+            readOnly: true,
+            controller: dateTextController,
+            onTap: () {
+              DatePicker.showDatePicker(
+                context,
+                maxDateTime: DateTime(DateTime.now().year - 18),
+                minDateTime: DateTime(1921),
+                locale: DateTimePickerLocale.pt_br,
+                dateFormat: 'dd-MMMM-yyyy',
+                onConfirm: (dateTime, selectedIndex) async {
+                  setState(() {
+                    controller.birthday = dateTime;
+                    dateTextController.text =
+                        DateParser.getDateString(dateTime);
+                  });
+                },
+              );
+            },
           ),
         ],
       ),
-      floatingActionButton: DefaultButton(onPressed: (){}, title: "Próximo passo"),
+      floatingActionButton: DefaultButton(onPressed: (){
+        controller.formValidation();
+        if (controller.dialogData != null) {
+          DefaultAlertDialog.show(
+            barrierDismissible: true,
+            dialogData: controller.dialogData!);
+        }else{
+          Modular.to.pushNamed(AppRoutes.registerUserdata);
+        }
+      }, title: "Próximo passo"),
     );
   }
 }

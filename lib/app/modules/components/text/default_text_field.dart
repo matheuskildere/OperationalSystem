@@ -157,9 +157,12 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                         padding: EdgeInsets.only(top: 10),
                         child: widget.suffixText)
                     : null,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color:  _controller.text.isNotEmpty ? AppColors.black : AppColors.white)),
             disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: AppColors.white)),
+                borderSide: BorderSide(color:  _controller.text.isNotEmpty ? AppColors.black : AppColors.white)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: _controller.text.isNotEmpty ? AppColors.black : AppColors.white)),
