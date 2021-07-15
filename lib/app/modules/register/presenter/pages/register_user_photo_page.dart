@@ -1,9 +1,4 @@
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
-import 'package:feelps/app/core/theme/app_colors.dart';
-import 'package:feelps/app/core/theme/app_icons.dart';
-import 'package:feelps/app/core/theme/app_illustrations.dart';
-import 'package:feelps/app/core/theme/app_shadows.dart';
-import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:feelps/app/modules/register/presenter/pages/components/photo_component.dart';
 import 'package:flutter/material.dart';
