@@ -2,6 +2,7 @@ import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -75,7 +76,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
           Column(
             children: [
-              DefaultButton(onPressed: () {}, title: 'Iniciar'),
+              DefaultButton(onPressed: () {
+                Modular.to.pushNamed(AppRoutes.register);
+              }, title: 'Iniciar'),
               SizedBox(
                 height: 15,
               ),
