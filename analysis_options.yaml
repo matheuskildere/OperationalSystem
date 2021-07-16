@@ -8,3 +8,5 @@ linter:
     prefer_const_literals_to_create_immutables: false
     invalid_assignment: false
     avoid_print: false
+    annotate_overrides: false
+    overridden_fields: false
