@@ -8,7 +8,7 @@ class DefaultAlertDialog {
   static Future show(
           {List<DefaultButton>? listButtons,
           required DialogDataEntity dialogData,
-          bool barrierDismissible = false}) => 
+          bool barrierDismissible = false}) =>
       asuka.showDialog(
           barrierDismissible: barrierDismissible,
           builder: (context) => Dialog(
@@ -24,10 +24,13 @@ class DefaultAlertDialog {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AppIcon(icon: dialogData.icon ?? AppIcons.warning,
+                          AppIcon(
+                            icon: dialogData.icon ?? AppIcons.warning,
                             color: AppColors.warning,
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Flexible(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -48,13 +51,14 @@ class DefaultAlertDialog {
                                       .bodyText1!
                                       .copyWith(color: AppColors.grey),
                                   textAlign: TextAlign.start,
-                                ),                 
+                                ),
                               ],
                             ),
                           ),
-                          AppIcon(icon: AppIcons.close,
+                          AppIcon(
+                            icon: AppIcons.close,
                             color: AppColors.grey,
-                            onTap: (){
+                            onTap: () {
                               Navigator.pop(context);
                             },
                           ),

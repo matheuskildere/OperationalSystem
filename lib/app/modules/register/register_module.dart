@@ -1,4 +1,3 @@
-
 import 'package:feelps/app/modules/register/presenter/pages/register_personal_data_page.dart';
 import 'package:feelps/app/modules/register/presenter/pages/register_user_data_page.dart';
 import 'package:feelps/app/modules/register/presenter/pages/register_user_photo_page.dart';
@@ -9,9 +8,9 @@ import 'package:feelps/app/modules/register/presenter/controller/register_contro
 class RegisterModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind((i)=> RegisterController(i())),
-    Bind<IRegisterRepository>((i)=> RegisterRepository(i(), i(), i()))
-  ];
+        Bind((i) => RegisterController(i())),
+        Bind<IRegisterRepository>((i) => RegisterRepository(i(), i(), i()))
+      ];
 
   @override
   List<ModularRoute> get routes => [

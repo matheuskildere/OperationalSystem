@@ -16,7 +16,7 @@ class DefaultTextField extends StatefulWidget {
   final TextInputType? type;
   final TextInputAction? action;
   final Function()? onTap;
-  final String? errorText;
+  final bool? hasError;
   final FocusNode? focusNode;
   final int? maxLines;
   final Color? labelColor;
@@ -44,7 +44,7 @@ class DefaultTextField extends StatefulWidget {
       this.mask = '',
       this.controller,
       this.onTap,
-      this.errorText,
+      this.hasError = false,
       this.type,
       this.action,
       this.focusNode,
@@ -133,19 +133,19 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
             .caption!
             .copyWith(color: AppColors.black),
         decoration: InputDecoration(
-            errorText: widget.errorText,
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             hintText: widget.hintText,
+            errorText: widget.hasError! ? '' : null,
+            errorStyle: TextStyle(height: 0),
             hintStyle: Theme.of(context)
                 .textTheme
                 .bodyText2!
                 .copyWith(color: widget.labelColor ?? AppColors.grey),
             labelText: widget.labelText,
-            labelStyle: Theme.of(context)
-                .textTheme
-                .bodyText2!
-                .copyWith(color: _controller.text.isNotEmpty ?
-                   AppColors.black : AppColors.grey),
+            labelStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+                color: _controller.text.isNotEmpty
+                    ? AppColors.black
+                    : AppColors.grey),
             suffixIcon: widget.suffixIcon != null
                 ? AppIcon(
                     icon: widget.suffixIcon!,
@@ -157,15 +157,30 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                         padding: EdgeInsets.only(top: 10),
                         child: widget.suffixText)
                     : null,
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                    color: _controller.text.isNotEmpty
+                        ? AppColors.error
+                        : AppColors.black)),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color:  _controller.text.isNotEmpty ? AppColors.black : AppColors.white)),
+                borderSide: BorderSide(
+                    color: _controller.text.isNotEmpty
+                        ? AppColors.black
+                        : AppColors.white)),
             disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color:  _controller.text.isNotEmpty ? AppColors.black : AppColors.white)),
+                borderSide: BorderSide(
+                    color: _controller.text.isNotEmpty
+                        ? AppColors.black
+                        : AppColors.white)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: _controller.text.isNotEmpty ? AppColors.black : AppColors.white)),
+                borderSide: BorderSide(
+                    color: _controller.text.isNotEmpty
+                        ? AppColors.black
+                        : AppColors.white)),
             focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: AppColors.error)),

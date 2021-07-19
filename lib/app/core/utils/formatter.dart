@@ -17,9 +17,6 @@ class Formatter {
   }
 
   static String cpfWithOutFormatter(String cpf) {
-    return cpf
-        .replaceAll('.', '')
-        .replaceAll('-', '')
-        .trim();
+    return cpf.replaceAll('.', '').replaceAll('-', '').trim();
   }
 }

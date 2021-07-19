@@ -12,8 +12,5 @@ class DialogDataEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-    title,
-    description
-  ];
+  List<Object?> get props => [title, description];
 }

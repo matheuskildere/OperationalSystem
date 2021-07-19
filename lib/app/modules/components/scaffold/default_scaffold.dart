@@ -5,10 +5,11 @@ class DefaultScaffold extends StatelessWidget {
   final Widget body;
   final Widget? floatingActionButton;
   final bool withScroll;
-  const DefaultScaffold({Key? key, 
-    required this.body, 
-    this.withScroll = true,
-    this.floatingActionButton})
+  const DefaultScaffold(
+      {Key? key,
+      required this.body,
+      this.withScroll = true,
+      this.floatingActionButton})
       : super(key: key);
 
   @override
@@ -26,10 +27,12 @@ class DefaultScaffold extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 21),
                 child: body,
               ),
-        floatingActionButton: !_keyboardIsOpen ? Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 21),
-          child: floatingActionButton,
-        ) : null,
+        floatingActionButton: !_keyboardIsOpen
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 21),
+                child: floatingActionButton,
+              )
+            : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );

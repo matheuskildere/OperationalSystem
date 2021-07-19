@@ -6,11 +6,12 @@ import 'package:feelps/app/modules/register/models/register_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-abstract class IRegisterRepository{
-  Future<Either<Failure, Unit>> registerDeliveryman({required RegisterRequest data});
+abstract class IRegisterRepository {
+  Future<Either<Failure, Unit>> registerDeliveryman(
+      {required RegisterRequest data});
 }
 
-class RegisterRepository implements IRegisterRepository{
+class RegisterRepository implements IRegisterRepository {
   final FirebaseDatabase _database;
   final FirebaseAuth _auth;
   final ConnectivityService _connectivityService;
@@ -18,12 +19,13 @@ class RegisterRepository implements IRegisterRepository{
   RegisterRepository(this._auth, this._database, this._connectivityService);
 
   @override
-  Future<Either<Failure, Unit>> registerDeliveryman({required RegisterRequest data}) async {
+  Future<Either<Failure, Unit>> registerDeliveryman(
+      {required RegisterRequest data}) async {
     final result = await _connectivityService.isOnline;
     result.fold((l) {
       return Left(l);
     }, (r) {});
-    
+
     final reference = _database.reference();
 
     late UserCredential userCredential;
@@ -33,7 +35,8 @@ class RegisterRepository implements IRegisterRepository{
     } catch (e) {
       return Left(EmailAlreadyUsedError(
           title: "Atenção",
-          message: "O email informado já está cadastrado em nossa base de dados!."));
+          message:
+              "O email informado já está cadastrado em nossa base de dados!."));
     }
 
     try {
@@ -44,8 +47,10 @@ class RegisterRepository implements IRegisterRepository{
           .child(userCredential.user!.uid)
           .set(dataToSet);
     } catch (e) {
-      return Left(RegisterError(title: "Não foi possível continuar",
-        message: 'Ocorreu um erro ao realizar seu cadastro no sistema, tente novamente.'));
+      return Left(RegisterError(
+          title: "Não foi possível continuar",
+          message:
+              'Ocorreu um erro ao realizar seu cadastro no sistema, tente novamente.'));
     }
 
     return Right(unit);
