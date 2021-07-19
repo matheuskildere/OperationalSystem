@@ -31,10 +31,11 @@ class AuthRepository implements IAuthRepository {
     final reference = _database.reference();
     final user = _auth.currentUser;
 
-    if (user == null)
+    if (user == null) {
       return Left(UserNotLoggedError(
           title: "Ocorreu um erro",
           message: "Sua sessão expirou, faça login e tente novamente!"));
+    }
 
     final dataSnapshotPages =
         await reference.child("deliveryman").child(user.uid).once();
