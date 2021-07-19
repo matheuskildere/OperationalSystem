@@ -76,15 +76,19 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
           Column(
             children: [
-              DefaultButton(onPressed: () {
-                Modular.to.pushNamed(AppRoutes.register);
-              }, title: 'Iniciar'),
+              DefaultButton(
+                  onPressed: () {
+                    Modular.to.pushNamed(AppRoutes.register);
+                  },
+                  title: 'Iniciar'),
               SizedBox(
                 height: 15,
               ),
               DefaultButton(
                   invertColors: true,
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed(AppRoutes.auth);
+                  },
                   title: 'Tenho uma conta'),
               SizedBox(
                 height: 40,

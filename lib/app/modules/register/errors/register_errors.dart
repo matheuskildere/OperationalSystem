@@ -1,4 +1,3 @@
-
 import 'package:feelps/app/core/errors/failure.dart';
 
 class RegisterError extends Failure {

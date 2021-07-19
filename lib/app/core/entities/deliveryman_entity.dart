@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Deliveryman extends Equatable {
+class DeliverymanEntity extends Equatable {
   final String email;
   final String password;
   final String fullName;
@@ -9,7 +9,7 @@ class Deliveryman extends Equatable {
   final String cpf;
   final String photoBase64;
 
-  const Deliveryman({
+  const DeliverymanEntity({
     required this.email,
     required this.password,
     required this.fullName,
@@ -20,7 +20,5 @@ class Deliveryman extends Equatable {
   });
 
   @override
-  List<Object?> get props => [email,
-    password,
-    fullName];
+  List<Object?> get props => [email, password, fullName];
 }

@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:feelps/app/core/entities/deliveryman_entity.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 
-class RegisterRequest extends DeliverymanEntity {
+class DelvierymanResponse extends DeliverymanEntity {
   final String email;
   final String password;
   final String fullName;
@@ -12,7 +10,7 @@ class RegisterRequest extends DeliverymanEntity {
   final String cpf;
   final String photoBase64;
 
-  const RegisterRequest({
+  const DelvierymanResponse({
     required this.email,
     required this.password,
     required this.fullName,
@@ -29,17 +27,15 @@ class RegisterRequest extends DeliverymanEntity {
             phoneNumber: phoneNumber,
             photoBase64: photoBase64);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'email': email,
-      'password': password,
-      'fullName': fullName,
-      'phoneNumber': phoneNumber,
-      'birthday': DateParser.getDateStringEn(birthday),
-      'cpf': cpf,
-      'photoBase64': photoBase64,
-    };
+  factory DelvierymanResponse.fromMap(Map<String, dynamic> map) {
+    return DelvierymanResponse(
+      email: map['email'].toString(),
+      fullName: map['fullName'].toString(),
+      password: "",
+      phoneNumber: map['phoneNumber'].toString(),
+      birthday: DateParser.getDateTime(map['birthday'].toString()),
+      cpf: map['cpf'].toString(),
+      photoBase64: map['photoBase64'].toString(),
+    );
   }
-
-  String toJson() => json.encode(toMap());
 }
