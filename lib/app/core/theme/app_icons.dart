@@ -7,6 +7,7 @@ class AppIcons {
   static const path = "assets/icons";
   static const arrowBack = '$path/arrowBack.svg';
   static const arrowBackIOS = '$path/arrowBackIOS.svg';
+  static const cancel = '$path/cancel.svg';
   static const checkCircle = '$path/checkCircle.svg';
   static const close = '$path/close.svg';
   static const deliveryDining = '$path/deliveryDining.svg';

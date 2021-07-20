@@ -1,4 +1,6 @@
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
+import 'package:feelps/app/core/theme/app_colors.dart';
+import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/modules/auth/presenter/controller/auth_controller.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +56,22 @@ class _AuthPageState extends State<AuthPage> {
               action: TextInputAction.next,
             );
           }),
+          const SizedBox(
+            height: 11,
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
+              onTap: () => Modular.to.pushNamed(AppRoutes.recoverPassword),
+              child: Text(
+                "Esqueci minha senha",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(fontSize: 18, color: AppColors.grey),
+              ),
+            ),
+          )
         ],
       ),
       floatingActionButton: DefaultButton(

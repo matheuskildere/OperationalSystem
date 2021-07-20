@@ -27,7 +27,16 @@ abstract class _AuthController with Store {
 
   @action
   Future<void> makeLogin() async {
+    errorData = null;
     await Modular.get<AuthStore>()
         .makeLogin(data: LoginRequest(email!, password!));
+    errorData = Modular.get<AuthStore>().errorData;
+  }
+
+  @action
+  Future<void> recoverPassword() async {
+    errorData = null;
+    await Modular.get<AuthStore>().recoverPassword(email: email!);
+    errorData = Modular.get<AuthStore>().errorData;
   }
 }

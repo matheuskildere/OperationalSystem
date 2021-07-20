@@ -11,6 +11,7 @@ import 'package:firebase_database/firebase_database.dart';
 abstract class IAuthRepository {
   Future<Either<Failure, DeliverymanEntity>> loginWithEmail(
       {required LoginRequest data});
+  Future<Either<Failure, Unit>> resetPassword({required String email});
   Future<Either<Failure, DeliverymanEntity>> getCurrentUser();
   Future<Either<Failure, Unit>> logout();
 }
@@ -62,7 +63,7 @@ class AuthRepository implements IAuthRepository {
       await _auth.signInWithEmailAndPassword(
           email: data.email, password: data.password);
     } catch (e) {
-      Left(AuthError(
+      return Left(AuthError(
           title: "Atenção", message: "Email e/ou Senha incorretos!!"));
     }
     return getCurrentUser();
@@ -80,6 +81,36 @@ class AuthRepository implements IAuthRepository {
       return Left(LogoutError(
           title: "Ocorreu um erro",
           message: "Tivemos um problema ao fazer logout, tente novamente!"));
+    }
+    return Right(unit);
+  }
+
+  @override
+  Future<Either<Failure, Unit>> resetPassword({required String email}) async {
+    final result = await _connectivityService.isOnline;
+    result.fold((l) {
+      return Left(l);
+    }, (r) {});
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'invalid-email':
+          return Left(LogoutError(
+              title: "Atenção",
+              message:
+                  "Parece que você informou um e-mail incorreto. Tente novamente!"));
+        case 'user-not-found':
+          return Left(LogoutError(
+              title: "Atenção",
+              message:
+                  "Não encontramos este email em nossa base de dados, realize o cadastro para acessar a nossa aplicação!"));
+        default:
+          return Left(LogoutError(
+              title: "Atenção",
+              message:
+                  "Ocorreu um erro ao enviar o link de recuperação para sua conta, tente novamente mais tarde!"));
+      }
     }
     return Right(unit);
   }

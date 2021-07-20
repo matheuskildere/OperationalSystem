@@ -21,11 +21,20 @@ abstract class _AuthStore with Store {
 
   @action
   Future<void> makeLogin({required LoginRequest data}) async {
+    errorData = null;
     final result = await _repository.loginWithEmail(data: data);
     result.fold((l) {
       errorData = DialogDataEntity(title: l.title, description: l.message);
     }, (r) {
       deliveryman = r;
     });
+  }
+
+  @action
+  Future<void> recoverPassword({required String email}) async {
+    final result = await _repository.resetPassword(email: email);
+    result.fold((l) {
+      errorData = DialogDataEntity(title: l.title, description: l.message);
+    }, (r) {});
   }
 }
