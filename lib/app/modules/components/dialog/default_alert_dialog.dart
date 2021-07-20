@@ -26,7 +26,12 @@ class DefaultAlertDialog {
                         children: [
                           AppIcon(
                             icon: dialogData.icon ?? AppIcons.warning,
-                            color: AppColors.warning,
+                            color: dialogData.icon == AppIcons.warning ||
+                                    dialogData.icon == null
+                                ? AppColors.warning
+                                : dialogData.icon == AppIcons.checkCircle
+                                    ? AppColors.success
+                                    : AppColors.error,
                           ),
                           SizedBox(
                             width: 10,
