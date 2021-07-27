@@ -62,9 +62,11 @@ class _DefaultButtonState extends State<DefaultButton>
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           splashFactory: NoSplash.splashFactory,
-          backgroundColor: MaterialStateProperty.all(
-              widget.invertColors ? AppColors.white : widget.successColor ? AppColors.success :
-               AppColors.primary),
+          backgroundColor: MaterialStateProperty.all(widget.invertColors
+              ? AppColors.white
+              : widget.successColor
+                  ? AppColors.success
+                  : AppColors.primary),
         ),
         onPressed: !_isLoading
             ? () async {
@@ -96,10 +98,12 @@ class _DefaultButtonState extends State<DefaultButton>
                 child: Text(
                   widget.title,
                   style: Theme.of(context).textTheme.button!.copyWith(
-                    fontSize: widget.smallTitle ? 15: null,
+                      fontSize: widget.smallTitle ? 15 : null,
                       color: widget.invertColors
-                          ? AppColors.primary 
-                          : widget.successColor ? AppColors.white : AppColors.secondary),
+                          ? AppColors.primary
+                          : widget.successColor
+                              ? AppColors.white
+                              : AppColors.secondary),
                 ),
               ),
               AnimatedOpacity(

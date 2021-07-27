@@ -21,9 +21,10 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getToken();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  FirebaseMessaging.onMessageOpenedApp.listen((event) { ReceiveMessagingService.onReceiveMessage(event);});
-  FirebaseMessaging.onMessage
-      .listen(_firebaseMessagingForograundHandler);
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    ReceiveMessagingService.onReceiveMessage(event);
+  });
+  FirebaseMessaging.onMessage.listen(_firebaseMessagingForograundHandler);
   await initializeDateFormatting('p t_BR');
   runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }

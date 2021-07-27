@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapRoutePage extends StatefulWidget {
-  const MapRoutePage({ Key? key }) : super(key: key);
+  const MapRoutePage({Key? key}) : super(key: key);
 
   @override
   _MapRoutePageState createState() => _MapRoutePageState();

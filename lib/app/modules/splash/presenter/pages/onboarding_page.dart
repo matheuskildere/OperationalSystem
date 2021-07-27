@@ -87,7 +87,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               DefaultButton(
                   invertColors: true,
                   onPressed: () {
-                   Modular.to.pushNamed(AppRoutes.auth);
+                    Modular.to.pushNamed(AppRoutes.auth);
                   },
                   title: 'Tenho uma conta'),
               SizedBox(
