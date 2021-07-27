@@ -7,15 +7,19 @@ class DefaultButton extends StatefulWidget {
   final double? width;
   final double? height;
   final String title;
+  final bool smallTitle;
   final bool isMediumButton;
   final bool invertColors;
+  final bool successColor;
   final bool? isLoading;
   const DefaultButton({
     Key? key,
     required this.onPressed,
     required this.title,
+    this.smallTitle = false,
     this.isLoading,
     this.invertColors = false,
+    this.successColor = false,
     this.height,
     this.width,
     this.isMediumButton = false,
@@ -58,8 +62,11 @@ class _DefaultButtonState extends State<DefaultButton>
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           splashFactory: NoSplash.splashFactory,
-          backgroundColor: MaterialStateProperty.all(
-              widget.invertColors ? AppColors.white : AppColors.primary),
+          backgroundColor: MaterialStateProperty.all(widget.invertColors
+              ? AppColors.white
+              : widget.successColor
+                  ? AppColors.success
+                  : AppColors.primary),
         ),
         onPressed: !_isLoading
             ? () async {
@@ -91,9 +98,12 @@ class _DefaultButtonState extends State<DefaultButton>
                 child: Text(
                   widget.title,
                   style: Theme.of(context).textTheme.button!.copyWith(
+                      fontSize: widget.smallTitle ? 15 : null,
                       color: widget.invertColors
                           ? AppColors.primary
-                          : AppColors.secondary),
+                          : widget.successColor
+                              ? AppColors.white
+                              : AppColors.secondary),
                 ),
               ),
               AnimatedOpacity(

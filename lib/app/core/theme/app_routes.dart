@@ -6,4 +6,5 @@ class AppRoutes {
   static String get registerUserPhoto => '/register/user-photo';
   static String get auth => '/auth';
   static String get recoverPassword => '/auth/recover-password';
+  static String get mapRoute => '/map';
 }

@@ -1,0 +1,59 @@
+{
+    "deliveryMan": {
+        "birthday": "",
+        "cpf": "",
+        "email": "",
+        "fullName": "",
+        "id": "",
+        "password": "",
+        "phoneNumber": "",
+        "photoBase64": "",
+        "servicesHistory": [
+            "id", "id"
+        ]
+    },
+    "establishment": {
+        "name": "",
+        "address": "",
+        "cnpj": "",
+        "id": "",
+        "email": "",
+        "phoneNumber": "",
+        "logo": "",
+        "servicesHistory": [
+            "id", "id"
+        ]
+    },
+    "services": [
+        {
+            "id": "",
+            "date": "",
+            "serviceName": "",
+            "price": "",
+            "status": "",
+            "contactNumber": "",
+            "pickupAddress": {
+                "address": "",
+                "latitude": "",
+                "longitude": ""
+            },
+            "deliveryAddress":  {
+                "address": "",
+                "latitude": "",
+                "longitude": ""
+            },
+            "deliveryMan": {
+                "id": "",
+                "fullName": "",
+                "location": {
+                    "latitude": "",
+                    "longitude": ""
+                }
+            },
+            "establishment": {
+                "id": "",
+                "name": ""
+            }
+        }
+    ]
+}
