@@ -10,7 +10,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       builder: asuka.builder,
       navigatorObservers: [
-        asuka.asukaHeroController //if u don`t add this Hero will not work
+        asuka.asukaHeroController 
       ],
       debugShowCheckedModeBanner: false,
       title: 'Feelps',

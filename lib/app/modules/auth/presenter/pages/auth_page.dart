@@ -1,4 +1,3 @@
-import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/modules/auth/presenter/controller/auth_controller.dart';
@@ -83,11 +82,7 @@ class _AuthPageState extends State<AuthPage> {
                     barrierDismissible: true,
                     dialogData: controller.errorData!);
               } else {
-                DefaultAlertDialog.show(
-                    barrierDismissible: true,
-                    dialogData: DialogDataEntity(
-                        title: "Legal",
-                        description: "Login realizado com sucesso"));
+                Modular.to.navigate(AppRoutes.mapRoute);
               }
             }
           },
