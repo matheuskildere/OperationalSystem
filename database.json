@@ -8,13 +8,18 @@
         "password": "",
         "phoneNumber": "",
         "photoBase64": "",
+        "status": "actived",
         "servicesHistory": [
             "id", "id"
         ]
     },
     "establishment": {
         "name": "",
-        "address": "",
+        "address": {
+            "completed": "",
+            "latitude": "",
+            "longitude": ""
+        },
         "cnpj": "",
         "id": "",
         "email": "",

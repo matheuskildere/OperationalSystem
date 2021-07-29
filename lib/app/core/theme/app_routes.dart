@@ -7,4 +7,5 @@ class AppRoutes {
   static String get auth => '/auth';
   static String get recoverPassword => '/auth/recover-password';
   static String get mapRoute => '/map';
+  static String get home => '/home';
 }

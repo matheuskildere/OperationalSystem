@@ -46,6 +46,29 @@ mixin _$AuthStore on _AuthStore, Store {
     return _$makeLoginAsyncAction.run(() => super.makeLogin(data: data));
   }
 
+  final _$getCurrentUserAsyncAction = AsyncAction('_AuthStore.getCurrentUser');
+
+  @override
+  Future<void> getCurrentUser() {
+    return _$getCurrentUserAsyncAction.run(() => super.getCurrentUser());
+  }
+
+  final _$recoverPasswordAsyncAction =
+      AsyncAction('_AuthStore.recoverPassword');
+
+  @override
+  Future<void> recoverPassword({required String email}) {
+    return _$recoverPasswordAsyncAction
+        .run(() => super.recoverPassword(email: email));
+  }
+
+  final _$logoutAsyncAction = AsyncAction('_AuthStore.logout');
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   @override
   String toString() {
     return '''

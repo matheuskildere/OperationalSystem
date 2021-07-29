@@ -12,6 +12,10 @@ class AppIcons {
   static const close = '$path/close.svg';
   static const deliveryDining = '$path/deliveryDining.svg';
   static const deliveryDiningRounded = '$path/deliveryDiningRounded.svg';
+  static const hand = '$path/hand.png';
+  static const horse = '$path/horse.png';
+  static const motocicle = '$path/motocicle.png';
+  static const ninja = '$path/ninja.png';
   static const warning = '$path/warning.svg';
 }
 
