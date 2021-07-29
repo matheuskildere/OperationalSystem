@@ -10,6 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'modules/home/home_module.dart';
+
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
@@ -26,6 +28,7 @@ class AppModule extends Module {
         ModuleRoute('/splash', module: SplashModule()),
         ModuleRoute('/register', module: RegisterModule()),
         ModuleRoute('/auth', module: AuthModule()),
-        ModuleRoute('/map', module: MapModule())
+        ModuleRoute('/map', module: MapModule()),
+        ModuleRoute('/home', module: HomeModule())
       ];
 }

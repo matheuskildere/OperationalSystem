@@ -1,15 +1,19 @@
 import 'package:equatable/equatable.dart';
 
 class DeliverymanEntity extends Equatable {
+  final String? id;
   final String email;
-  final String password;
+  final String? password;
   final String fullName;
   final String phoneNumber;
   final DateTime birthday;
   final String cpf;
   final String photoBase64;
+  final bool? isAvaliable;
+  final bool? status;
 
   const DeliverymanEntity({
+    required this.id,
     required this.email,
     required this.password,
     required this.fullName,
@@ -17,6 +21,8 @@ class DeliverymanEntity extends Equatable {
     required this.birthday,
     required this.cpf,
     required this.photoBase64,
+    this.status,
+    this.isAvaliable,
   });
 
   @override

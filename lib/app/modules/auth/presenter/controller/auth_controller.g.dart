@@ -76,6 +76,14 @@ mixin _$AuthController on _AuthController, Store {
     return _$makeLoginAsyncAction.run(() => super.makeLogin());
   }
 
+  final _$recoverPasswordAsyncAction =
+      AsyncAction('_AuthController.recoverPassword');
+
+  @override
+  Future<void> recoverPassword() {
+    return _$recoverPasswordAsyncAction.run(() => super.recoverPassword());
+  }
+
   @override
   String toString() {
     return '''

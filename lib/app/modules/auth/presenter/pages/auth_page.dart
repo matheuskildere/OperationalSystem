@@ -82,7 +82,7 @@ class _AuthPageState extends State<AuthPage> {
                     barrierDismissible: true,
                     dialogData: controller.errorData!);
               } else {
-                Modular.to.navigate(AppRoutes.mapRoute);
+                Modular.to.navigate(AppRoutes.home);
               }
             }
           },
