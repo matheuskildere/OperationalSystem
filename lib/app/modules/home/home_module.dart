@@ -1,10 +1,14 @@
 import 'package:feelps/app/modules/home/presenter/controllers/home_controller.dart';
 import 'package:feelps/app/modules/home/presenter/pages/home_page.dart';
+import 'package:feelps/app/modules/home/repositories/home_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeModule extends Module {
   @override
-  List<Bind> get binds => [Bind((i) => HomeController())];
+  List<Bind> get binds => [
+        Bind((i) => HomeController(i())),
+        Bind<IHomeRepository>((i) => HomeRepository(i(), i())),
+      ];
 
   @override
   List<ModularRoute> get routes => [

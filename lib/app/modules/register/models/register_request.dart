@@ -21,6 +21,7 @@ class RegisterRequest extends DeliverymanEntity {
     required this.cpf,
     required this.photoBase64,
   }) : super(
+            id: null,
             birthday: birthday,
             cpf: cpf,
             email: email,

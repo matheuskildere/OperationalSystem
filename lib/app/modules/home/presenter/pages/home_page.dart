@@ -24,6 +24,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final authStore = Modular.get<AuthStore>();
   final controller = Modular.get<HomeController>();
+
+  @override
+  void initState() {
+    controller.getStatusAvaliable();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
