@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:camera_camera/camera_camera.dart';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/utils/formatter.dart';
 import 'package:feelps/app/core/validations/app_validations.dart';
 import 'package:feelps/app/modules/register/models/register_request.dart';
 import 'package:feelps/app/modules/register/repositories/resgister_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 
@@ -46,6 +49,7 @@ abstract class _RegisterController with Store {
 
   @action
   Future<void> makeRegister() async {
+    dialogData = null;
     late String base64;
     if (photo != null) {
       base64 = String.fromCharCodes(await photo!.readAsBytes());
@@ -69,11 +73,28 @@ abstract class _RegisterController with Store {
   @action
   Future<void> getImage({bool isFromGalery = true}) async {
     final _picker = ImagePicker();
-    final PickedFile? pickedFile = await _picker.getImage(
-        imageQuality: 70,
-        source: isFromGalery ? ImageSource.gallery : ImageSource.camera);
-    if (pickedFile != null) {
-      photo = File(pickedFile.path);
+    if (isFromGalery) {
+      final XFile? pickedFile = await _picker.pickImage(
+          imageQuality: 70, source: ImageSource.gallery);
+
+      if (pickedFile != null) {
+        photo = File(pickedFile.path);
+      }
+    } else {
+      Modular.to.push(MaterialPageRoute(
+        builder: (context) {
+          return CameraCamera(
+            cameraSide: CameraSide.back,
+            enableZoom: false,
+            resolutionPreset: ResolutionPreset.high,
+            flashModes: [FlashMode.off],
+            onFile: (file) {
+              photo = File(file.path);
+              Navigator.pop(context);
+            },
+          );
+        },
+      ));
     }
   }
 

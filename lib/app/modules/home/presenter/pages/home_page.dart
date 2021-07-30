@@ -143,34 +143,38 @@ class _HomePageState extends State<HomePage> {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                    height: 29,
-                                    width: 29,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.secondary,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: MemoryImage(
-                                              Uint8List.fromList(authStore
-                                                  .deliveryman!
-                                                  .photoBase64
-                                                  .codeUnits),
-                                            ),
-                                            fit: BoxFit.cover))),
-                                SizedBox(
-                                  width: 11,
-                                ),
-                                Text(
-                                    Formatter.upperCaseAllFirstLetters(
-                                        authStore.deliveryman!.fullName),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .button!
-                                        .copyWith(fontSize: 21)),
-                              ],
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Container(
+                                      height: 29,
+                                      width: 29,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.secondary,
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: MemoryImage(
+                                                Uint8List.fromList(authStore
+                                                    .deliveryman!
+                                                    .photoBase64
+                                                    .codeUnits),
+                                              ),
+                                              fit: BoxFit.cover))),
+                                  SizedBox(
+                                    width: 11,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                        Formatter.upperCaseAllFirstLetters(
+                                            authStore.deliveryman!.fullName),
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .button!
+                                            .copyWith(fontSize: 21)),
+                                  ),
+                                ],
+                              ),
                             ),
                             Row(
                               children: [

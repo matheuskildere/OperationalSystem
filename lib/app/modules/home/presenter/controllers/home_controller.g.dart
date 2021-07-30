@@ -33,6 +33,15 @@ mixin _$HomeController on _HomeController, Store {
         .run(() => super.isAvaliableChanged(value: value));
   }
 
+  final _$getStatusAvaliableAsyncAction =
+      AsyncAction('_HomeController.getStatusAvaliable');
+
+  @override
+  Future<void> getStatusAvaliable() {
+    return _$getStatusAvaliableAsyncAction
+        .run(() => super.getStatusAvaliable());
+  }
+
   @override
   String toString() {
     return '''
