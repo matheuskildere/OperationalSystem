@@ -69,6 +69,30 @@ class _HomePageState extends State<HomePage> {
                                 .last),
                             status: controller.isAvaliable));
                   }),
+                  Observer(builder: (context) {
+                    return Positioned(
+                        top: 25,
+                        right: 25,
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              color: controller.isAvaliable
+                                  ? AppColors.white
+                                  : AppColors.secondary,
+                              shape: BoxShape.circle),
+                          child: AppIcon(
+                            icon: AppIcons.logout,
+                            width: 16,
+                            height: 16,
+                            fit: BoxFit.scaleDown,
+                            onTap: () async {
+                              await controller.isAvaliableChanged(value: false);
+                              await authStore.logout();
+                            },
+                          ),
+                        ));
+                  }),
                   Positioned(
                       top: 204,
                       left: 49,
