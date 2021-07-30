@@ -10,6 +10,7 @@ environment:
 
 dependencies:
   asuka: ^2.0.0-nullsafety.2
+  camera_camera: ^2.0.2
   connectivity: ^3.0.6
   cupertino_icons: ^1.0.2
   
@@ -30,7 +31,7 @@ dependencies:
   flutter_secure_storage: ^4.2.0
   flutter_svg: ^0.22.0
   google_maps_flutter: ^2.0.6
-  image_picker: ^0.8.1+4
+  image_picker: ^0.8.2
   lint: ^1.5.3
   location: ^4.3.0
   mobx: ^2.0.1
