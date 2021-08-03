@@ -41,6 +41,7 @@ class RegisterRequest extends DeliverymanEntity {
       'photoBase64': photoBase64,
       'isAvaliable': false,
       'status': true,
+      'createdAt': DateParser.getDateStringEn(DateTime.now()),
     };
   }
 

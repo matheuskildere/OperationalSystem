@@ -4,6 +4,7 @@ class AppTypography {
   static TextTheme textTheme = TextTheme(
       headline1: h1,
       headline2: h2,
+      headline3: cardText,
       bodyText1: bodyText,
       bodyText2: labelText,
       caption: hintText,
@@ -36,6 +37,11 @@ class AppTypography {
 
   static TextStyle hintText = const TextStyle(
     fontSize: 18,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle cardText = const TextStyle(
+    fontSize: 15,
     fontWeight: FontWeight.w400,
   );
 }

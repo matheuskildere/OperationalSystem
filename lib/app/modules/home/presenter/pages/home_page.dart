@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_icons.dart';
+import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/core/utils/formatter.dart';
 import 'package:feelps/app/modules/components/scaffold/default_scaffold.dart';
@@ -107,7 +108,9 @@ class _HomePageState extends State<HomePage> {
                                     isAvailable: false,
                                     title: 'Meus dados',
                                     icon: AppIcons.ninja,
-                                    onPress: () {}),
+                                    onPress: () {
+                                      Modular.to.pushNamed(AppRoutes.myData);
+                                    }),
                                 HomeButtonComponent(
                                     isAvailable: false,
                                     title: 'Minha moto',
