@@ -18,30 +18,34 @@ class HomeButtonComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: AppColumns.column4(context: context),
-      height: AppColumns.column4(context: context),
-      decoration: BoxDecoration(
-          color: isAvailable ? AppColors.background : AppColors.secondary,
-          borderRadius: BorderRadius.circular(20)),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            AppIcon(
-              icon: icon,
-              appIconType: AppIconType.png,
-              height: 50,
-              width: 50,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.button!.copyWith(fontSize: 15),
-            )
-          ]),
+    return InkWell(
+      onTap: onPress,
+      child: Container(
+        width: AppColumns.column4(context: context),
+        height: AppColumns.column4(context: context),
+        decoration: BoxDecoration(
+            color: isAvailable ? AppColors.background : AppColors.secondary,
+            borderRadius: BorderRadius.circular(20)),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AppIcon(
+                icon: icon,
+                appIconType: AppIconType.png,
+                height: 50,
+                width: 50,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                title,
+                style:
+                    Theme.of(context).textTheme.button!.copyWith(fontSize: 15),
+              )
+            ]),
+      ),
     );
   }
 }

@@ -8,6 +8,7 @@ class DelvierymanResponse extends DeliverymanEntity {
   final String fullName;
   final String phoneNumber;
   final DateTime birthday;
+  final DateTime? createdAt;
   final String cpf;
   final String photoBase64;
   final bool status;
@@ -17,6 +18,7 @@ class DelvierymanResponse extends DeliverymanEntity {
     required this.id,
     required this.email,
     this.password,
+    this.createdAt,
     required this.fullName,
     required this.phoneNumber,
     required this.birthday,
@@ -31,6 +33,7 @@ class DelvierymanResponse extends DeliverymanEntity {
           email: email,
           fullName: fullName,
           password: password,
+          createdAt: createdAt,
           phoneNumber: phoneNumber,
           photoBase64: photoBase64,
           status: status,
@@ -44,6 +47,7 @@ class DelvierymanResponse extends DeliverymanEntity {
       fullName: map['fullName'].toString(),
       phoneNumber: map['phoneNumber'].toString(),
       birthday: DateParser.getDateTime(map['birthday'].toString()),
+      createdAt: DateParser.getDateTime(map['createdAt'].toString()),
       cpf: map['cpf'].toString(),
       photoBase64: map['photoBase64'].toString(),
       status: map['status'] as bool,

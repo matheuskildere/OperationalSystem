@@ -12,6 +12,7 @@ class DefaultButton extends StatefulWidget {
   final bool invertColors;
   final bool successColor;
   final bool? isLoading;
+  final bool? border;
   const DefaultButton({
     Key? key,
     required this.onPressed,
@@ -20,6 +21,7 @@ class DefaultButton extends StatefulWidget {
     this.isLoading,
     this.invertColors = false,
     this.successColor = false,
+    this.border = false,
     this.height,
     this.width,
     this.isMediumButton = false,
@@ -62,6 +64,9 @@ class _DefaultButtonState extends State<DefaultButton>
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           splashFactory: NoSplash.splashFactory,
+          side: widget.border != false
+              ? MaterialStateProperty.all(BorderSide(color: AppColors.black))
+              : null,
           backgroundColor: MaterialStateProperty.all(widget.invertColors
               ? AppColors.white
               : widget.successColor
