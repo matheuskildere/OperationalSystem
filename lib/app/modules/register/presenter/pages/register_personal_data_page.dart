@@ -46,6 +46,7 @@ class _RegisterPersonalDataPageState
           DefaultTextField(
             labelText: "CPF",
             mask: '000.000.000-00',
+            type: TextInputType.number,
             action: TextInputAction.next,
             onChanged: (value) => controller.cpf = value,
           ),
@@ -55,6 +56,7 @@ class _RegisterPersonalDataPageState
           DefaultTextField(
             labelText: "Número de celular",
             mask: '(00) 00000-0000',
+            type: TextInputType.number,
             onChanged: (value) => controller.phoneNumber = value,
           ),
           const SizedBox(

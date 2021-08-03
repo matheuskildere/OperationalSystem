@@ -1,4 +1,7 @@
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
+import 'package:feelps/app/core/stores/auth_store.dart';
+import 'package:feelps/app/core/theme/app_icons.dart';
+import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:feelps/app/modules/register/presenter/pages/components/photo_component.dart';
 import 'package:flutter/material.dart';
@@ -83,10 +86,24 @@ class _RegisterUserPhotoPageState extends State<RegisterUserPhotoPage> {
                 DefaultAlertDialog.show(
                     barrierDismissible: true,
                     dialogData: controller.dialogData!);
+              } else {
+                await Modular.get<AuthStore>().getCurrentUser();
+                congratulation();
               }
             }
           },
-          title: "Próximo passo"),
+          title: "Finalizar Cadastro"),
     );
+  }
+
+  Future<void> congratulation() async {
+    await DefaultAlertDialog.show(
+        barrierDismissible: true,
+        dialogData: DialogDataEntity(
+            icon: AppIcons.checkCircle,
+            title: "Parabêns",
+            description:
+                "Finalizamos seu cadastro com sucesso, agora iremos analisar seus dados e se tudo estiver certo você estará realializando entregas logo logo!"));
+    Modular.to.navigate(AppRoutes.home);
   }
 }

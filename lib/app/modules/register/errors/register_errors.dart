@@ -11,3 +11,9 @@ class EmailAlreadyUsedError extends Failure {
   final String message;
   EmailAlreadyUsedError({required this.title, required this.message});
 }
+
+class CPFAlreadyUsedError extends Failure {
+  final String title;
+  final String message;
+  CPFAlreadyUsedError({required this.title, required this.message});
+}

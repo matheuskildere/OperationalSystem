@@ -69,6 +69,30 @@ class _HomePageState extends State<HomePage> {
                                 .last),
                             status: controller.isAvaliable));
                   }),
+                  Observer(builder: (context) {
+                    return Positioned(
+                        top: 25,
+                        right: 25,
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              color: controller.isAvaliable
+                                  ? AppColors.white
+                                  : AppColors.secondary,
+                              shape: BoxShape.circle),
+                          child: AppIcon(
+                            icon: AppIcons.logout,
+                            width: 16,
+                            height: 16,
+                            fit: BoxFit.scaleDown,
+                            onTap: () async {
+                              await controller.isAvaliableChanged(value: false);
+                              await authStore.logout();
+                            },
+                          ),
+                        ));
+                  }),
                   Positioned(
                       top: 204,
                       left: 49,
@@ -119,34 +143,38 @@ class _HomePageState extends State<HomePage> {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                    height: 29,
-                                    width: 29,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.secondary,
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                            image: MemoryImage(
-                                              Uint8List.fromList(authStore
-                                                  .deliveryman!
-                                                  .photoBase64
-                                                  .codeUnits),
-                                            ),
-                                            fit: BoxFit.cover))),
-                                SizedBox(
-                                  width: 11,
-                                ),
-                                Text(
-                                    Formatter.upperCaseAllFirstLetters(
-                                        authStore.deliveryman!.fullName),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .button!
-                                        .copyWith(fontSize: 21)),
-                              ],
+                            Flexible(
+                              child: Row(
+                                children: [
+                                  Container(
+                                      height: 29,
+                                      width: 29,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.secondary,
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: MemoryImage(
+                                                Uint8List.fromList(authStore
+                                                    .deliveryman!
+                                                    .photoBase64
+                                                    .codeUnits),
+                                              ),
+                                              fit: BoxFit.cover))),
+                                  SizedBox(
+                                    width: 11,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                        Formatter.upperCaseAllFirstLetters(
+                                            authStore.deliveryman!.fullName),
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .button!
+                                            .copyWith(fontSize: 21)),
+                                  ),
+                                ],
+                              ),
                             ),
                             Row(
                               children: [

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:feelps/app/core/errors/failure.dart';
+import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/modules/home/errors/home_errors.dart';
 import 'package:feelps/app/modules/home/models/change_status_request.dart';
@@ -15,6 +16,7 @@ abstract class IHomeRepository {
 class HomeRepository extends IHomeRepository {
   final IConnectivityService _connectivityService;
   final FirebaseDatabase _database;
+  final String tableName = 'deliveryman-${appFlavor!.title}';
 
   HomeRepository(this._connectivityService, this._database);
 
@@ -29,7 +31,7 @@ class HomeRepository extends IHomeRepository {
 
     try {
       await reference
-          .child("deliveryman")
+          .child(tableName)
           .child(request.deliveryManId)
           .update(request.toMap());
       return Right(unit);
@@ -51,7 +53,7 @@ class HomeRepository extends IHomeRepository {
 
     try {
       final resultSnapshot = await reference
-          .child("deliveryman")
+          .child(tableName)
           .child(deliveryManId)
           .child('isAvaliable')
           .once();

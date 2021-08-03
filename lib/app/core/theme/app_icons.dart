@@ -14,6 +14,7 @@ class AppIcons {
   static const deliveryDiningRounded = '$path/deliveryDiningRounded.svg';
   static const hand = '$path/hand.png';
   static const horse = '$path/horse.png';
+  static const logout = '$path/logout.svg';
   static const motocicle = '$path/motocicle.png';
   static const ninja = '$path/ninja.png';
   static const warning = '$path/warning.svg';

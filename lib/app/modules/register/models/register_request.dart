@@ -39,6 +39,8 @@ class RegisterRequest extends DeliverymanEntity {
       'birthday': DateParser.getDateStringEn(birthday),
       'cpf': cpf,
       'photoBase64': photoBase64,
+      'isAvaliable': false,
+      'status': true,
     };
   }
 

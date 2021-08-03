@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:feelps/app/core/entities/deliveryman_entity.dart';
 import 'package:feelps/app/core/errors/failure.dart';
+import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/modules/auth/errors/auth_erros.dart';
 import 'package:feelps/app/modules/auth/models/deliveryman_response.dart';
@@ -20,6 +21,7 @@ class AuthRepository implements IAuthRepository {
   final FirebaseDatabase _database;
   final FirebaseAuth _auth;
   final ConnectivityService _connectivityService;
+  final String tableName = 'deliveryman-${appFlavor!.title}';
 
   AuthRepository(this._auth, this._database, this._connectivityService);
 
@@ -39,7 +41,7 @@ class AuthRepository implements IAuthRepository {
     }
 
     final dataSnapshotPages =
-        await reference.child("deliveryman").child(user.uid).once();
+        await reference.child(tableName).child(user.uid).once();
 
     if (dataSnapshotPages.value == null) {
       return Left(GetLoggedUserError(

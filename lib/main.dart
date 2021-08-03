@@ -1,5 +1,6 @@
 import 'package:feelps/app/app_module.dart';
 import 'package:feelps/app/app_widget.dart';
+import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -26,5 +27,6 @@ Future<void> main() async {
   });
   FirebaseMessaging.onMessage.listen(_firebaseMessagingForograundHandler);
   await initializeDateFormatting('p t_BR');
+  appFlavor = Flavor.dev;
   runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
