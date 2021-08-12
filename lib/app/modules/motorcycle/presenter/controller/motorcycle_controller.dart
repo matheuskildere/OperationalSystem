@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera_camera/camera_camera.dart';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
+import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
 import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
 import 'package:feelps/app/core/validations/app_validations.dart';
 import 'package:feelps/app/modules/motorcycle/models/register_motorcycle_request.dart';
@@ -44,21 +45,24 @@ abstract class _MotorcycleController with Store {
   @observable
   DialogDataEntity? dialogData;
 
+  @observable
+  MotorcycleEntity? motorcycle;
+
   @action
   void formValidation() {
-    if (brand == null || brand!.split(' ').length < 2) {
+    if (brand == null || brand!.length < 3) {
       dialogData = DialogDataEntity(
           title: "Atenção",
           description: "Informe a marca da sua moto corretamente!");
       return;
     }
-    if (model == null || model!.split(' ').length < 2) {
+    if (model == null || model!.length < 3) {
       dialogData = DialogDataEntity(
           title: "Atenção",
           description: "Informe o modelo da sua moto corretamente!");
       return;
     }
-    if (year == null || year!.toString().split(' ').length < 4) {
+    if (year == null || year!.toString().length < 4) {
       dialogData = DialogDataEntity(
           title: "Atenção",
           description: "Informe o ano da sua moto corretamente!");
@@ -69,6 +73,11 @@ abstract class _MotorcycleController with Store {
       dialogData = DialogDataEntity(
           title: "Atenção",
           description: "Informe a placa da sua moto corretamente!");
+      return;
+    }
+    if (photo == null) {
+      dialogData = DialogDataEntity(
+          title: "Atenção", description: "Adicone uma foto da sua moto!");
       return;
     }
 
@@ -116,8 +125,12 @@ abstract class _MotorcycleController with Store {
           model: model!,
           year: year!,
           photoBase64: base64,
-          color: color.toString(),
+          color: color!,
           plate: plate!),
     );
+
+    result.fold((l) {
+      dialogData = DialogDataEntity(title: l.title, description: l.message);
+    }, (r) {});
   }
 }

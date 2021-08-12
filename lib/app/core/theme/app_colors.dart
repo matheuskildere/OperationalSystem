@@ -5,6 +5,7 @@ class AppColors {
   static Color get secondary => const Color(0xFFFADF4A);
   static Color get black => const Color(0xFF393939);
   static Color get grey => const Color(0xFF7A7A7A);
+  static Color get lightGrey => const Color(0xFFDADADA);
   static Color get background => const Color(0xFFF4F4F4);
   static Color get white => const Color(0xFFFFFFFF);
   static Color get error => const Color(0xFFB00020);

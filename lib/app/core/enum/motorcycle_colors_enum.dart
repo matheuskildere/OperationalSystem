@@ -52,4 +52,19 @@ extension MotorcycleColorsExt on MotorcycleColorsEnum {
         return "black";
     }
   }
+
+  String getCor() {
+    switch (this) {
+      case MotorcycleColorsEnum.red:
+        return "Vermelho";
+      case MotorcycleColorsEnum.blue:
+        return "Azul";
+      case MotorcycleColorsEnum.black:
+        return "Preto";
+      case MotorcycleColorsEnum.grey:
+        return "Cinza";
+      default:
+        return "Preto";
+    }
+  }
 }

@@ -1,9 +1,11 @@
+import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
+
 class RegistermotorcycleRequest {
   final String brand;
   final String model;
   final int year;
   final String photoBase64;
-  final String color;
+  final MotorcycleColorsEnum color;
   final String plate;
 
   RegistermotorcycleRequest(
@@ -20,7 +22,7 @@ class RegistermotorcycleRequest {
       'model': model,
       'year': year,
       'photoBase64': photoBase64,
-      'color': color,
+      'color': color.getString(),
       'plate': plate,
     };
   }
@@ -31,7 +33,7 @@ class RegistermotorcycleRequest {
       model: map['model'] as String,
       year: map['year'] as int,
       photoBase64: map['photoBase64'] as String,
-      color: map['color'] as String,
+      color: MotorcycleColorsExt.getByString(map['color'] as String),
       plate: map['plate'] as String,
     );
   }

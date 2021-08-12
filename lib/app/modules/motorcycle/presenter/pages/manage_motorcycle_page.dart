@@ -1,4 +1,4 @@
-import 'package:feelps/app/modules/components/components.dart';
+import 'package:feelps/app/modules/components/scaffold/default_scaffold.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/components/big_title_component.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
         withBackAction: true,
         body: Column(
           children: [
-            BigTitleComponent(title: 'Cadastrar\nmotocicleta'),
+            BigTitleComponent(title: 'Gerenciar\nmotocicleta'),
           ],
         ));
   }

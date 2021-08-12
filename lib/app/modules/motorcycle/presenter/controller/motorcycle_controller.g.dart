@@ -129,6 +129,21 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     });
   }
 
+  final _$motorcycleAtom = Atom(name: '_MotorcycleController.motorcycle');
+
+  @override
+  MotorcycleEntity? get motorcycle {
+    _$motorcycleAtom.reportRead();
+    return super.motorcycle;
+  }
+
+  @override
+  set motorcycle(MotorcycleEntity? value) {
+    _$motorcycleAtom.reportWrite(value, super.motorcycle, () {
+      super.motorcycle = value;
+    });
+  }
+
   final _$getImageAsyncAction = AsyncAction('_MotorcycleController.getImage');
 
   @override
@@ -170,7 +185,8 @@ photoBase64: ${photoBase64},
 color: ${color},
 plate: ${plate},
 photo: ${photo},
-dialogData: ${dialogData}
+dialogData: ${dialogData},
+motorcycle: ${motorcycle}
     ''';
   }
 }

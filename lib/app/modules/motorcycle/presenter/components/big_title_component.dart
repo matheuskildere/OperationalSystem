@@ -7,9 +7,12 @@ class BigTitleComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: AppTypography.h1,
+    return Padding(
+      padding: const EdgeInsets.only(left: 32, bottom: 30),
+      child: Text(
+        title,
+        style: AppTypography.h1,
+      ),
     );
   }
 }
