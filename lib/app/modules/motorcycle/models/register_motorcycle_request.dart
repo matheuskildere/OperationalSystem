@@ -1,6 +1,6 @@
 import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
 
-class RegistermotorcycleRequest {
+class RegisterMotorcycleRequest {
   final String brand;
   final String model;
   final int year;
@@ -8,7 +8,7 @@ class RegistermotorcycleRequest {
   final MotorcycleColorsEnum color;
   final String plate;
 
-  RegistermotorcycleRequest(
+  RegisterMotorcycleRequest(
       {required this.brand,
       required this.model,
       required this.year,
@@ -27,8 +27,8 @@ class RegistermotorcycleRequest {
     };
   }
 
-  factory RegistermotorcycleRequest.fromMap(Map<String, dynamic> map) {
-    return RegistermotorcycleRequest(
+  factory RegisterMotorcycleRequest.fromMap(Map<String, dynamic> map) {
+    return RegisterMotorcycleRequest(
       brand: map['brand'] as String,
       model: map['model'] as String,
       year: map['year'] as int,
