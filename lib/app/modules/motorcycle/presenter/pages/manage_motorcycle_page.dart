@@ -1,4 +1,3 @@
-import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
 import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
@@ -7,9 +6,9 @@ import 'package:feelps/app/core/theme/app_icons.dart';
 import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/theme/app_typography.dart';
 import 'package:feelps/app/modules/components/button/default_button.dart';
-import 'package:feelps/app/modules/components/dialog/default_alert_dialog.dart';
+import 'package:feelps/app/modules/components/components.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/components/big_title_component.dart';
-import 'package:feelps/app/modules/motorcycle/presenter/components/title_subtitle_component.dart';
+import 'package:feelps/app/modules/motorcycle/presenter/components/motorcycle_data_component.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/controller/motorcycle_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -30,8 +29,12 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
 
   @override
   void initState() {
-    controller.getMotorcycle();
+    getMotorcycle();
     super.initState();
+  }
+
+  Future<void> getMotorcycle() async {
+    await controller.getMotorcycle();
   }
 
   @override
@@ -40,6 +43,18 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
         backgroundColor: AppColors.white,
         body: Observer(
           builder: (context) {
+            if (controller.errorMessage == null &&
+                controller.motorcycle == null) {
+              return Center(
+                  child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: CircularProgressIndicator(
+                        color: AppColors.secondary,
+                        strokeWidth: 6,
+                      )));
+            }
+
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -75,28 +90,38 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                                   onTap: () {
                                     controller.getImage();
                                   },
-                                  child: Column(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 25,
-                                        backgroundImage:
-                                            controller.currentPhoto == null
-                                                ? null
-                                                : FileImage(
-                                                    controller.currentPhoto!),
-                                        backgroundColor: AppColors.lightGrey,
-                                      ),
-                                      SizedBox(
-                                        height: 6,
-                                      ),
-                                      Text(
-                                        'Adicionar',
-                                        style: AppTypography.cardText.copyWith(
-                                            fontSize: 13,
-                                            decoration:
-                                                TextDecoration.underline),
-                                      ),
-                                    ],
+                                  child: Observer(
+                                    builder: (context) {
+                                      return Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundImage: controller
+                                                        .currentPhoto !=
+                                                    null
+                                                ? FileImage(
+                                                    controller.currentPhoto!)
+                                                : controller.newPhoto == null
+                                                    ? null
+                                                    : FileImage(
+                                                        controller.newPhoto!),
+                                            backgroundColor:
+                                                AppColors.lightGrey,
+                                          ),
+                                          SizedBox(
+                                            height: 6,
+                                          ),
+                                          Text(
+                                            'Adicionar',
+                                            style: AppTypography.cardText
+                                                .copyWith(
+                                                    fontSize: 13,
+                                                    decoration: TextDecoration
+                                                        .underline),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   ),
                                 );
                               },
@@ -107,6 +132,25 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                     ],
                   ),
                 ),
+                if (controller.errorMessage != null &&
+                    controller.motorcycle == null)
+                  Container(
+                    width: 332,
+                    decoration: BoxDecoration(
+                        color: AppColors.background,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                      child: Center(
+                        child: Text(
+                          controller.errorMessage!,
+                          textAlign: TextAlign.center,
+                          style: AppTypography.cardText,
+                        ),
+                      ),
+                    ),
+                  ),
                 if (controller.motorcycle != null)
                   Container(
                     width: 360,
@@ -121,46 +165,30 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TitleSubtitleComponent(
+                        MotorcycleDataComponent(
                           title: 'Marca',
                           subtitle: controller.motorcycle!.brand,
                         ),
-                        TitleSubtitleComponent(
+                        MotorcycleDataComponent(
                           title: 'Modelo',
                           subtitle: controller.motorcycle!.model,
                         ),
-                        TitleSubtitleComponent(
+                        MotorcycleDataComponent(
                           title: 'Ano',
                           subtitle: controller.motorcycle!.year.toString(),
                         ),
-                        TitleSubtitleComponent(
+                        MotorcycleDataComponent(
                           title: 'Cor',
                           subtitle: controller.motorcycle!.color.getCor(),
                           trailing: CircleAvatar(
                               backgroundColor:
                                   controller.motorcycle!.color.getColor),
                         ),
-                        TitleSubtitleComponent(
+                        MotorcycleDataComponent(
                           title: 'Placa',
                           subtitle: controller.motorcycle!.plate,
                         ),
                       ],
-                    ),
-                  )
-                else
-                  Container(
-                    width: 332,
-                    decoration: BoxDecoration(
-                        color: AppColors.background,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                      child: Text(
-                        'Oops, parece que você ainda não\npossui uma motocicleta cadastrada.',
-                        textAlign: TextAlign.center,
-                        style: AppTypography.cardText,
-                      ),
                     ),
                   ),
                 Padding(

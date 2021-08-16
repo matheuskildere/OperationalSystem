@@ -5,7 +5,6 @@ import 'package:camera_camera/camera_camera.dart';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
 import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
-import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/validations/app_validations.dart';
 import 'package:feelps/app/modules/motorcycle/models/register_motorcycle_request.dart';
 import 'package:feelps/app/modules/motorcycle/repository/motorcycle_repository.dart';
@@ -51,6 +50,9 @@ abstract class _MotorcycleController with Store {
 
   @observable
   MotorcycleEntity? motorcycle;
+
+  @observable
+  String? errorMessage;
 
   @action
   void formValidation() {
@@ -144,13 +146,7 @@ abstract class _MotorcycleController with Store {
           plate: plate!);
       currentPhoto = newPhoto;
       cleanFields();
-      // Modular.get<AuthStore>().deliveryman!.motorcycle = MotorcycleEntity(
-      //     brand: brand!,
-      //     model: model!,
-      //     year: year!,
-      //     photoBase64: base64Encode(await newPhoto!.readAsBytes()),
-      //     color: color!,
-      //     plate: plate!);
+      Modular.to.pop();
     });
   }
 
@@ -159,15 +155,18 @@ abstract class _MotorcycleController with Store {
     final result = await _repository.getMotorcycle();
     result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
+      errorMessage = l.message;
     }, (r) async {
       motorcycle = r;
       if (r != null) {
         final String dir = (await getApplicationDocumentsDirectory()).path;
         final img.Image tempImage =
             img.decodeImage(base64Decode(motorcycle!.photoBase64))!;
-
         currentPhoto = File("$dir/motorcyclePhoto.png")
           ..writeAsBytes(img.encodePng(tempImage));
+      } else {
+        errorMessage =
+            'Oops, parece que você ainda não\npossui uma motocicleta cadastrada.';
       }
     });
   }
@@ -188,6 +187,8 @@ abstract class _MotorcycleController with Store {
     }, (r) async {
       motorcycle = null;
       currentPhoto = null;
+      errorMessage =
+          'Oops, parece que você ainda não\npossui uma motocicleta cadastrada.';
     });
   }
 }

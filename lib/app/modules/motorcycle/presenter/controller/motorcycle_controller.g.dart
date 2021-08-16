@@ -144,6 +144,21 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     });
   }
 
+  final _$errorMessageAtom = Atom(name: '_MotorcycleController.errorMessage');
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   final _$getImageAsyncAction = AsyncAction('_MotorcycleController.getImage');
 
   @override
@@ -194,7 +209,8 @@ plate: ${plate},
 newPhoto: ${newPhoto},
 currentPhoto: ${currentPhoto},
 dialogData: ${dialogData},
-motorcycle: ${motorcycle}
+motorcycle: ${motorcycle},
+errorMessage: ${errorMessage}
     ''';
   }
 }

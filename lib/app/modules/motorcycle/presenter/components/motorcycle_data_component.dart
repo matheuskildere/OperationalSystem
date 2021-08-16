@@ -2,11 +2,11 @@ import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_typography.dart';
 import 'package:flutter/material.dart';
 
-class TitleSubtitleComponent extends StatelessWidget {
+class MotorcycleDataComponent extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget? trailing;
-  const TitleSubtitleComponent({
+  const MotorcycleDataComponent({
     required this.title,
     required this.subtitle,
     this.trailing,

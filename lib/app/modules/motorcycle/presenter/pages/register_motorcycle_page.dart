@@ -115,7 +115,8 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   padding: const EdgeInsets.only(bottom: 26),
                   child: DefaultTextField(
                       labelText: 'Ano',
-                      action: TextInputAction.next,
+                      type: TextInputType.number,
+                      action: TextInputAction.done,
                       onChanged: (value) {
                         controller.year = int.parse(value);
                       }),
@@ -212,7 +213,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                 ),
                 SizedBox(
                   height: 26,
-                )
+                ),
               ],
             ),
           ),
