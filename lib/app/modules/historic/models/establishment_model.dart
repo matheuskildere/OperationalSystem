@@ -1,27 +1,24 @@
 import 'package:feelps/app/core/entities/service_entity.dart';
+import 'package:feelps/app/modules/historic/models/location_model.dart';
 
 class EstablishmentModel extends EstablishmentEntity {
   final String id;
   final String name;
   final String address;
-  final String latitude;
-  final String longitude;
+  final LocationModel location;
 
   EstablishmentModel(
       {required this.id,
       required this.name,
       required this.address,
-      required this.latitude,
-      required this.longitude}):
-        super(id: id, name: name, address: address, latitude: latitude, longitude: longitude);
+      required this.location})
+      : super(id: id, name: name, address: address, location: location);
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
       'address': address,
-      'latitude': latitude,
-      'longitude': longitude,
     };
   }
 
@@ -30,8 +27,7 @@ class EstablishmentModel extends EstablishmentEntity {
       id: map['id'] as String,
       name: map['name'] as String,
       address: map['address'] as String,
-      latitude: map['latitude'] as String,
-      longitude: map['longitude'] as String,
+      location: LocationModel.fromMap(map['location'] as Map<String, dynamic>),
     );
   }
 }

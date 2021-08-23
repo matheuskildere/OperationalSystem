@@ -1,7 +1,7 @@
 import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 
-class ObservationModel extends ObservationEntity{
+class ObservationModel extends ObservationEntity {
   final String status;
   final String observation;
   final DateTime createdAt;
@@ -9,11 +9,8 @@ class ObservationModel extends ObservationEntity{
   ObservationModel(
       {required this.status,
       required this.observation,
-      required this.createdAt}): super(
-        status: status,
-        observation: observation,
-        createdAt: createdAt
-        );
+      required this.createdAt})
+      : super(status: status, observation: observation, createdAt: createdAt);
 
   Map<String, dynamic> toMap() {
     return {

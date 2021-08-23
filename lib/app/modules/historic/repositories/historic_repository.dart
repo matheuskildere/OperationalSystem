@@ -20,34 +20,30 @@ class HistoricRepository extends IHistoricRepository {
   HistoricRepository(this._connectivityService, this._database);
 
   @override
-  Future<Either<Failure, List<ServiceEntity>>> getHistoric(String userId) async {
+  Future<Either<Failure, List<ServiceEntity>>> getHistoric(
+      String userId) async {
     @override
     final result = await _connectivityService.isOnline;
     if (result.isLeft()) {
       //TODO:return result;
     }
     final reference = _database.reference();
-    
+
     final List<ServiceModel> services = [];
     try {
-      final snapListId1 = await reference
-              .child(tableNameDelMan);
-         final dataSnapshot = await snapListId1.once();
       final snapListId = await reference
-              .child(tableNameDelMan)
-              .child(userId)
-              .child('servicesHistory')
-              .once();
+          .child(tableNameDelMan)
+          .child(userId)
+          .child('servicesHistory')
+          .once();
       final List<String> deliveryManServicesList =
           snapListId.value as List<String>;
 
-      for (final String id in deliveryManServicesList) {
-        final ServiceModel service = ServiceModel.fromMap((await reference
-                .child(tableNameServices)
-                .orderByChild('id')
-                .equalTo(id)
-                .once())
-            .value as Map<String, dynamic>);
+      for (final id in deliveryManServicesList) {
+        final snapshotServices =
+            await reference.child(tableNameServices).child(id).once();
+        final ServiceModel service = ServiceModel.fromMap(
+            snapshotServices.value as Map<String, dynamic>);
         services.add(service);
       }
       return Right(services);

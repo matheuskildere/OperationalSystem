@@ -12,12 +12,12 @@ class DeliveryManServiceModel extends DeliveryManServiceEntity {
     required this.fullName,
     required this.notificationToken,
     required this.location,
-  }): super(
-    id: id,
-    fullName: fullName,
-    notificationToken: notificationToken,
-    location: location,
-    );
+  }) : super(
+          id: id,
+          fullName: fullName,
+          notificationToken: notificationToken,
+          location: location,
+        );
 
   Map<String, dynamic> toMap() {
     return {

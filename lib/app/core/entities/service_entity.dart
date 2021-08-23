@@ -39,9 +39,9 @@ class DeliveryAdressEntity {
       required this.adress,
       required this.latitude,
       required this.longitude});
-}	
+}
 
-class DeliveryManServiceEntity{
+class DeliveryManServiceEntity {
   final String id;
   final String fullName;
   final String notificationToken;
@@ -80,13 +80,11 @@ class EstablishmentEntity {
   final String id;
   final String name;
   final String address;
-  final String latitude;
-  final String longitude;
-  
+  final LocationEntity location;
+
   EstablishmentEntity(
       {required this.id,
       required this.name,
       required this.address,
-      required this.latitude,
-      required this.longitude});
+      required this.location});
 }

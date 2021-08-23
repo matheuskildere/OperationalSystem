@@ -1,13 +1,13 @@
 import 'package:feelps/app/core/entities/service_entity.dart';
 
-class LocationModel extends LocationEntity{
+class LocationModel extends LocationEntity {
   final double latitude;
   final double longitude;
 
   LocationModel({
     required this.latitude,
     required this.longitude,
-  }): super(latitude: latitude, longitude: longitude);
+  }) : super(latitude: latitude, longitude: longitude);
 
   Map<String, dynamic> toMap() {
     return {

@@ -5,7 +5,7 @@ import 'package:feelps/app/modules/historic/models/deliveryman_service_model.dar
 import 'package:feelps/app/modules/historic/models/establishment_model.dart';
 import 'package:feelps/app/modules/historic/models/observation_model.dart';
 
-class ServiceModel extends ServiceEntity{
+class ServiceModel extends ServiceEntity {
   final String id;
   final DateTime dateInit;
   final DateTime dateEnd;
@@ -17,7 +17,7 @@ class ServiceModel extends ServiceEntity{
   final List<ObservationModel> observations;
   final EstablishmentModel establishment;
 
-  ServiceModel(
+  const ServiceModel(
       {required this.id,
       required this.dateInit,
       required this.dateEnd,
@@ -27,17 +27,18 @@ class ServiceModel extends ServiceEntity{
       required this.deliveryAddress,
       required this.deliveryMan,
       required this.observations,
-      required this.establishment}): 
-        super(id: id, 
-        dateInit: dateInit, 
-        dateEnd: dateEnd,
-        serviceName: serviceName, 
-        price: price, 
-        status: status, 
-        deliveryAddress: deliveryAddress, 
-        deliveryMan: deliveryMan, 
-        observations: observations, 
-        establishment: establishment);
+      required this.establishment})
+      : super(
+            id: id,
+            dateInit: dateInit,
+            dateEnd: dateEnd,
+            serviceName: serviceName,
+            price: price,
+            status: status,
+            deliveryAddress: deliveryAddress,
+            deliveryMan: deliveryMan,
+            observations: observations,
+            establishment: establishment);
 
   factory ServiceModel.fromMap(Map<String, dynamic> map) {
     return ServiceModel(

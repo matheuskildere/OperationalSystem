@@ -10,11 +10,12 @@ class DeliveryAdressModel extends DeliveryAdressEntity {
       {required this.receiver,
       required this.adress,
       required this.latitude,
-      required this.longitude}) : super(
-          receiver: receiver,
-          adress: adress,
-          latitude: latitude,
-          longitude: longitude);
+      required this.longitude})
+      : super(
+            receiver: receiver,
+            adress: adress,
+            latitude: latitude,
+            longitude: longitude);
 
   Map<String, dynamic> toMap() {
     return {
@@ -28,7 +29,7 @@ class DeliveryAdressModel extends DeliveryAdressEntity {
   factory DeliveryAdressModel.fromMap(Map<String, dynamic> map) {
     return DeliveryAdressModel(
       receiver: map['receiver'] as String,
-      adress: map['adress'] as String,
+      adress: map['address'] as String,
       latitude: map['latitude'] as double,
       longitude: map['longitude'] as double,
     );
