@@ -36,8 +36,10 @@ class HistoricRepository extends IHistoricRepository {
           .child(userId)
           .child('servicesHistory')
           .once();
-      final List<String> deliveryManServicesList =
-          snapListId.value as List<String>;
+      List<String> deliveryManServicesList = [];
+      if (snapListId.value != null) {
+        deliveryManServicesList = snapListId.value as List<String>;
+      }
 
       for (final id in deliveryManServicesList) {
         final snapshotServices =

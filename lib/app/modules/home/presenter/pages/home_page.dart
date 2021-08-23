@@ -124,7 +124,9 @@ class _HomePageState extends State<HomePage> {
                               isAvailable: false,
                               title: 'Corridas',
                               icon: AppIcons.horse,
-                              onPress: () {})
+                              onPress: () {
+                                Modular.to.pushNamed(AppRoutes.historic);
+                              })
                         ],
                       )),
                 ],

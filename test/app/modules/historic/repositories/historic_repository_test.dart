@@ -37,7 +37,7 @@ void main() {
     when(() => connectivityService.isOnline)
         .thenAnswer((_) async => Right(unit));
 
-    MockFirebaseDatabase.instance.reference().set(mockDataResponse);
+    MockFirebaseDatabase.instance.reference().set(database);
   });
 
   test('Get list of services entities', () async {
@@ -47,7 +47,7 @@ void main() {
   });
 }
 
-final mockDataResponse = {
+final database = {
   'deliveryman-Develop': {
     '0': {
       'servicesHistory': ['service1']

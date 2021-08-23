@@ -10,5 +10,6 @@ class AppColors {
   static Color get error => const Color(0xFFB00020);
   static Color get success => const Color(0xFF4BB543);
   static Color get warning => const Color(0xFFFFB91C);
+  static Color get blue => const Color(0xFF007BFF);
   static Color get transparent => const Color(0xFFFFFFFF).withOpacity(1);
 }
