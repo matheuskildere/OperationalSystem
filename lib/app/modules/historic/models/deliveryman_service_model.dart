@@ -1,6 +1,7 @@
+import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/modules/historic/models/location_model.dart';
 
-class DeliveryManServiceModel {
+class DeliveryManServiceModel extends DeliveryManServiceEntity {
   final String id;
   final String fullName;
   final String notificationToken;
@@ -11,7 +12,12 @@ class DeliveryManServiceModel {
     required this.fullName,
     required this.notificationToken,
     required this.location,
-  });
+  }): super(
+    id: id,
+    fullName: fullName,
+    notificationToken: notificationToken,
+    location: location,
+    );
 
   Map<String, dynamic> toMap() {
     return {

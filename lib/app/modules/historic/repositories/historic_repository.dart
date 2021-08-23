@@ -1,43 +1,45 @@
 import 'package:dartz/dartz.dart';
+import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/errors/failure.dart';
 import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/modules/historic/errors/get_deliveryman_services_error.dart';
 import 'package:feelps/app/modules/historic/models/service_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 abstract class IHistoricRepository {
-  Future<Either<Failure, List<ServiceModel>>> getHistoric();
+  Future<Either<Failure, List<ServiceEntity>>> getHistoric(String userId);
 }
 
 class HistoricRepository extends IHistoricRepository {
   final IConnectivityService _connectivityService;
-  final FirebaseAuth _auth;
   final FirebaseDatabase _database;
   final String tableNameServices = 'services-${appFlavor!.title}';
   final String tableNameDelMan = 'deliveryman-${appFlavor!.title}';
 
-  HistoricRepository(this._connectivityService, this._database, this._auth);
+  HistoricRepository(this._connectivityService, this._database);
 
   @override
-  Future<Either<Failure, List<ServiceModel>>> getHistoric() async {
+  Future<Either<Failure, List<ServiceEntity>>> getHistoric(String userId) async {
     @override
     final result = await _connectivityService.isOnline;
     if (result.isLeft()) {
-      // return result;
-      //comentei pq não sei como resolver
+      //TODO:return result;
     }
     final reference = _database.reference();
-
+    
     final List<ServiceModel> services = [];
     try {
-      final List<String> deliveryManServicesList = (await reference
+      final snapListId1 = await reference
+              .child(tableNameDelMan);
+         final dataSnapshot = await snapListId1.once();
+      final snapListId = await reference
               .child(tableNameDelMan)
-              .child(_auth.currentUser!.uid)
+              .child(userId)
               .child('servicesHistory')
-              .once())
-          .value as List<String>;
+              .once();
+      final List<String> deliveryManServicesList =
+          snapListId.value as List<String>;
 
       for (final String id in deliveryManServicesList) {
         final ServiceModel service = ServiceModel.fromMap((await reference
@@ -48,7 +50,7 @@ class HistoricRepository extends IHistoricRepository {
             .value as Map<String, dynamic>);
         services.add(service);
       }
-      return right(services);
+      return Right(services);
     } catch (e) {
       return Left(GetDeliveryManServicesError(
           title: "Não foi possível continuar",

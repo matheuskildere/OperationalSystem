@@ -1,4 +1,6 @@
-class DeliveryAdressModel {
+import 'package:feelps/app/core/entities/service_entity.dart';
+
+class DeliveryAdressModel extends DeliveryAdressEntity {
   final String receiver;
   final String adress;
   final double latitude;
@@ -8,7 +10,11 @@ class DeliveryAdressModel {
       {required this.receiver,
       required this.adress,
       required this.latitude,
-      required this.longitude});
+      required this.longitude}) : super(
+          receiver: receiver,
+          adress: adress,
+          latitude: latitude,
+          longitude: longitude);
 
   Map<String, dynamic> toMap() {
     return {
