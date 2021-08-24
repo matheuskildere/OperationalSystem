@@ -14,7 +14,7 @@ abstract class IHistoricRepository {
 class HistoricRepository extends IHistoricRepository {
   final IConnectivityService _connectivityService;
   final FirebaseDatabase _database;
-  final String tableNameServices = 'services-${appFlavor!.title}';
+  final String tableNameServices = 'service-${appFlavor!.title}';
   final String tableNameDelMan = 'deliveryman-${appFlavor!.title}';
 
   HistoricRepository(this._connectivityService, this._database);
@@ -36,17 +36,21 @@ class HistoricRepository extends IHistoricRepository {
           .child(userId)
           .child('servicesHistory')
           .once();
-      List<String> deliveryManServicesList = [];
+      List deliveryManServicesList = [];
       if (snapListId.value != null) {
-        deliveryManServicesList = snapListId.value as List<String>;
+        deliveryManServicesList = snapListId.value as List;
       }
 
       for (final id in deliveryManServicesList) {
-        final snapshotServices =
-            await reference.child(tableNameServices).child(id).once();
-        final ServiceModel service = ServiceModel.fromMap(
-            snapshotServices.value as Map<String, dynamic>);
-        services.add(service);
+        final snapshotServices = await reference
+            .child(tableNameServices)
+            .child(id.toString())
+            .once();
+        if (snapshotServices.value != null) {
+          final ServiceModel service = ServiceModel.fromMap(
+              Map<String, dynamic>.from(snapshotServices.value as Map));
+          services.add(service);
+        }
       }
       return Right(services);
     } catch (e) {

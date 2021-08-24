@@ -1,9 +1,6 @@
-import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_icons.dart';
 import 'package:feelps/app/core/theme/theme.dart';
-import 'package:feelps/app/modules/components/components.dart';
-import 'package:feelps/app/modules/historic/models/observation_model.dart';
 import 'package:feelps/app/modules/historic/presenter/components/big_title_component.dart';
 import 'package:feelps/app/modules/historic/presenter/components/expandable_container.dart';
 import 'package:feelps/app/modules/historic/presenter/controller/historic_controller.dart';
@@ -58,7 +55,7 @@ class _HistoricPageState extends State<HistoricPage> {
                 Container(
                   height: 198,
                   width: double.infinity,
-                  color: AppColors.white,
+                  color: AppColors.background,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -78,7 +75,7 @@ class _HistoricPageState extends State<HistoricPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          BigTitleComponent(title: 'Histórico de serviços'),
+                          BigTitleComponent(title: 'Histórico de\nserviços'),
                           Padding(
                             padding: const EdgeInsets.only(right: 25),
                             child: Observer(
@@ -102,11 +99,11 @@ class _HistoricPageState extends State<HistoricPage> {
                   builder: (context) {
                     return Column(
                       children: [
-                        if (controller.services.isNotEmpty)
+                        if (controller.services.isEmpty)
                           Container(
                             width: 332,
                             decoration: BoxDecoration(
-                                color: AppColors.background,
+                                color: AppColors.white,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Padding(
                               padding: EdgeInsets.symmetric(
@@ -121,38 +118,11 @@ class _HistoricPageState extends State<HistoricPage> {
                             ),
                           )
                         else
-                          ExpandableContainer(
-                            service: ServiceEntity(
-                                id: '0',
-                                dateInit: DateTime.now(),
-                                dateEnd: DateTime.now(),
-                                serviceName: 'Título do Serviço',
-                                price: 10.0,
-                                status: 'Cancelado',
-                                deliveryAddress: DeliveryAdressEntity(
-                                    receiver: '1pessoa',
-                                    adress: 'adress',
-                                    latitude: 0.0,
-                                    longitude: 0.0),
-                                deliveryMan: DeliveryManServiceEntity(
-                                    id: 'id',
-                                    fullName: 'Lucas Fonseca',
-                                    notificationToken: 'notificationToken',
-                                    location: LocationEntity(
-                                        latitude: 0.0, longitude: 0.0)),
-                                observations: [
-                                  ObservationModel(
-                                      status: 'confuso',
-                                      observation: 'observation',
-                                      createdAt: DateTime.now())
-                                ],
-                                establishment: EstablishmentEntity(
-                                    id: 'id',
-                                    name: 'name',
-                                    address: 'address',
-                                    location: LocationEntity(
-                                        latitude: 0.0, longitude: 0.0))),
-                          )
+                          Column(
+                              children: controller.services
+                                  .map((service) =>
+                                      ExpandableContainer(service: service))
+                                  .toList())
                       ],
                     );
                   },

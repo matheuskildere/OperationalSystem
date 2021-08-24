@@ -49,16 +49,16 @@ class ServiceModel extends ServiceEntity {
       price: double.parse(map['price'].toString()),
       status: map['status'] as String,
       deliveryAddress: DeliveryAdressModel.fromMap(
-          map['deliveryAddress'] as Map<String, dynamic>),
+          Map<String, dynamic>.from(map['deliveryAddress'] as Map)),
       deliveryMan: DeliveryManServiceModel.fromMap(
-          map['deliveryMan'] as Map<String, dynamic>),
+          Map<String, dynamic>.from(map['deliveryMan'] as Map)),
       observations: map['observations'] == null
           ? []
           : (map['observations'] as List)
               .map((e) => ObservationModel.fromMap(e as Map<String, dynamic>))
               .toList(),
       establishment: EstablishmentModel.fromMap(
-          map['establishment'] as Map<String, dynamic>),
+          Map<String, dynamic>.from(map['establishment'] as Map)),
     );
   }
 }

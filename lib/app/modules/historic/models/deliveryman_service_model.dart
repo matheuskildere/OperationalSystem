@@ -33,7 +33,8 @@ class DeliveryManServiceModel extends DeliveryManServiceEntity {
       id: map['id'] as String,
       fullName: map['fullName'] as String,
       notificationToken: map['notificationToken'] as String,
-      location: LocationModel.fromMap(map['location'] as Map<String, dynamic>),
+      location: LocationModel.fromMap(
+          Map<String, dynamic>.from(map['location'] as Map)),
     );
   }
 }

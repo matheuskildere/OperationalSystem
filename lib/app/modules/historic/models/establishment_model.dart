@@ -27,7 +27,8 @@ class EstablishmentModel extends EstablishmentEntity {
       id: map['id'] as String,
       name: map['name'] as String,
       address: map['address'] as String,
-      location: LocationModel.fromMap(map['location'] as Map<String, dynamic>),
+      location: LocationModel.fromMap(
+          Map<String, dynamic>.from(map['location'] as Map)),
     );
   }
 }
