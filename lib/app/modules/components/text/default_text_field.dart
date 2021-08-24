@@ -24,9 +24,11 @@ class DefaultTextField extends StatefulWidget {
   final String? initialValue;
   final String mask;
   final bool isFloat;
+  final bool enabled;
   final String? text;
   final TextAlign align;
   final List<TextInputFormatter>? inputFormatters;
+  final TextCapitalization? textCapitalization;
 
   const DefaultTextField(
       {Key? key,
@@ -52,7 +54,9 @@ class DefaultTextField extends StatefulWidget {
       this.initialValue,
       this.onTapSuffixIcon,
       this.inputFormatters,
-      this.align = TextAlign.start})
+      this.enabled = true,
+      this.align = TextAlign.start,
+      this.textCapitalization})
       : super(key: key);
 
   @override
@@ -113,10 +117,14 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                 color: AppColors.black.withOpacity(0.25))
           ]),
       child: TextFormField(
+        enabled: widget.enabled,
         textAlign: widget.align,
         maxLines: widget.maxLines,
         focusNode: widget.focusNode,
         inputFormatters: widget.inputFormatters,
+        textCapitalization: widget.textCapitalization == null
+            ? TextCapitalization.none
+            : widget.textCapitalization!,
         onChanged: widget.onChanged ??
             (value) {
               setState(() {});

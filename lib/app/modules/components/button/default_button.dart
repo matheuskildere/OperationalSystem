@@ -13,6 +13,7 @@ class DefaultButton extends StatefulWidget {
   final bool successColor;
   final bool? isLoading;
   final bool? border;
+  final String? icon;
   const DefaultButton({
     Key? key,
     required this.onPressed,
@@ -25,6 +26,7 @@ class DefaultButton extends StatefulWidget {
     this.height,
     this.width,
     this.isMediumButton = false,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -65,7 +67,8 @@ class _DefaultButtonState extends State<DefaultButton>
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           splashFactory: NoSplash.splashFactory,
           side: widget.border != false
-              ? MaterialStateProperty.all(BorderSide(color: AppColors.black))
+              ? MaterialStateProperty.all(
+                  BorderSide(color: AppColors.black, width: 2))
               : null,
           backgroundColor: MaterialStateProperty.all(widget.invertColors
               ? AppColors.white
@@ -100,15 +103,32 @@ class _DefaultButtonState extends State<DefaultButton>
               AnimatedOpacity(
                 duration: Duration(milliseconds: 350),
                 opacity: _isLoading ? 0 : 1,
-                child: Text(
-                  widget.title,
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                      fontSize: widget.smallTitle ? 15 : null,
-                      color: widget.invertColors
-                          ? AppColors.primary
-                          : widget.successColor
-                              ? AppColors.white
-                              : AppColors.secondary),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (widget.icon != null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: AppIcon(
+                          icon: widget.icon!,
+                          color: widget.invertColors
+                              ? AppColors.primary
+                              : widget.successColor
+                                  ? AppColors.white
+                                  : AppColors.secondary,
+                        ),
+                      ),
+                    Text(
+                      widget.title,
+                      style: Theme.of(context).textTheme.button!.copyWith(
+                          fontSize: widget.smallTitle ? 15 : null,
+                          color: widget.invertColors
+                              ? AppColors.primary
+                              : widget.successColor
+                                  ? AppColors.white
+                                  : AppColors.secondary),
+                    ),
+                  ],
                 ),
               ),
               AnimatedOpacity(
