@@ -14,6 +14,6 @@ class HomeModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (_, args) => HomePage()),
-        ChildRoute('my-data', child: (_, args) => MyDataPage())
+        ChildRoute('my-data', child: (_, args) => MyDataPage()),
       ];
 }
