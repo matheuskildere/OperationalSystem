@@ -67,7 +67,8 @@ class _DefaultButtonState extends State<DefaultButton>
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           splashFactory: NoSplash.splashFactory,
           side: widget.border != false
-              ? MaterialStateProperty.all(BorderSide(color: AppColors.black))
+              ? MaterialStateProperty.all(
+                  BorderSide(color: AppColors.black, width: 2))
               : null,
           backgroundColor: MaterialStateProperty.all(widget.invertColors
               ? AppColors.white

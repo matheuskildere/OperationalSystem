@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
 
 class DeliverymanEntity extends Equatable {
   final String? id;
@@ -12,6 +13,7 @@ class DeliverymanEntity extends Equatable {
   final String photoBase64;
   final bool? isAvaliable;
   final bool? status;
+  final MotorcycleEntity? motorcycle;
 
   const DeliverymanEntity({
     required this.id,
@@ -25,6 +27,7 @@ class DeliverymanEntity extends Equatable {
     this.createdAt,
     this.status,
     this.isAvaliable,
+    this.motorcycle,
   });
 
   @override

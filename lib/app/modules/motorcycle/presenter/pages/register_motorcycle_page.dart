@@ -61,9 +61,9 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                               children: [
                                 CircleAvatar(
                                   radius: 25,
-                                  backgroundImage: controller.photo == null
+                                  backgroundImage: controller.newPhoto == null
                                       ? null
-                                      : FileImage(controller.photo!),
+                                      : FileImage(controller.newPhoto!),
                                   backgroundColor: AppColors.background,
                                 ),
                                 SizedBox(
@@ -97,6 +97,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   padding: const EdgeInsets.only(bottom: 26),
                   child: DefaultTextField(
                       labelText: 'Marca',
+                      action: TextInputAction.next,
                       onChanged: (value) {
                         controller.brand = value;
                       }),
@@ -105,6 +106,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   padding: const EdgeInsets.only(bottom: 26),
                   child: DefaultTextField(
                       labelText: 'Modelo',
+                      action: TextInputAction.next,
                       onChanged: (value) {
                         controller.model = value;
                       }),
@@ -113,6 +115,8 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   padding: const EdgeInsets.only(bottom: 26),
                   child: DefaultTextField(
                       labelText: 'Ano',
+                      type: TextInputType.number,
+                      action: TextInputAction.done,
                       onChanged: (value) {
                         controller.year = int.parse(value);
                       }),
@@ -188,6 +192,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   child: DefaultTextField(
                       textCapitalization: TextCapitalization.characters,
                       labelText: 'Placa',
+                      action: TextInputAction.done,
                       onChanged: (value) {
                         controller.plate = value;
                       }),
@@ -208,7 +213,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                 ),
                 SizedBox(
                   height: 26,
-                )
+                ),
               ],
             ),
           ),

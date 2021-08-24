@@ -54,21 +54,6 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     });
   }
 
-  final _$photoBase64Atom = Atom(name: '_MotorcycleController.photoBase64');
-
-  @override
-  String? get photoBase64 {
-    _$photoBase64Atom.reportRead();
-    return super.photoBase64;
-  }
-
-  @override
-  set photoBase64(String? value) {
-    _$photoBase64Atom.reportWrite(value, super.photoBase64, () {
-      super.photoBase64 = value;
-    });
-  }
-
   final _$colorAtom = Atom(name: '_MotorcycleController.color');
 
   @override
@@ -99,18 +84,33 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     });
   }
 
-  final _$photoAtom = Atom(name: '_MotorcycleController.photo');
+  final _$newPhotoAtom = Atom(name: '_MotorcycleController.newPhoto');
 
   @override
-  File? get photo {
-    _$photoAtom.reportRead();
-    return super.photo;
+  File? get newPhoto {
+    _$newPhotoAtom.reportRead();
+    return super.newPhoto;
   }
 
   @override
-  set photo(File? value) {
-    _$photoAtom.reportWrite(value, super.photo, () {
-      super.photo = value;
+  set newPhoto(File? value) {
+    _$newPhotoAtom.reportWrite(value, super.newPhoto, () {
+      super.newPhoto = value;
+    });
+  }
+
+  final _$currentPhotoAtom = Atom(name: '_MotorcycleController.currentPhoto');
+
+  @override
+  File? get currentPhoto {
+    _$currentPhotoAtom.reportRead();
+    return super.currentPhoto;
+  }
+
+  @override
+  set currentPhoto(File? value) {
+    _$currentPhotoAtom.reportWrite(value, super.currentPhoto, () {
+      super.currentPhoto = value;
     });
   }
 
@@ -144,6 +144,21 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     });
   }
 
+  final _$errorMessageAtom = Atom(name: '_MotorcycleController.errorMessage');
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   final _$getImageAsyncAction = AsyncAction('_MotorcycleController.getImage');
 
   @override
@@ -159,6 +174,14 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
   Future<void> registerMotorcycle() {
     return _$registerMotorcycleAsyncAction
         .run(() => super.registerMotorcycle());
+  }
+
+  final _$getMotorcycleAsyncAction =
+      AsyncAction('_MotorcycleController.getMotorcycle');
+
+  @override
+  Future<void> getMotorcycle() {
+    return _$getMotorcycleAsyncAction.run(() => super.getMotorcycle());
   }
 
   final _$_MotorcycleControllerActionController =
@@ -181,12 +204,13 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
 brand: ${brand},
 model: ${model},
 year: ${year},
-photoBase64: ${photoBase64},
 color: ${color},
 plate: ${plate},
-photo: ${photo},
+newPhoto: ${newPhoto},
+currentPhoto: ${currentPhoto},
 dialogData: ${dialogData},
-motorcycle: ${motorcycle}
+motorcycle: ${motorcycle},
+errorMessage: ${errorMessage}
     ''';
   }
 }
