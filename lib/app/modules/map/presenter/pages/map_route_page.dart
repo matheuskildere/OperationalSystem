@@ -11,7 +11,7 @@ class MapRoutePage extends StatefulWidget {
 
 class _MapRoutePageState extends State<MapRoutePage> {
   static final CameraPosition _initialCameraPosition = CameraPosition(
-    target: LatLng(-30.0277, -51.2287),
+    target: LatLng(-3.091256, -60.018891),
     zoom: 14.4746,
   );
   @override
@@ -20,7 +20,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
       children: [
         Observer(builder: (context) {
           return GoogleMap(
-            //markers: controller.markers,
+            // markers: controller.markers,
             myLocationButtonEnabled: false,
             myLocationEnabled: true,
             onTap: (argument) {
@@ -34,7 +34,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
             },
             initialCameraPosition: _initialCameraPosition,
             onMapCreated: (GoogleMapController controllerMap) async {
-              //controller.mapController.complete(controllerMap);
+              // controller.mapController.complete(controllerMap);
               setState(() {});
             },
             zoomControlsEnabled: false,
