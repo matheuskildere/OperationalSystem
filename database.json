@@ -40,7 +40,8 @@
     "services": [
         {
             "id": "",
-            "date": "",
+            "date_init": "",
+            "date_end": "",
             "serviceName": "",
             "price": "",
             "status": "",

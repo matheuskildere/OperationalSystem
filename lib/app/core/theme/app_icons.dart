@@ -15,8 +15,10 @@ class AppIcons {
   static const hand = '$path/hand.png';
   static const horse = '$path/horse.png';
   static const logout = '$path/logout.svg';
+  static const map = '$path/map.svg';
   static const motocicle = '$path/motocicle.png';
   static const ninja = '$path/ninja.png';
+  static const union = '$path/union.svg';
   static const warning = '$path/warning.svg';
 }
 
