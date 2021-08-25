@@ -9,13 +9,6 @@ class LocationModel extends LocationEntity {
     required this.longitude,
   }) : super(latitude: latitude, longitude: longitude);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-  }
-
   factory LocationModel.fromMap(Map<String, dynamic> map) {
     return LocationModel(
       latitude: double.parse(map['latitude'].toString()),

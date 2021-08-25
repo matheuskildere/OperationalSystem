@@ -17,15 +17,6 @@ class DeliveryAdressModel extends DeliveryAdressEntity {
             latitude: latitude,
             longitude: longitude);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'receiver': receiver,
-      'adress': adress,
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-  }
-
   factory DeliveryAdressModel.fromMap(Map<String, dynamic> map) {
     return DeliveryAdressModel(
       receiver: map['receiver'] as String,

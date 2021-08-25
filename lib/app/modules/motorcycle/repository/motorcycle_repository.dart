@@ -46,8 +46,6 @@ class MotorcycleRepository implements IMotorcycleRepository {
           .child(_auth.currentUser!.uid)
           .child('motorcycle')
           .once();
-
-      print(a.value);
     } catch (e) {
       return Left(RegisterMotorcycleError(
           title: "Não foi possível continuar",

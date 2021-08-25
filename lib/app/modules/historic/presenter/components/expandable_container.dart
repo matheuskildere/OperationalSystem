@@ -1,4 +1,5 @@
 import 'package:feelps/app/core/entities/service_entity.dart';
+import 'package:feelps/app/core/enum/status_enum.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
@@ -21,9 +22,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
       child: InkWell(
         onTap: () {
           setState(() {
-            (widget.isClicked)
-                ? widget.isClicked = false
-                : widget.isClicked = true;
+            widget.isClicked = !widget.isClicked;
           });
         },
         child: SizedBox(
@@ -46,8 +45,9 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                             children: [
                               CircleAvatar(
                                 backgroundColor: AppColors.secondary,
-                                backgroundImage: NetworkImage(
-                                    'https://juristas.com.br/wp-content/uploads/2020/01/iStock-1144136008-300x202.jpg'),
+                                //   backgroundImage: NetworkImage(
+                                //       widget.service.deliveryMan.photoBase64),
+                                //
                               ),
                               SizedBox(
                                 width: 11,
@@ -103,10 +103,10 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                             children: [
                               CircleAvatar(
                                 radius: 6.5,
-                                backgroundColor:
-                                    widget.service.status == 'Cancelado'
-                                        ? AppColors.error
-                                        : AppColors.success,
+                                backgroundColor: widget.service.status ==
+                                        DeliveryStatusEnum.accepted.getString()
+                                    ? AppColors.error
+                                    : AppColors.success,
                               ),
                               SizedBox(
                                 width: 4,
@@ -115,7 +115,9 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                 widget.service.status,
                                 style: AppTypography.cardText.copyWith(
                                     fontSize: 10.5,
-                                    color: widget.service.status == 'Cancelado'
+                                    color: widget.service.status ==
+                                            DeliveryStatusEnum.accepted
+                                                .getString()
                                         ? AppColors.error
                                         : AppColors.success),
                               ),

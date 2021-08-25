@@ -14,14 +14,6 @@ class EstablishmentModel extends EstablishmentEntity {
       required this.location})
       : super(id: id, name: name, address: address, location: location);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'address': address,
-    };
-  }
-
   factory EstablishmentModel.fromMap(Map<String, dynamic> map) {
     return EstablishmentModel(
       id: map['id'] as String,

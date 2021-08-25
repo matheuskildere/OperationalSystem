@@ -12,14 +12,6 @@ class ObservationModel extends ObservationEntity {
       required this.createdAt})
       : super(status: status, observation: observation, createdAt: createdAt);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'status': status,
-      'observation': observation,
-      'createdAt': createdAt,
-    };
-  }
-
   factory ObservationModel.fromMap(Map<String, dynamic> map) {
     return ObservationModel(
       status: map['status'] as String,

@@ -34,7 +34,6 @@ abstract class _HistoricController with Store {
       errorMessage = 'Não foi possível buscar seus serviços';
     }, (r) {
       services = r;
-      if (services.isEmpty) errorMessage = 'Não há serviços registrados ainda!';
     });
   }
 }

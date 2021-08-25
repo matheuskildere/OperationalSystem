@@ -47,8 +47,8 @@ class _HistoricPageState extends State<HistoricPage> {
                     )));
           }
 
-          return Scaffold(
-              body: SingleChildScrollView(
+          return SizedBox(
+              child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -110,7 +110,9 @@ class _HistoricPageState extends State<HistoricPage> {
                                   horizontal: 40, vertical: 16),
                               child: Center(
                                 child: Text(
-                                  controller.errorMessage!,
+                                  controller.errorMessage != null
+                                      ? controller.errorMessage!
+                                      : 'Não há serviços registrados ainda!',
                                   textAlign: TextAlign.center,
                                   style: AppTypography.cardText,
                                 ),
