@@ -9,6 +9,7 @@ class AppRoutes {
   static String get mapRoute => '/map';
   static String get home => '/home';
   static String get myData => '/home/my-data';
+  static String get historic => '/home/historic';
   static String get motorcycle => '/motorcycle';
   static String get registerMotorcycle => '/motorcycle/register';
 }

@@ -43,6 +43,7 @@ dev_dependencies:
   build_runner: ^2.0.4
   change_app_package_name: ^1.0.0
   firebase_auth_mocks: ^0.6.0
+  firebase_database_mock: ^0.1.0
   flutter_test:
     sdk: flutter
   mobx_codegen: ^2.0.1+3
