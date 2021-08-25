@@ -40,12 +40,6 @@ class MotorcycleRepository implements IMotorcycleRepository {
           .child(_auth.currentUser!.uid)
           .child('motorcycle')
           .set(dataToSet);
-
-      final DataSnapshot a = await reference
-          .child(tableName)
-          .child(_auth.currentUser!.uid)
-          .child('motorcycle')
-          .once();
     } catch (e) {
       return Left(RegisterMotorcycleError(
           title: "Não foi possível continuar",

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:feelps/app/core/enum/status_enum.dart';
 
 class ServiceEntity extends Equatable {
   final String id;
@@ -6,7 +7,7 @@ class ServiceEntity extends Equatable {
   final DateTime dateEnd;
   final String serviceName;
   final double price;
-  final String status;
+  final DeliveryStatusEnum status;
   final DeliveryAdressEntity deliveryAddress;
   final DeliveryManServiceEntity deliveryMan;
   final List<ObservationEntity> observations;
@@ -46,7 +47,7 @@ class DeliveryManServiceEntity {
   final String fullName;
   final String notificationToken;
   final LocationEntity location;
-  final String? photoBase64;
+  final String photoBase64;
 
   DeliveryManServiceEntity({
     required this.id,

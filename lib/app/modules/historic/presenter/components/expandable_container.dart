@@ -45,9 +45,8 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                             children: [
                               CircleAvatar(
                                 backgroundColor: AppColors.secondary,
-                                //   backgroundImage: NetworkImage(
-                                //       widget.service.deliveryMan.photoBase64),
-                                //
+                                backgroundImage: NetworkImage(
+                                    widget.service.deliveryMan.photoBase64),
                               ),
                               SizedBox(
                                 width: 11,
@@ -104,7 +103,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               CircleAvatar(
                                 radius: 6.5,
                                 backgroundColor: widget.service.status ==
-                                        DeliveryStatusEnum.accepted.getString()
+                                        DeliveryStatusEnum.accepted
                                     ? AppColors.error
                                     : AppColors.success,
                               ),
@@ -112,12 +111,11 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                 width: 4,
                               ),
                               Text(
-                                widget.service.status,
+                                widget.service.status.getDescription(),
                                 style: AppTypography.cardText.copyWith(
                                     fontSize: 10.5,
                                     color: widget.service.status ==
                                             DeliveryStatusEnum.accepted
-                                                .getString()
                                         ? AppColors.error
                                         : AppColors.success),
                               ),

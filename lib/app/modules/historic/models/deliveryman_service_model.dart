@@ -6,14 +6,14 @@ class DeliveryManServiceModel extends DeliveryManServiceEntity {
   final String fullName;
   final String notificationToken;
   final LocationModel location;
-  final String? photoBase64;
+  final String photoBase64;
 
   DeliveryManServiceModel({
     required this.id,
     required this.fullName,
     required this.notificationToken,
     required this.location,
-    this.photoBase64,
+    required this.photoBase64,
   }) : super(
           id: id,
           fullName: fullName,

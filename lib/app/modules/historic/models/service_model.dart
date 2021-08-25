@@ -1,4 +1,5 @@
 import 'package:feelps/app/core/entities/service_entity.dart';
+import 'package:feelps/app/core/enum/status_enum.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:feelps/app/modules/historic/models/delivery_adress_model.dart';
 import 'package:feelps/app/modules/historic/models/deliveryman_service_model.dart';
@@ -11,7 +12,7 @@ class ServiceModel extends ServiceEntity {
   final DateTime dateEnd;
   final String serviceName;
   final double price;
-  final String status;
+  final DeliveryStatusEnum status;
   final DeliveryAdressModel deliveryAddress;
   final DeliveryManServiceModel deliveryMan;
   final List<ObservationModel> observations;
@@ -47,7 +48,7 @@ class ServiceModel extends ServiceEntity {
       dateEnd: DateParser.getDateTime(map['dateEnd'].toString()),
       serviceName: map['serviceName'] as String,
       price: double.parse(map['price'].toString()),
-      status: map['status'] as String,
+      status: DeliveryStatusExt.getByString(map['status'] as String),
       deliveryAddress: DeliveryAdressModel.fromMap(
           Map<String, dynamic>.from(map['deliveryAddress'] as Map)),
       deliveryMan: DeliveryManServiceModel.fromMap(
