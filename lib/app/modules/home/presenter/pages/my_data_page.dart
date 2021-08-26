@@ -75,7 +75,7 @@ class _MyDataPageState extends State<MyDataPage> {
                                 image: DecorationImage(
                                     image: MemoryImage(
                                       Uint8List.fromList(authStore
-                                          .deliveryman!.photoBase64.codeUnits),
+                                          .deliveryman!.photoUrl.codeUnits),
                                     ),
                                     fit: BoxFit.cover))),
                       ),
