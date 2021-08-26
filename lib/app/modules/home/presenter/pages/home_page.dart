@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                                           image: MemoryImage(
                                             Uint8List.fromList(authStore
                                                 .deliveryman!
-                                                .photoBase64
+                                                .photoUrl
                                                 .codeUnits),
                                           ),
                                           fit: BoxFit.cover))),

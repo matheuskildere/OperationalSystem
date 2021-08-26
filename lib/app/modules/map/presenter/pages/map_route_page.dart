@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class MapRoutePage extends StatefulWidget {
   final String? serviceId;
@@ -14,23 +15,32 @@ class MapRoutePage extends StatefulWidget {
 }
 
 class _MapRoutePageState extends State<MapRoutePage> {
-  static CameraPosition _initialCameraPosition = CameraPosition(
-    target: LatLng(-3.091256, -60.018891),
-    zoom: 14.4746,
-  );
+  late CameraPosition? _initialCameraPosition;
   late GoogleMapController mapController;
   final controller = Modular.get<MapRouteController>();
 
   @override
   void initState() {
     controller.serviceId = widget.serviceId;
+
     getLocation();
+    Location().changeSettings(
+      interval: 5000,
+    );
+    Location().onLocationChanged.listen((event) {
+      controller.locationData = event;
+      controller.getDirections();
+      CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(event.latitude!, event.longitude!)));
+      setState(() {});
+    });
 
     super.initState();
   }
 
   Future<void> getLocation() async {
     _initialCameraPosition = await controller.initialLocation();
+
     setState(() {});
   }
 
@@ -51,6 +61,20 @@ class _MapRoutePageState extends State<MapRoutePage> {
                           .map((e) => LatLng(e.latitude, e.longitude))
                           .toList())
               },
+              markers: {
+                if (controller.directions != null)
+                  Marker(
+                      markerId: MarkerId('destination'),
+                      position: LatLng(
+                          controller.directions!.polylinepoints.last.latitude,
+                          controller
+                              .directions!.polylinepoints.last.longitude)),
+                if (controller.locationData != null)
+                  Marker(
+                      markerId: MarkerId('location'),
+                      position: LatLng(controller.locationData!.latitude!,
+                          controller.locationData!.longitude!)),
+              },
               myLocationButtonEnabled: false,
               myLocationEnabled: true,
               onTap: (argument) {},
@@ -60,7 +84,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
               onCameraMoveStarted: () {
                 setState(() {});
               },
-              initialCameraPosition: _initialCameraPosition,
+              initialCameraPosition: _initialCameraPosition!,
               onMapCreated: (GoogleMapController controllerMap) async {
                 mapController = controllerMap;
 
@@ -75,27 +99,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
             );
           }),
         ],
-      ),
-      floatingActionButton: InkWell(
-        onTap: () async {
-          await controller.getDirections();
-          mapController.animateCamera(
-              CameraUpdate.newLatLngBounds(controller.directions!.bounds, 100));
-          setState(() {});
-        },
-        child: Container(
-          height: 46,
-          width: 174,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Color(0xFF434343)),
-          child: Center(
-              child: Text(
-            "Iniciar",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
-          )),
-        ),
       ),
     );
   }

@@ -255,7 +255,7 @@ class DefaultAlertDialog {
                             onPressed: () {
                               Modular.to
                                   .navigate('${AppRoutes.mapRoute}/$serviceId');
-                              // Navigator.pop(context);
+                              Navigator.pop(context);
                             },
                           ),
                         ),

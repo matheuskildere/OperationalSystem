@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/errors/failure.dart';
 import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
@@ -8,6 +7,7 @@ import 'package:feelps/app/modules/historic/models/service_model.dart';
 import 'package:feelps/app/modules/map/errors/map_error.dart';
 import 'package:feelps/app/modules/map/models/directions_model.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:location/location.dart';
 
 abstract class IMapRouteRepository {
   Future<Either<Failure, DirectionsModel>> getRoute(
@@ -40,12 +40,12 @@ class MapRouteRepository implements IMapRouteRepository {
       final service = ServiceModel.fromMap(Map<String, dynamic>.from(
           (await reference.child(tableName).child(serviceId.toString()).once())
               .value as Map));
+      final currentLocation = await Location().getLocation();
 
       final mapResponse = await _dio.get(
         _baseUrl,
         queryParameters: {
-          'origin':
-              '${service.establishment.location.latitude},${service.establishment.location.longitude}',
+          'origin': '${currentLocation.latitude},${currentLocation.longitude}',
           'destination':
               '${service.deliveryAddress.latitude},${service.deliveryAddress.longitude}',
           'key': apikey,
