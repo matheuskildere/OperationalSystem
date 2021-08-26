@@ -1,7 +1,13 @@
 import 'package:feelps/app/core/errors/failure.dart';
 
-class GetServiceInfoError extends Failure {
+class GetDirectionsInfoError extends Failure {
   final String title;
   final String message;
-  GetServiceInfoError({required this.title, required this.message});
+  GetDirectionsInfoError({required this.title, required this.message});
+}
+
+class NoRouteAvailableError extends Failure {
+  final String title;
+  final String message;
+  NoRouteAvailableError({required this.title, required this.message});
 }

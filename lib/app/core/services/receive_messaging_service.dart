@@ -6,6 +6,7 @@ class ReceiveMessagingService {
     DefaultAlertDialog.showService(
         value: double.parse(event.data['value'].toString()),
         distance: event.data['distance'].toString(),
+        serviceId: event.data['serviceId'] as String,
         pickupAddress: event.data['pickup_address'].toString(),
         deliveryAddress: event.data['delivery_address'].toString());
   }

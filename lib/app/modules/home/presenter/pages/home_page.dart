@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                 title: 'Meus dados',
                                 icon: AppIcons.ninja,
                                 onPress: () {
-                                  Modular.to.pushNamed(AppRoutes.myData);
+                                  Modular.to.pushNamed(AppRoutes.mapRoute);
                                 }),
                             HomeButtonComponent(
                                 isAvailable: false,

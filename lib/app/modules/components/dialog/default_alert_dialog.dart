@@ -7,6 +7,7 @@ import 'package:feelps/app/core/utils/formatter.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DefaultAlertDialog {
   static Future show(
@@ -81,6 +82,7 @@ class DefaultAlertDialog {
   static Future showService(
           {required double value,
           required String distance,
+          required String serviceId,
           required String pickupAddress,
           required String deliveryAddress,
           bool barrierDismissible = false}) =>
@@ -251,7 +253,9 @@ class DefaultAlertDialog {
                             smallTitle: true,
                             successColor: true,
                             onPressed: () {
-                              Navigator.pop(context);
+                              Modular.to
+                                  .navigate('${AppRoutes.mapRoute}/$serviceId');
+                              // Navigator.pop(context);
                             },
                           ),
                         ),
