@@ -73,10 +73,8 @@ class _MyDataPageState extends State<MyDataPage> {
                                 color: AppColors.secondary,
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                    image: MemoryImage(
-                                      Uint8List.fromList(authStore
-                                          .deliveryman!.photoUrl.codeUnits),
-                                    ),
+                                    image: NetworkImage(
+                                        authStore.deliveryman!.photoUrl),
                                     fit: BoxFit.cover))),
                       ),
                     ),

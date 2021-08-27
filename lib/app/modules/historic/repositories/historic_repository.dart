@@ -39,6 +39,8 @@ class HistoricRepository extends IHistoricRepository {
       List deliveryManServicesList = [];
       if (snapListId.value != null) {
         deliveryManServicesList = snapListId.value as List;
+      } else {
+        return Right(services);
       }
 
       for (final id in deliveryManServicesList) {

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
-import 'package:feelps/app/core/utils/formatter.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -80,7 +79,7 @@ class DefaultAlertDialog {
   static String count = '60';
   static bool instaceCreated = false;
   static Future showService(
-          {required double value,
+          {required String value,
           required String distance,
           required String serviceId,
           required String pickupAddress,
@@ -148,7 +147,7 @@ class DefaultAlertDialog {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Valor: ${Formatter.moneySettings(value.toString())}",
+                            "Valor: $value",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1!
@@ -253,9 +252,9 @@ class DefaultAlertDialog {
                             smallTitle: true,
                             successColor: true,
                             onPressed: () {
+                              Navigator.pop(context);
                               Modular.to
                                   .navigate('${AppRoutes.mapRoute}/$serviceId');
-                              Navigator.pop(context);
                             },
                           ),
                         ),

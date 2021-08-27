@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_icons.dart';
@@ -107,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                                 title: 'Meus dados',
                                 icon: AppIcons.ninja,
                                 onPress: () {
-                                  Modular.to.pushNamed(AppRoutes.mapRoute);
+                                  Modular.to.pushNamed(AppRoutes.myData);
                                 }),
                             HomeButtonComponent(
                                 isAvailable: false,
@@ -158,12 +156,8 @@ class _HomePageState extends State<HomePage> {
                                       color: AppColors.secondary,
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
-                                          image: MemoryImage(
-                                            Uint8List.fromList(authStore
-                                                .deliveryman!
-                                                .photoUrl
-                                                .codeUnits),
-                                          ),
+                                          image: NetworkImage(
+                                              authStore.deliveryman!.photoUrl),
                                           fit: BoxFit.cover))),
                               SizedBox(
                                 width: 11,
