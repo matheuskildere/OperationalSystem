@@ -46,7 +46,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               CircleAvatar(
                                 backgroundColor: AppColors.secondary,
                                 backgroundImage: NetworkImage(
-                                    widget.service.deliveryMan.photoBase64),
+                                    widget.service.deliveryMan.photoUrl),
                               ),
                               SizedBox(
                                 width: 11,
@@ -63,8 +63,8 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                   ),
                                   Text(
                                     DateParser.getTimeInterval(
-                                        start: widget.service.dateInit,
-                                        end: widget.service.dateEnd),
+                                        start: widget.service.dateInit!,
+                                        end: widget.service.dateEnd!),
                                     style: AppTypography.labelText
                                         .copyWith(fontSize: 10.5),
                                   ),

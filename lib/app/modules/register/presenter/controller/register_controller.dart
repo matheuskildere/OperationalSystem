@@ -63,7 +63,7 @@ abstract class _RegisterController with Store {
             fullName: fullName!.trim(),
             password: password!.trim(),
             phoneNumber: phoneNumber!.trim(),
-            photoBase64: base64));
+            photoUrl: base64));
 
     result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);

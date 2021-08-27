@@ -10,7 +10,7 @@ class DeliverymanEntity extends Equatable {
   final DateTime birthday;
   final DateTime? createdAt;
   final String cpf;
-  final String photoBase64;
+  final String photoUrl;
   final bool? isAvaliable;
   final bool? status;
   final MotorcycleEntity? motorcycle;
@@ -23,7 +23,7 @@ class DeliverymanEntity extends Equatable {
     required this.phoneNumber,
     required this.birthday,
     required this.cpf,
-    required this.photoBase64,
+    required this.photoUrl,
     this.createdAt,
     this.status,
     this.isAvaliable,

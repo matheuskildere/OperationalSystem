@@ -130,7 +130,7 @@ abstract class _MotorcycleController with Store {
           brand: brand!,
           model: model!,
           year: year!,
-          photoBase64: base64,
+          photoUrl: base64,
           color: color!,
           plate: plate!),
     );
@@ -141,7 +141,7 @@ abstract class _MotorcycleController with Store {
           brand: brand!,
           model: model!,
           year: year!,
-          photoBase64: base64Encode(await newPhoto!.readAsBytes()),
+          photoUrl: base64Encode(await newPhoto!.readAsBytes()),
           color: color!,
           plate: plate!);
       currentPhoto = newPhoto;
@@ -161,7 +161,7 @@ abstract class _MotorcycleController with Store {
       if (r != null) {
         final String dir = (await getApplicationDocumentsDirectory()).path;
         final img.Image tempImage =
-            img.decodeImage(base64Decode(motorcycle!.photoBase64))!;
+            img.decodeImage(base64Decode(motorcycle!.photoUrl))!;
         currentPhoto = File("$dir/motorcyclePhoto.png")
           ..writeAsBytes(img.encodePng(tempImage));
       } else {

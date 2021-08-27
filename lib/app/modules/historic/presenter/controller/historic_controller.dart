@@ -18,7 +18,7 @@ abstract class _HistoricController with Store {
   DialogDataEntity? dialogData;
 
   @observable
-  List<ServiceEntity> services = [];
+  List<ServiceEntity>? services;
 
   @observable
   String? errorMessage;

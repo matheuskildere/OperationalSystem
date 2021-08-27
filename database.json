@@ -7,8 +7,10 @@
         "id": "",
         "password": "",
         "phoneNumber": "",
-        "photoBase64": "",
+        "photoUrl": "",
         "status": "actived",
+        "notificationToken": "",
+        "createdAt": "",
         "servicesHistory": [
             "id", "id"
         ],
@@ -16,13 +18,14 @@
             "brand": "",
             "model": "",
             "year": "",
-            "photoBase64": "",
+            "photoUrl": "",
             "color": "",
             "plate": ""
         }
     },
     "establishment": {
         "name": "",
+        "corporateName": "",
         "address": {
             "completed": "",
             "latitude": "",
@@ -33,6 +36,11 @@
         "email": "",
         "phoneNumber": "",
         "logo": "",
+        "createdAt": "",
+        "fee": {
+            "perService": 0,
+            "perKM": 0
+        },
         "servicesHistory": [
             "id", "id"
         ]
@@ -43,15 +51,11 @@
             "date_init": "",
             "date_end": "",
             "serviceName": "",
+            "contactNumber": "",
             "price": "",
             "status": "",
-            "contactNumber": "",
-            "pickupAddress": {
-                "address": "",
-                "latitude": "",
-                "longitude": ""
-            },
             "deliveryAddress":  {
+                "receiver": "user receiver",
                 "address": "",
                 "latitude": "",
                 "longitude": ""
@@ -59,6 +63,8 @@
             "deliveryMan": {
                 "id": "",
                 "fullName": "",
+                "photoUrl": "",
+                "notificationToken": "ashkdjasdkasd",
                 "location": {
                     "latitude": "",
                     "longitude": ""
@@ -66,7 +72,12 @@
             },
             "establishment": {
                 "id": "",
-                "name": ""
+                "name": "",
+                "address": "address",
+                "location": {
+                  "latitude": -6.0734862262354845,
+                  "longitude": -49.89554485547499
+                }
             }
         }
     ]

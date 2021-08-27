@@ -6,20 +6,20 @@ class DeliveryManServiceModel extends DeliveryManServiceEntity {
   final String fullName;
   final String notificationToken;
   final LocationModel location;
-  final String photoBase64;
+  final String photoUrl;
 
   DeliveryManServiceModel({
     required this.id,
     required this.fullName,
     required this.notificationToken,
     required this.location,
-    required this.photoBase64,
+    required this.photoUrl,
   }) : super(
           id: id,
           fullName: fullName,
           notificationToken: notificationToken,
           location: location,
-          photoBase64: photoBase64,
+          photoUrl: photoUrl,
         );
 
   factory DeliveryManServiceModel.fromMap(Map<String, dynamic> map) {
@@ -27,7 +27,7 @@ class DeliveryManServiceModel extends DeliveryManServiceEntity {
       id: map['id'] as String,
       fullName: map['fullName'] as String,
       notificationToken: map['notificationToken'] as String,
-      photoBase64: map['photoBase64'] as String,
+      photoUrl: map['photoUrl'] as String,
       location: LocationModel.fromMap(
           Map<String, dynamic>.from(map['location'] as Map)),
     );

@@ -25,7 +25,7 @@ class ChangeSatatusBarComponent extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .button!
-                    .copyWith(fontSize: 17, color: AppColors.white)),
+                    .copyWith(fontSize: 16, color: AppColors.white)),
             Switch.adaptive(
               value: isAvaliable,
               onChanged: onChangedAvaliable,

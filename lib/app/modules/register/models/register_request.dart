@@ -10,7 +10,7 @@ class RegisterRequest extends DeliverymanEntity {
   final String phoneNumber;
   final DateTime birthday;
   final String cpf;
-  final String photoBase64;
+  final String photoUrl;
 
   const RegisterRequest({
     required this.email,
@@ -19,7 +19,7 @@ class RegisterRequest extends DeliverymanEntity {
     required this.phoneNumber,
     required this.birthday,
     required this.cpf,
-    required this.photoBase64,
+    required this.photoUrl,
   }) : super(
             id: null,
             birthday: birthday,
@@ -28,7 +28,7 @@ class RegisterRequest extends DeliverymanEntity {
             fullName: fullName,
             password: password,
             phoneNumber: phoneNumber,
-            photoBase64: photoBase64);
+            photoUrl: photoUrl);
 
   Map<String, dynamic> toMap() {
     return {
@@ -38,7 +38,7 @@ class RegisterRequest extends DeliverymanEntity {
       'phoneNumber': phoneNumber,
       'birthday': DateParser.getDateStringEn(birthday),
       'cpf': cpf,
-      'photoBase64': photoBase64,
+      'photoUrl': photoUrl,
       'isAvaliable': false,
       'status': true,
       'createdAt': DateParser.getDateStringEn(DateTime.now()),
