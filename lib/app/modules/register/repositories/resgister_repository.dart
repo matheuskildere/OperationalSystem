@@ -6,6 +6,7 @@ import 'package:feelps/app/modules/register/errors/register_errors.dart';
 import 'package:feelps/app/modules/register/models/register_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 abstract class IRegisterRepository {
   Future<Either<Failure, Unit>> registerDeliveryman(
@@ -51,6 +52,8 @@ class RegisterRepository implements IRegisterRepository {
     try {
       final dataToSet = data.toMap();
       dataToSet['id'] = userCredential.user!.uid;
+      dataToSet['notificationToken'] =
+          await FirebaseMessaging.instance.getToken();
       await reference
           .child(tableName)
           .child(userCredential.user!.uid)

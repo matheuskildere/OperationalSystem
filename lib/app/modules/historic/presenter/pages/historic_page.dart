@@ -36,11 +36,11 @@ class _HistoricPageState extends State<HistoricPage> {
     return Scaffold(
         backgroundColor: AppColors.white,
         body: Observer(builder: (context) {
-          if (controller.errorMessage == null && controller.services.isEmpty) {
+          if (controller.errorMessage == null && controller.services == null) {
             return Center(
                 child: SizedBox(
-                    height: 200,
-                    width: 200,
+                    height: 100,
+                    width: 100,
                     child: CircularProgressIndicator(
                       color: AppColors.secondary,
                       strokeWidth: 6,
@@ -99,7 +99,9 @@ class _HistoricPageState extends State<HistoricPage> {
                   builder: (context) {
                     return Column(
                       children: [
-                        if (controller.services.isEmpty)
+                        if (controller.errorMessage != null ||
+                            (controller.services != null &&
+                                controller.services!.isEmpty))
                           Container(
                             width: 332,
                             decoration: BoxDecoration(
@@ -121,7 +123,7 @@ class _HistoricPageState extends State<HistoricPage> {
                           )
                         else
                           Column(
-                              children: controller.services
+                              children: controller.services!
                                   .map((service) =>
                                       ExpandableContainer(service: service))
                                   .toList())

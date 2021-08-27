@@ -8,6 +8,7 @@ import 'package:feelps/app/modules/auth/models/deliveryman_response.dart';
 import 'package:feelps/app/modules/auth/models/login_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 abstract class IAuthRepository {
   Future<Either<Failure, DeliverymanEntity>> loginWithEmail(
@@ -50,6 +51,9 @@ class AuthRepository implements IAuthRepository {
     }
     final userData = DelvierymanResponse.fromMap(
         Map<String, dynamic>.from(dataSnapshotPages.value as Map));
+
+    await reference.child(tableName).child(userData.id).update(
+        {'notificationToken': await FirebaseMessaging.instance.getToken()});
 
     return Right(userData);
   }

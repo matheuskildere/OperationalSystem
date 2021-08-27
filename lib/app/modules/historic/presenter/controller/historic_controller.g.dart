@@ -27,13 +27,13 @@ mixin _$HistoricController on _HistoricController, Store {
   final _$servicesAtom = Atom(name: '_HistoricController.services');
 
   @override
-  List<ServiceEntity> get services {
+  List<ServiceEntity>? get services {
     _$servicesAtom.reportRead();
     return super.services;
   }
 
   @override
-  set services(List<ServiceEntity> value) {
+  set services(List<ServiceEntity>? value) {
     _$servicesAtom.reportWrite(value, super.services, () {
       super.services = value;
     });

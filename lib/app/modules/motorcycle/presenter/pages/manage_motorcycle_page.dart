@@ -187,14 +187,15 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                       SizedBox(
                         height: 22,
                       ),
-                      DefaultButton(
-                        onPressed: () async {
-                          await controller.deleteMotorcycle();
-                        },
-                        title: 'Apagar moto',
-                        invertColors: true,
-                        border: true,
-                      ),
+                      if (controller.motorcycle != null)
+                        DefaultButton(
+                          onPressed: () async {
+                            await controller.deleteMotorcycle();
+                          },
+                          title: 'Apagar moto',
+                          invertColors: true,
+                          border: true,
+                        ),
                       SizedBox(
                         height: 22,
                       ),
