@@ -86,43 +86,25 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                             padding: const EdgeInsets.only(right: 25),
                             child: Observer(
                               builder: (context) {
-                                return InkWell(
-                                  onTap: () {
-                                    controller.getImage();
+                                return Observer(
+                                  builder: (context) {
+                                    return Column(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 25,
+                                          backgroundImage:
+                                              controller.currentPhoto != null
+                                                  ? FileImage(
+                                                      controller.currentPhoto!)
+                                                  : null,
+                                          backgroundColor: AppColors.lightGrey,
+                                        ),
+                                        SizedBox(
+                                          height: 6,
+                                        ),
+                                      ],
+                                    );
                                   },
-                                  child: Observer(
-                                    builder: (context) {
-                                      return Column(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 25,
-                                            backgroundImage: controller
-                                                        .currentPhoto !=
-                                                    null
-                                                ? FileImage(
-                                                    controller.currentPhoto!)
-                                                : controller.newPhoto == null
-                                                    ? null
-                                                    : FileImage(
-                                                        controller.newPhoto!),
-                                            backgroundColor:
-                                                AppColors.lightGrey,
-                                          ),
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Text(
-                                            'Adicionar',
-                                            style: AppTypography.cardText
-                                                .copyWith(
-                                                    fontSize: 13,
-                                                    decoration: TextDecoration
-                                                        .underline),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
                                 );
                               },
                             ),

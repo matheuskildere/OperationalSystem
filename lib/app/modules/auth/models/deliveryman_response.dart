@@ -10,7 +10,7 @@ class DelvierymanResponse extends DeliverymanEntity {
   final DateTime birthday;
   final DateTime? createdAt;
   final String cpf;
-  final String photoBase64;
+  final String photoUrl;
   final bool status;
   final bool isAvaliable;
 
@@ -23,7 +23,7 @@ class DelvierymanResponse extends DeliverymanEntity {
     required this.phoneNumber,
     required this.birthday,
     required this.cpf,
-    required this.photoBase64,
+    required this.photoUrl,
     required this.status,
     required this.isAvaliable,
   }) : super(
@@ -35,7 +35,7 @@ class DelvierymanResponse extends DeliverymanEntity {
           password: password,
           createdAt: createdAt,
           phoneNumber: phoneNumber,
-          photoBase64: photoBase64,
+          photoUrl: photoUrl,
           status: status,
           isAvaliable: isAvaliable,
         );
@@ -49,7 +49,7 @@ class DelvierymanResponse extends DeliverymanEntity {
       birthday: DateParser.getDateTime(map['birthday'].toString()),
       createdAt: DateParser.getDateTime(map['createdAt'].toString()),
       cpf: map['cpf'].toString(),
-      photoBase64: map['photoBase64'].toString(),
+      photoUrl: map['photoUrl'].toString(),
       status: map['status'] as bool,
       isAvaliable: map['isAvaliable'] as bool,
     );

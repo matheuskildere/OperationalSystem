@@ -167,6 +167,14 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
         .run(() => super.getImage(isFromGalery: isFromGalery));
   }
 
+  final _$uploadPhotoAsyncAction =
+      AsyncAction('_MotorcycleController.uploadPhoto');
+
+  @override
+  Future<String> uploadPhoto() {
+    return _$uploadPhotoAsyncAction.run(() => super.uploadPhoto());
+  }
+
   final _$registerMotorcycleAsyncAction =
       AsyncAction('_MotorcycleController.registerMotorcycle');
 

@@ -46,7 +46,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               CircleAvatar(
                                 backgroundColor: AppColors.secondary,
                                 backgroundImage: NetworkImage(
-                                    widget.service.deliveryMan.photoBase64),
+                                    widget.service.deliveryMan.photoUrl),
                               ),
                               SizedBox(
                                 width: 11,

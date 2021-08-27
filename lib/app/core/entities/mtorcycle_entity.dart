@@ -5,7 +5,7 @@ class MotorcycleEntity extends Equatable {
   final String brand;
   final String model;
   final int year;
-  final String photoBase64;
+  final String photoUrl;
   final MotorcycleColorsEnum color;
   final String plate;
 
@@ -13,10 +13,10 @@ class MotorcycleEntity extends Equatable {
       {required this.brand,
       required this.model,
       required this.year,
-      required this.photoBase64,
+      required this.photoUrl,
       required this.color,
       required this.plate});
 
   @override
-  List<Object?> get props => [brand, model, year, photoBase64, color, plate];
+  List<Object?> get props => [brand, model, year, photoUrl, color, plate];
 }

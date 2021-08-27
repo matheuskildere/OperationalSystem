@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
@@ -73,9 +71,8 @@ class _MyDataPageState extends State<MyDataPage> {
                                 color: AppColors.secondary,
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                    image: MemoryImage(
-                                      Uint8List.fromList(authStore
-                                          .deliveryman!.photoBase64.codeUnits),
+                                    image: NetworkImage(
+                                      authStore.deliveryman!.photoUrl,
                                     ),
                                     fit: BoxFit.cover))),
                       ),

@@ -72,7 +72,7 @@ class MotorcycleRepository implements IMotorcycleRepository {
         brand: b['brand'] as String,
         model: b['model'] as String,
         year: b['year'] as int,
-        photoBase64: b['photoBase64'] as String,
+        photoUrl: b['photoUrl'] as String,
         color: MotorcycleColorsExt.getByString(b['color'] as String),
         plate: b['plate'] as String,
       ));
@@ -80,7 +80,7 @@ class MotorcycleRepository implements IMotorcycleRepository {
       return Left(RegisterMotorcycleError(
           title: "Não foi possível continuar",
           message:
-              'Ocorreu um erro ao cadastrat a moto no sistema, tente novamente.'));
+              'Ocorreu um erro ao cadastratr a moto no sistema, tente novamente.'));
     }
   }
 

@@ -7,7 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 class MotorcycleModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind((i) => MotorcycleController(i())),
+        Bind((i) => MotorcycleController(i(), i())),
         Bind<IMotorcycleRepository>((i) => MotorcycleRepository(i(), i(), i()))
       ];
 

@@ -4,7 +4,7 @@ class RegisterMotorcycleRequest {
   final String brand;
   final String model;
   final int year;
-  final String photoBase64;
+  final String photoUrl;
   final MotorcycleColorsEnum color;
   final String plate;
 
@@ -12,7 +12,7 @@ class RegisterMotorcycleRequest {
       {required this.brand,
       required this.model,
       required this.year,
-      required this.photoBase64,
+      required this.photoUrl,
       required this.color,
       required this.plate});
 
@@ -21,7 +21,7 @@ class RegisterMotorcycleRequest {
       'brand': brand,
       'model': model,
       'year': year,
-      'photoBase64': photoBase64,
+      'photoUrl': photoUrl,
       'color': color.getString(),
       'plate': plate,
     };
@@ -32,7 +32,7 @@ class RegisterMotorcycleRequest {
       brand: map['brand'] as String,
       model: map['model'] as String,
       year: map['year'] as int,
-      photoBase64: map['photoBase64'] as String,
+      photoUrl: map['photoUrl'] as String,
       color: MotorcycleColorsExt.getByString(map['color'] as String),
       plate: map['plate'] as String,
     );

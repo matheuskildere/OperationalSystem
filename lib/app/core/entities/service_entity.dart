@@ -47,14 +47,14 @@ class DeliveryManServiceEntity {
   final String fullName;
   final String notificationToken;
   final LocationEntity location;
-  final String photoBase64;
+  final String photoUrl;
 
   DeliveryManServiceEntity({
     required this.id,
     required this.fullName,
     required this.notificationToken,
     required this.location,
-    required this.photoBase64,
+    required this.photoUrl,
   });
 }
 

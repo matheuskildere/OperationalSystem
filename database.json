@@ -7,7 +7,7 @@
         "id": "",
         "password": "",
         "phoneNumber": "",
-        "photoBase64": "",
+        "photoUrl": "",
         "status": "actived",
         "servicesHistory": [
             "id", "id"
@@ -16,7 +16,7 @@
             "brand": "",
             "model": "",
             "year": "",
-            "photoBase64": "",
+            "photoUrl": "",
             "color": "",
             "plate": ""
         }
