@@ -157,7 +157,8 @@ class _HomePageState extends State<HomePage> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                           image: NetworkImage(
-                                              authStore.deliveryman!.photoUrl),
+                                            authStore.deliveryman!.photoUrl,
+                                          ),
                                           fit: BoxFit.cover))),
                               SizedBox(
                                 width: 11,
