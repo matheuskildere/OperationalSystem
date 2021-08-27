@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:camera_camera/camera_camera.dart';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
-import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/utils/formatter.dart';
 import 'package:feelps/app/core/validations/app_validations.dart';
 import 'package:feelps/app/modules/register/models/register_request.dart';

@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
               Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.74,
           child: Stack(
             children: [
               Observer(builder: (context) {
