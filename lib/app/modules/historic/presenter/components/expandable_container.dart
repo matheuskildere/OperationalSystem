@@ -54,9 +54,13 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    widget.service.deliveryMan.fullName,
-                                    style: AppTypography.buttonText,
+                                  SizedBox(
+                                    width: 120,
+                                    child: Text(
+                                      widget.service.deliveryMan.fullName,
+                                      style: AppTypography.buttonText,
+                                      overflow: TextOverflow.clip,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -110,14 +114,18 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               SizedBox(
                                 width: 4,
                               ),
-                              Text(
-                                widget.service.status.getDescription(),
-                                style: AppTypography.cardText.copyWith(
-                                    fontSize: 10.5,
-                                    color: widget.service.status ==
-                                            DeliveryStatusEnum.accepted
-                                        ? AppColors.error
-                                        : AppColors.success),
+                              SizedBox(
+                                width: 90,
+                                child: Text(
+                                  widget.service.status.getDescription(),
+                                  overflow: TextOverflow.fade,
+                                  style: AppTypography.cardText.copyWith(
+                                      fontSize: 10.5,
+                                      color: widget.service.status ==
+                                              DeliveryStatusEnum.accepted
+                                          ? AppColors.error
+                                          : AppColors.success),
+                                ),
                               ),
                             ],
                           ),
@@ -142,9 +150,6 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          SizedBox(
-                            height: 34,
-                          ),
                           Text('Endereço de Retirada:',
                               textAlign: TextAlign.start,
                               style: AppTypography.buttonText

@@ -106,7 +106,8 @@ class _MyDataPageState extends State<MyDataPage> {
                       ],
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 21, right: 31, left: 31),
+                  padding:
+                      const EdgeInsets.only(bottom: 21, right: 31, left: 31),
                   child: DefaultButton(
                       invertColors: true,
                       border: true,
