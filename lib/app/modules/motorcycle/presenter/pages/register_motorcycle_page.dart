@@ -192,6 +192,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   child: DefaultTextField(
                       textCapitalization: TextCapitalization.characters,
                       labelText: 'Placa',
+                      mask: '*******',
                       action: TextInputAction.done,
                       onChanged: (value) {
                         controller.plate = value;

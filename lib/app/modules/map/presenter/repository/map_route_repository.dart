@@ -37,6 +37,12 @@ class MapRouteRepository implements IMapRouteRepository {
     }
     final snapMap = Map<String, dynamic>.from(snapshotService.value as Map);
     final service = ServiceModel.fromMap(snapMap);
+
+    await reference
+        .child(tableName)
+        .child(serviceId)
+        .update({'status': 'A caminho da retirada'});
+
     return Right(service);
   }
 }

@@ -47,8 +47,8 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                 controller.motorcycle == null) {
               return Center(
                   child: SizedBox(
-                      height: 200,
-                      width: 200,
+                      height: 150,
+                      width: 150,
                       child: CircularProgressIndicator(
                         color: AppColors.secondary,
                         strokeWidth: 6,

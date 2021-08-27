@@ -56,6 +56,7 @@ abstract class _MotorcycleController with Store {
 
   @action
   void formValidation() {
+    dialogData = null;
     if (brand == null || brand!.length < 3) {
       dialogData = DialogDataEntity(
           title: "Atenção",

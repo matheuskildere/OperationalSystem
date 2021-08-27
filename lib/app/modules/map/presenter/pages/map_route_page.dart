@@ -6,6 +6,7 @@ import 'package:feelps/app/core/theme/app_typography.dart';
 import 'package:feelps/app/core/utils/app_parameters.dart';
 import 'package:feelps/app/modules/map/models/pin_information.dart';
 import 'package:feelps/app/modules/map/presenter/controller/map_route_controller.dart';
+import 'package:feelps/app/modules/map/services/distance_calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,15 +23,24 @@ class MapRoutePage extends StatefulWidget {
 }
 
 class _MapRoutePageState extends State<MapRoutePage> {
+  // locations
   LocationData? startLocation;
   LocationData? currentLocation;
+  LocationData? lastLocation;
   LocationData? destinationLocation;
+  // to get location
   late Location location;
+  // to create a Polyline route
   List<LatLng> polylineCoordinates = [];
+  // markert to se locations
   final Set<Marker> _markers = <Marker>{};
+  // map controller
   final Completer<GoogleMapController> _controller = Completer();
 
   final controller = Modular.get<MapRouteController>();
+  // to calculate the distance
+  final distanceCalculator = DistanceCalculator();
+  double? distance;
 
   PinInformation currentlySelectedPin = PinInformation(
       pinPath: '',
@@ -57,8 +67,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
     );
     Location().onLocationChanged.listen((event) async {
       currentLocation = event;
-
       updatePinOnMap();
+
+      if (polylineCoordinates.isNotEmpty) {
+        distance =
+            DistanceCalculator.distanceCalculatorByList(polylineCoordinates);
+        print(distance);
+      }
       setState(() {});
     });
 
@@ -87,72 +102,74 @@ class _MapRoutePageState extends State<MapRoutePage> {
   @override
   Widget build(BuildContext context) {
     CameraPosition initialCameraPosition = CameraPosition(
-        zoom: 18,
+        zoom: 20,
         tilt: 50,
         bearing: 30,
         target: LatLng(-26.910421537584813, -49.092771326985265));
     if (currentLocation != null) {
       initialCameraPosition = CameraPosition(
         target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
-        zoom: 18,
+        zoom: 20,
         tilt: 50,
         bearing: 30,
       );
     }
-    return Scaffold(
-      body: Observer(builder: (context) {
-        if (controller.dialogData != null) {
-          return Container(
-            width: 332,
-            decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-              child: Center(
-                child: Text(
-                  controller.dialogData!.description,
-                  textAlign: TextAlign.center,
-                  style: AppTypography.cardText,
+    return SafeArea(
+      child: Scaffold(
+        body: Observer(builder: (context) {
+          if (controller.dialogData != null) {
+            return Container(
+              width: 332,
+              decoration: BoxDecoration(
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                child: Center(
+                  child: Text(
+                    controller.dialogData!.description,
+                    textAlign: TextAlign.center,
+                    style: AppTypography.cardText,
+                  ),
                 ),
               ),
-            ),
+            );
+          }
+          if (controller.serviceEntity == null || destinationLocation == null) {
+            return Center(
+                child: SizedBox(
+                    height: 150,
+                    width: 150,
+                    child: CircularProgressIndicator(
+                      color: AppColors.secondary,
+                      strokeWidth: 6,
+                    )));
+          }
+          return Stack(
+            children: [
+              GoogleMap(
+                polylines: _polylines,
+                markers: _markers,
+                myLocationButtonEnabled: false,
+                onTap: (argument) {},
+                onCameraMove: (position) {
+                  setState(() {});
+                },
+                onCameraMoveStarted: () {
+                  setState(() {});
+                },
+                initialCameraPosition: initialCameraPosition,
+                onMapCreated: (GoogleMapController controllerMap) {
+                  controllerMap.setMapStyle(Utils.mapStyles);
+                  _controller.complete(controllerMap);
+                  showPinsOnMap();
+                },
+                zoomControlsEnabled: false,
+              )
+            ],
           );
-        }
-        if (controller.serviceEntity == null || destinationLocation == null) {
-          return Center(
-              child: SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: CircularProgressIndicator(
-                    color: AppColors.secondary,
-                    strokeWidth: 6,
-                  )));
-        }
-        return Stack(
-          children: [
-            GoogleMap(
-              polylines: _polylines,
-              markers: _markers,
-              myLocationButtonEnabled: false,
-              onTap: (argument) {},
-              onCameraMove: (position) {
-                setState(() {});
-              },
-              onCameraMoveStarted: () {
-                setState(() {});
-              },
-              initialCameraPosition: initialCameraPosition,
-              onMapCreated: (GoogleMapController controllerMap) {
-                controllerMap.setMapStyle(Utils.mapStyles);
-                _controller.complete(controllerMap);
-                showPinsOnMap();
-              },
-              zoomControlsEnabled: false,
-            )
-          ],
-        );
-      }),
+        }),
+      ),
     );
   }
 
@@ -197,7 +214,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
       _polylines.add(Polyline(
           polylineId: PolylineId('poly'),
-          color: AppColors.primary,
+          color: AppColors.secondary,
           width: 7,
           points: polylineCoordinates));
       print(_polylines);
@@ -210,7 +227,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
     // every time the location changes, so the camera
     // follows the pin as it moves with an animation
     final CameraPosition cPosition = CameraPosition(
-      zoom: 18,
+      zoom: 20,
       tilt: 50,
       bearing: 30,
       target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
@@ -239,6 +256,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
         icon: await BitmapDescriptor.fromAssetImage(
             ImageConfiguration(devicePixelRatio: 2.0),
             AppImages.deliveryManLocation)));
+    // if (lastLocation != null &&
+    //   lastLocation!.latitude == currentLocation!.latitude &&
+    //   lastLocation!.longitude == currentLocation!.longitude) {
+    //   polylineCoordinates.clear();
+    //   setPolylines();
+    //   lastLocation = currentLocation;
+    // }
     setState(() {});
   }
 }
