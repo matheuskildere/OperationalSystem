@@ -80,7 +80,7 @@ class MotorcycleRepository implements IMotorcycleRepository {
       return Left(RegisterMotorcycleError(
           title: "Não foi possível continuar",
           message:
-              'Ocorreu um erro ao cadastrat a moto no sistema, tente novamente.'));
+              'Ocorreu um erro ao cadastratr a moto no sistema, tente novamente.'));
     }
   }
 

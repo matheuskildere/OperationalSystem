@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
               Widget>[
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.74,
           child: Stack(
             children: [
               Observer(builder: (context) {
@@ -157,7 +157,8 @@ class _HomePageState extends State<HomePage> {
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                           image: NetworkImage(
-                                              authStore.deliveryman!.photoUrl),
+                                            authStore.deliveryman!.photoUrl,
+                                          ),
                                           fit: BoxFit.cover))),
                               SizedBox(
                                 width: 11,
