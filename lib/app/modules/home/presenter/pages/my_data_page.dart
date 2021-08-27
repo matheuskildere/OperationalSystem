@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';

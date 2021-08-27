@@ -3,8 +3,8 @@ import 'package:feelps/app/core/enum/status_enum.dart';
 
 class ServiceEntity extends Equatable {
   final String id;
-  final DateTime dateInit;
-  final DateTime dateEnd;
+  final DateTime? dateInit;
+  final DateTime? dateEnd;
   final String serviceName;
   final double price;
   final DeliveryStatusEnum status;
@@ -15,8 +15,8 @@ class ServiceEntity extends Equatable {
 
   const ServiceEntity(
       {required this.id,
-      required this.dateInit,
-      required this.dateEnd,
+      this.dateInit,
+      this.dateEnd,
       required this.serviceName,
       required this.price,
       required this.status,

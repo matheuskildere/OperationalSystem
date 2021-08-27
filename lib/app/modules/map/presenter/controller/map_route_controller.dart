@@ -1,5 +1,5 @@
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
-import 'package:feelps/app/modules/map/models/directions_model.dart';
+import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/modules/map/presenter/repository/map_route_repository.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -15,16 +15,13 @@ abstract class _MapRouteController with Store {
   _MapRouteController(this._repository);
 
   @observable
-  DirectionsModel? directions;
-
-  @observable
   String? serviceId;
 
   @observable
-  DialogDataEntity? dialogData;
+  ServiceEntity? serviceEntity;
 
   @observable
-  LocationData? locationData;
+  DialogDataEntity? dialogData;
 
   @action
   Future<CameraPosition> initialLocation() async {
@@ -38,24 +35,16 @@ abstract class _MapRouteController with Store {
     }
   }
 
-  // @action
-  // Future<LatLng?> getLocation() async {
-  //   final result = await Location().getLocation();
-  //   if (result.latitude != null && result.longitude != null) {
-  //     return LatLng(result.latitude!, result.longitude!);
-  //   }
-  // }
-
   @action
-  Future<DirectionsModel?> getDirections() async {
-    final result = await _repository.getRoute(serviceId: serviceId!);
+  Future<void> getService() async {
+    dialogData = null;
+    final result = await _repository.getService(serviceId: serviceId!);
 
     return result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
       return null;
     }, (r) {
-      directions = r;
-      return directions!;
+      serviceEntity = r;
     });
   }
 }

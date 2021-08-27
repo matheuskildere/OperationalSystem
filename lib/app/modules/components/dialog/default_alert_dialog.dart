@@ -252,6 +252,8 @@ class DefaultAlertDialog {
                             smallTitle: true,
                             successColor: true,
                             onPressed: () {
+                              count = '60';
+                              instaceCreated = false;
                               Navigator.pop(context);
                               Modular.to
                                   .navigate('${AppRoutes.mapRoute}/$serviceId');

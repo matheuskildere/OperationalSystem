@@ -2,6 +2,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DirectionsModel {
+  final LatLng destination;
   final LatLngBounds bounds;
   final List<PointLatLng> polylinepoints;
   final String? distance;
@@ -9,6 +10,7 @@ class DirectionsModel {
 
   DirectionsModel(
       {required this.bounds,
+      required this.destination,
       required this.polylinepoints,
       required this.distance,
       required this.duration});
@@ -24,6 +26,8 @@ class DirectionsModel {
     );
     return DirectionsModel(
       bounds: bounds,
+      destination:
+          LatLng(data['desLatitude'] as double, data['desLongitude'] as double),
       polylinepoints: PolylinePoints()
           .decodePolyline(data['overview_polyline']['points'].toString()),
       distance: 'aaaaa',

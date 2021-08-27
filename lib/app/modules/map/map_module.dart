@@ -10,10 +10,7 @@ class MapModule extends Module {
         Bind((i) => MapRouteController(i())),
         Bind((i) => Dio(i())),
         Bind((i) => BaseOptions()),
-        Bind<IMapRouteRepository>((i) => MapRouteRepository(i(), i(), i())),
-        Bind<Dio>((i) => Dio(
-              i(),
-            )),
+        Bind<IMapRouteRepository>((i) => MapRouteRepository(i(), i())),
       ];
 
   @override

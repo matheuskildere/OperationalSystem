@@ -8,8 +8,8 @@ import 'package:feelps/app/modules/historic/models/observation_model.dart';
 
 class ServiceModel extends ServiceEntity {
   final String id;
-  final DateTime dateInit;
-  final DateTime dateEnd;
+  final DateTime? dateInit;
+  final DateTime? dateEnd;
   final String serviceName;
   final double price;
   final DeliveryStatusEnum status;
@@ -20,8 +20,8 @@ class ServiceModel extends ServiceEntity {
 
   const ServiceModel(
       {required this.id,
-      required this.dateInit,
-      required this.dateEnd,
+      this.dateInit,
+      this.dateEnd,
       required this.serviceName,
       required this.price,
       required this.status,
@@ -44,8 +44,12 @@ class ServiceModel extends ServiceEntity {
   factory ServiceModel.fromMap(Map<String, dynamic> map) {
     return ServiceModel(
       id: map['id'] as String,
-      dateInit: DateParser.getDateTime(map['dateInit'].toString()),
-      dateEnd: DateParser.getDateTime(map['dateEnd'].toString()),
+      dateInit: map['dateInit'] != null
+          ? DateParser.getDateTime(map['dateInit'].toString())
+          : null,
+      dateEnd: map['dateEnd'] != null
+          ? DateParser.getDateTime(map['dateEnd'].toString())
+          : null,
       serviceName: map['serviceName'] as String,
       price: double.parse(map['price'].toString()),
       status: DeliveryStatusExt.getByString(map['status'] as String),

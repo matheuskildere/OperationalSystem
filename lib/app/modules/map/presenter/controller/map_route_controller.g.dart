@@ -9,21 +9,6 @@ part of 'map_route_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$MapRouteController on _MapRouteController, Store {
-  final _$directionsAtom = Atom(name: '_MapRouteController.directions');
-
-  @override
-  DirectionsModel? get directions {
-    _$directionsAtom.reportRead();
-    return super.directions;
-  }
-
-  @override
-  set directions(DirectionsModel? value) {
-    _$directionsAtom.reportWrite(value, super.directions, () {
-      super.directions = value;
-    });
-  }
-
   final _$serviceIdAtom = Atom(name: '_MapRouteController.serviceId');
 
   @override
@@ -36,6 +21,21 @@ mixin _$MapRouteController on _MapRouteController, Store {
   set serviceId(String? value) {
     _$serviceIdAtom.reportWrite(value, super.serviceId, () {
       super.serviceId = value;
+    });
+  }
+
+  final _$serviceEntityAtom = Atom(name: '_MapRouteController.serviceEntity');
+
+  @override
+  ServiceEntity? get serviceEntity {
+    _$serviceEntityAtom.reportRead();
+    return super.serviceEntity;
+  }
+
+  @override
+  set serviceEntity(ServiceEntity? value) {
+    _$serviceEntityAtom.reportWrite(value, super.serviceEntity, () {
+      super.serviceEntity = value;
     });
   }
 
@@ -62,19 +62,18 @@ mixin _$MapRouteController on _MapRouteController, Store {
     return _$initialLocationAsyncAction.run(() => super.initialLocation());
   }
 
-  final _$getDirectionsAsyncAction =
-      AsyncAction('_MapRouteController.getDirections');
+  final _$getServiceAsyncAction = AsyncAction('_MapRouteController.getService');
 
   @override
-  Future<DirectionsModel?> getDirections() {
-    return _$getDirectionsAsyncAction.run(() => super.getDirections());
+  Future<void> getService() {
+    return _$getServiceAsyncAction.run(() => super.getService());
   }
 
   @override
   String toString() {
     return '''
-directions: ${directions},
 serviceId: ${serviceId},
+serviceEntity: ${serviceEntity},
 dialogData: ${dialogData}
     ''';
   }
