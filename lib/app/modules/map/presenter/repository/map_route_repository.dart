@@ -24,10 +24,27 @@ class MapRouteRepository implements IMapRouteRepository {
       {required String serviceId}) async {
     final result = await _connectivityService.isOnline;
     if (result.isLeft()) {
-      //TODO:return result;
+      return result.fold((l) {
+        return Left(l);
+      }, (r) {
+        return Left(NoConnectionError(
+          title: "Atenção",
+          message: "Você não possui conexão com a internet!"));
+      });
     }
     final reference = _database.reference();
 
+
+    await reference
+        .child(tableName)
+        .child(serviceId)
+        .update({'status': 'Aceito'});
+
+    await reference
+        .child(tableName)
+        .child(serviceId)
+        .update({'status': 'A caminho da retirada'});
+        
     final snapshotService =
         await reference.child(tableName).child(serviceId).once();
     if (snapshotService.value == null) {
@@ -37,12 +54,6 @@ class MapRouteRepository implements IMapRouteRepository {
     }
     final snapMap = Map<String, dynamic>.from(snapshotService.value as Map);
     final service = ServiceModel.fromMap(snapMap);
-
-    await reference
-        .child(tableName)
-        .child(serviceId)
-        .update({'status': 'A caminho da retirada'});
-
     return Right(service);
   }
 }

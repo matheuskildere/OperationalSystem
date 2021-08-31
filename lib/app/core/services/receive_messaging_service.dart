@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ReceiveMessagingService {
   static void onReceiveMessage(RemoteMessage event) {
+    print(event.data);
     DefaultAlertDialog.showService(
         value: event.data['value'].toString(),
         distance: event.data['distance'].toString(),

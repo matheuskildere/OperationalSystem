@@ -72,7 +72,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
       if (polylineCoordinates.isNotEmpty) {
         distance =
             DistanceCalculator.distanceCalculatorByList(polylineCoordinates);
-        print(distance);
+       // print(distance);
       }
       setState(() {});
     });
@@ -95,7 +95,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
         "latitude": controller.serviceEntity!.deliveryMan.location.latitude,
         "longitude": controller.serviceEntity!.deliveryMan.location.longitude,
       });
-      print(destinationLocation);
     }
   }
 
@@ -164,7 +163,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
                   _controller.complete(controllerMap);
                   showPinsOnMap();
                 },
-                zoomControlsEnabled: false,
               )
             ],
           );
@@ -217,7 +215,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
           color: AppColors.secondary,
           width: 7,
           points: polylineCoordinates));
-      print(_polylines);
       setState(() {});
     }
   }
@@ -259,8 +256,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
     // if (lastLocation != null &&
     //   lastLocation!.latitude == currentLocation!.latitude &&
     //   lastLocation!.longitude == currentLocation!.longitude) {
-    //   polylineCoordinates.clear();
-    //   setPolylines();
+      polylineCoordinates.clear();
+      setPolylines();
     //   lastLocation = currentLocation;
     // }
     setState(() {});
