@@ -1,7 +1,7 @@
 import 'package:feelps/app/modules/motorcycle/presenter/controller/motorcycle_controller.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/pages/manage_motorcycle_page.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/pages/register_motorcycle_page.dart';
-import 'package:feelps/app/modules/motorcycle/repository/motorcycle_repository.dart';
+import 'package:feelps/app/modules/motorcycle/repositories/motorcycle_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MotorcycleModule extends Module {

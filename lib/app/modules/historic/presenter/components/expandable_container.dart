@@ -59,7 +59,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                     child: Text(
                                       widget.service.deliveryMan.fullName,
                                       style: AppTypography.buttonText,
-                                      overflow: TextOverflow.clip,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   SizedBox(
@@ -210,27 +210,6 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               SizedBox(
                                 width: 4,
                               ),
-                              InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColors.blue,
-                                        borderRadius:
-                                            BorderRadiusDirectional.circular(
-                                                5)),
-                                    padding: EdgeInsets.all(4),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Cartão',
-                                          style: AppTypography.cardText
-                                              .copyWith(
-                                                  fontSize: 10.5,
-                                                  color: AppColors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
                             ],
                           ),
                           SizedBox(
@@ -248,7 +227,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      'Tempo de corrida: 15 min',
+                                      "Tempo de corrida: ${DateParser.getTimeOfService(start: widget.service.dateInit!, end: widget.service.dateEnd!)} min",
                                       style: AppTypography.cardText.copyWith(
                                           fontSize: 10.5,
                                           color: AppColors.white),
