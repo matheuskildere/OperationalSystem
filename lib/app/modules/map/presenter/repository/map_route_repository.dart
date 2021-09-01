@@ -6,28 +6,31 @@ import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:feelps/app/modules/historic/models/service_model.dart';
-import 'package:feelps/app/modules/home/models/change_status_request.dart';
 import 'package:feelps/app/modules/map/errors/map_error.dart';
+import 'package:feelps/app/modules/map/models/last_location_request.dart';
 import 'package:feelps/app/modules/map/models/status_update_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 abstract class IMapRouteRepository {
   Future<Either<Failure, ServiceEntity>> getService(
-      {required String serviceId});
+      {required String serviceId, required String deliveryManId});
   Future<Either<Failure, ServiceEntity>> updateStatus(
       {required StatusUpdateModel request});
+  Future<Either<Failure, Unit>> updateLastLocation(
+      {required LastLocationRequest request});
 }
 
 class MapRouteRepository implements IMapRouteRepository {
   final FirebaseDatabase _database;
   final ConnectivityService _connectivityService;
   final String tableName = 'service-${appFlavor!.title}';
+  final String tableNameDeliveryMan = 'deliveryman-${appFlavor!.title}';
 
   MapRouteRepository(this._database, this._connectivityService);
 
   @override
   Future<Either<Failure, ServiceEntity>> getService(
-      {required String serviceId}) async {
+      {required String serviceId, required String deliveryManId}) async {
     final result = await _connectivityService.isOnline;
     if (result.isLeft()) {
       return result.fold((l) {
@@ -50,6 +53,11 @@ class MapRouteRepository implements IMapRouteRepository {
         .child(serviceId)
         .update({'status': 'A caminho da retirada'});
 
+    await reference
+        .child(tableNameDeliveryMan)
+        .child(deliveryManId)
+        .update({'isAvaliable': false});
+
     final snapshotService =
         await reference.child(tableName).child(serviceId).once();
     if (snapshotService.value == null) {
@@ -66,16 +74,6 @@ class MapRouteRepository implements IMapRouteRepository {
   @override
   Future<Either<Failure, ServiceEntity>> updateStatus(
       {required StatusUpdateModel request}) async {
-    final result = await _connectivityService.isOnline;
-    if (result.isLeft()) {
-      return result.fold((l) {
-        return Left(l);
-      }, (r) {
-        return Left(NoConnectionError(
-            title: "Atenção",
-            message: "Você não possui conexão com a internet!"));
-      });
-    }
     final reference = _database.reference();
 
     if (request.observation != null) {
@@ -122,5 +120,22 @@ class MapRouteRepository implements IMapRouteRepository {
     final service = ServiceModel.fromMap(snapMap);
 
     return Right(service);
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateLastLocation(
+      {required LastLocationRequest request}) async {
+    final reference = _database.reference();
+
+    try {
+      await reference
+          .child(tableNameDeliveryMan)
+          .child(request.deliveryManId)
+          .update({'lastLocation': request.toMap()});
+    } catch (e) {
+      print(e);
+    }
+
+    return Right(unit);
   }
 }

@@ -1,8 +1,11 @@
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/enum/status_enum.dart';
+import 'package:feelps/app/core/stores/auth_store.dart';
+import 'package:feelps/app/modules/map/models/last_location_request.dart';
 import 'package:feelps/app/modules/map/models/status_update_model.dart';
 import 'package:feelps/app/modules/map/presenter/repository/map_route_repository.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:mobx/mobx.dart';
@@ -40,9 +43,11 @@ abstract class _MapRouteController with Store {
   @action
   Future<void> getService() async {
     dialogData = null;
-    final result = await _repository.getService(serviceId: serviceId!);
+    final idDeliveryMan = Modular.get<AuthStore>().deliveryman!.id!;
+    final result = await _repository.getService(
+        serviceId: serviceId!, deliveryManId: idDeliveryMan);
 
-    return result.fold((l) {
+    result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
       return null;
     }, (r) {
@@ -59,11 +64,28 @@ abstract class _MapRouteController with Store {
             observation: observation,
             serviceId: serviceId!));
 
-    return result.fold((l) {
+    result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
       return null;
     }, (r) {
       serviceEntity = r;
     });
+  }
+
+  @action
+  Future<void> updateLastLocation(
+      {required double latitude, required double longitude}) async {
+    dialogData = null;
+    final idDeliveryMan = Modular.get<AuthStore>().deliveryman!.id!;
+    final result = await _repository.updateLastLocation(
+        request: LastLocationRequest(
+            latitude: latitude,
+            longitude: longitude,
+            deliveryManId: idDeliveryMan));
+
+    result.fold((l) {
+      dialogData = DialogDataEntity(title: l.title, description: l.message);
+      return null;
+    }, (r) {});
   }
 }

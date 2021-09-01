@@ -6,9 +6,7 @@ import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_images.dart';
 import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/theme/app_typography.dart';
-import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/core/utils/app_parameters.dart';
-import 'package:feelps/app/modules/components/button/default_button.dart';
 import 'package:feelps/app/modules/components/components.dart';
 import 'package:feelps/app/modules/map/models/pin_information.dart';
 import 'package:feelps/app/modules/map/presenter/components/change_status_component.dart';
@@ -79,6 +77,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
       if (controller.serviceEntity!.status != DeliveryStatusEnum.completed) {
         currentLocation = event;
         updatePinOnMap();
+        controller.updateLastLocation(
+            latitude: event.latitude!, longitude: event.longitude!);
         if (polylineCoordinates.isNotEmpty) {
           distance =
               DistanceCalculator.distanceCalculatorByList(polylineCoordinates);
