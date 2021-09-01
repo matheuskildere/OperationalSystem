@@ -30,39 +30,42 @@ extension DeliveryStatusExt on DeliveryStatusEnum {
 
   static DeliveryStatusEnum getByString(String group) {
     switch (group) {
-      case "serchingDeliveryMan":
+      case "Procurando entregador":
         return DeliveryStatusEnum.serchingDeliveryMan;
-      case "accepted":
+      case "Aceito":
         return DeliveryStatusEnum.accepted;
-      case "wayToPickup":
+      case "A caminho da retirada":
         return DeliveryStatusEnum.wayToPickup;
-      case "pickedUp":
+      case "Retirado":
         return DeliveryStatusEnum.pickedUp;
-      case "waytoDeliver":
+      case "A caminho da entrega":
         return DeliveryStatusEnum.waytoDeliver;
-      case "completed":
+      case "Finalizado":
         return DeliveryStatusEnum.completed;
       default:
         return DeliveryStatusEnum.serchingDeliveryMan;
     }
   }
 
-  String getString() {
+  String getButtonTitle() {
     switch (this) {
-      case DeliveryStatusEnum.serchingDeliveryMan:
-        return "serchingDeliveryMan";
-      case DeliveryStatusEnum.accepted:
-        return "accepted";
       case DeliveryStatusEnum.wayToPickup:
-        return "wayToPickup";
-      case DeliveryStatusEnum.pickedUp:
-        return "pickedUp";
+        return "Confirmar retirada";
       case DeliveryStatusEnum.waytoDeliver:
-        return "waytoDeliver";
-      case DeliveryStatusEnum.completed:
-        return "completed";
+        return "Finalizar";
       default:
-        return "serchingDeliveryMan";
+        return "Finalizar";
+    }
+  }
+
+  DeliveryStatusEnum getNext() {
+    switch (this) {
+      case DeliveryStatusEnum.wayToPickup:
+        return DeliveryStatusEnum.waytoDeliver;
+      case DeliveryStatusEnum.waytoDeliver:
+        return DeliveryStatusEnum.completed;
+      default:
+        return DeliveryStatusEnum.completed;
     }
   }
 }

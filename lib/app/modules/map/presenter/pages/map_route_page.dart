@@ -1,10 +1,18 @@
 import 'dart:async';
 
+import 'package:feelps/app/core/entities/dialog_data_entity.dart';
+import 'package:feelps/app/core/enum/status_enum.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_images.dart';
+import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/theme/app_typography.dart';
+import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/core/utils/app_parameters.dart';
+import 'package:feelps/app/modules/components/button/default_button.dart';
+import 'package:feelps/app/modules/components/components.dart';
 import 'package:feelps/app/modules/map/models/pin_information.dart';
+import 'package:feelps/app/modules/map/presenter/components/change_status_component.dart';
+import 'package:feelps/app/modules/map/presenter/components/observation_dialog.dart';
 import 'package:feelps/app/modules/map/presenter/controller/map_route_controller.dart';
 import 'package:feelps/app/modules/map/services/distance_calculator.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +62,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
   final Set<Polyline> _polylines = <Polyline>{};
   late PolylinePoints polylinePoints;
 
+  bool seeButton = false;
+
   @override
   void initState() {
     location = Location();
@@ -65,16 +75,22 @@ class _MapRoutePageState extends State<MapRoutePage> {
     location.changeSettings(
       interval: 5000,
     );
-    Location().onLocationChanged.listen((event) async {
-      currentLocation = event;
-      updatePinOnMap();
-
-      if (polylineCoordinates.isNotEmpty) {
-        distance =
-            DistanceCalculator.distanceCalculatorByList(polylineCoordinates);
-       // print(distance);
+    location.onLocationChanged.listen((event) async {
+      if (controller.serviceEntity!.status != DeliveryStatusEnum.completed) {
+        currentLocation = event;
+        updatePinOnMap();
+        if (polylineCoordinates.isNotEmpty) {
+          distance =
+              DistanceCalculator.distanceCalculatorByList(polylineCoordinates);
+          print(distance);
+          if (distance != null && distance! <= 0.150) {
+            seeButton = true;
+          } else {
+            seeButton = false;
+          }
+        }
+        setState(() {});
       }
-      setState(() {});
     });
 
     setInitialLocationPickup();
@@ -144,31 +160,82 @@ class _MapRoutePageState extends State<MapRoutePage> {
                       strokeWidth: 6,
                     )));
           }
-          return Stack(
-            children: [
-              GoogleMap(
-                polylines: _polylines,
-                markers: _markers,
-                myLocationButtonEnabled: false,
-                onTap: (argument) {},
-                onCameraMove: (position) {
-                  setState(() {});
-                },
-                onCameraMoveStarted: () {
-                  setState(() {});
-                },
-                initialCameraPosition: initialCameraPosition,
-                onMapCreated: (GoogleMapController controllerMap) {
-                  controllerMap.setMapStyle(Utils.mapStyles);
-                  _controller.complete(controllerMap);
-                  showPinsOnMap();
-                },
-              )
-            ],
+          return Scaffold(
+            body: Stack(
+              children: [
+                GoogleMap(
+                  polylines: _polylines,
+                  markers: _markers,
+                  myLocationButtonEnabled: false,
+                  onTap: (argument) {},
+                  onCameraMove: (position) {
+                    setState(() {});
+                  },
+                  onCameraMoveStarted: () {
+                    setState(() {});
+                  },
+                  initialCameraPosition: initialCameraPosition,
+                  onMapCreated: (GoogleMapController controllerMap) {
+                    controllerMap.setMapStyle(Utils.mapStyles);
+                    _controller.complete(controllerMap);
+                    showPinsOnMap();
+                  },
+                ),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Visibility(
+                      visible: seeButton,
+                      child: ChangeStatusComponent(
+                        title:
+                            controller.serviceEntity!.status.getButtonTitle(),
+                        onPressed: () async {
+                          await ObservationDialog.showObservation(
+                              onTap: (value, popAction) async {
+                            await controller.updateStatus(value);
+                            if (controller.serviceEntity!.status ==
+                                DeliveryStatusEnum.waytoDeliver) {
+                              destinationLocation = LocationData.fromMap({
+                                "latitude": controller
+                                    .serviceEntity!.deliveryAddress.latitude,
+                                "longitude": controller
+                                    .serviceEntity!.deliveryAddress.longitude,
+                              });
+                              final newDestPosition = LatLng(
+                                  destinationLocation!.latitude!,
+                                  destinationLocation!.longitude!);
+                              _markers.removeWhere((element) =>
+                                  element.markerId.value == 'destination');
+                              _markers.add(Marker(
+                                  markerId: MarkerId('destination'),
+                                  position: newDestPosition,
+                                  icon: await BitmapDescriptor.fromAssetImage(
+                                      ImageConfiguration(devicePixelRatio: 2.0),
+                                      AppImages.peopleLocation)));
+                            }
+                            popAction();
+                            if (controller.serviceEntity!.status ==
+                                DeliveryStatusEnum.completed) {
+                              await DefaultAlertDialog.show(
+                                  dialogData: DialogDataEntity(
+                                      title: "Parabêns",
+                                      description:
+                                          "Entrega realizada com sucesso!"));
+                              backToHome();
+                            }
+                          });
+                        },
+                      ),
+                    )),
+              ],
+            ),
           );
         }),
       ),
     );
+  }
+
+  Future<void> backToHome() async {
+    Modular.to.navigate(AppRoutes.home);
   }
 
   Future<void> showPinsOnMap() async {
@@ -256,8 +323,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
     // if (lastLocation != null &&
     //   lastLocation!.latitude == currentLocation!.latitude &&
     //   lastLocation!.longitude == currentLocation!.longitude) {
-      polylineCoordinates.clear();
-      setPolylines();
+    polylineCoordinates.clear();
+    setPolylines();
     //   lastLocation = currentLocation;
     // }
     setState(() {});

@@ -11,6 +11,10 @@
         "status": "actived",
         "notificationToken": "",
         "createdAt": "",
+        "lastLocation": {
+            "latitude": "",
+            "longitude": ""
+        },
         "servicesHistory": [
             "id", "id"
         ],
@@ -54,6 +58,13 @@
             "contactNumber": "",
             "price": "",
             "status": "",
+            "observations": [
+                {
+                    "createdAt": "",
+                    "description": "",
+                    "status": ""
+                }
+            ],
             "deliveryAddress":  {
                 "receiver": "user receiver",
                 "address": "",

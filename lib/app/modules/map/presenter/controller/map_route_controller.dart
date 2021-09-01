@@ -1,5 +1,7 @@
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/entities/service_entity.dart';
+import 'package:feelps/app/core/enum/status_enum.dart';
+import 'package:feelps/app/modules/map/models/status_update_model.dart';
 import 'package:feelps/app/modules/map/presenter/repository/map_route_repository.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -39,6 +41,23 @@ abstract class _MapRouteController with Store {
   Future<void> getService() async {
     dialogData = null;
     final result = await _repository.getService(serviceId: serviceId!);
+
+    return result.fold((l) {
+      dialogData = DialogDataEntity(title: l.title, description: l.message);
+      return null;
+    }, (r) {
+      serviceEntity = r;
+    });
+  }
+
+  @action
+  Future<void> updateStatus(String? observation) async {
+    dialogData = null;
+    final result = await _repository.updateStatus(
+        request: StatusUpdateModel(
+            status: serviceEntity!.status.getNext().getDescription(),
+            observation: observation,
+            serviceId: serviceId!));
 
     return result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);

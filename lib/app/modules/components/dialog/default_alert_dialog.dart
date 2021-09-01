@@ -5,6 +5,7 @@ import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/modules/components/components.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
@@ -106,12 +107,17 @@ class DefaultAlertDialog {
                   print("bateu aqui");
                   (context as Element).markNeedsBuild();
                   if (count == "00") {
-                  print("bateu aqui 2");
+                    print("bateu aqui 2");
                     count = '10';
                     instaceCreated = false;
-                    FirebaseDatabase.instance.reference()
-                        .child('service-${appFlavor!.title}').child(serviceId)
-                        .update({'status': 'rejected'});
+                    FirebaseDatabase.instance
+                        .reference()
+                        .child('service-${appFlavor!.title}')
+                        .child(serviceId)
+                        .update({
+                      'status':
+                          'rejected-${FirebaseAuth.instance.currentUser!.uid}'
+                    });
                     Navigator.pop(context);
                   }
                 } else {
@@ -254,9 +260,11 @@ class DefaultAlertDialog {
                             onPressed: () async {
                               count = '10';
                               instaceCreated = false;
-                              await FirebaseDatabase.instance.reference()
-                                .child('service-${appFlavor!.title}').child(serviceId)
-                                .update({'status': 'rejected'});
+                              await FirebaseDatabase.instance
+                                  .reference()
+                                  .child('service-${appFlavor!.title}')
+                                  .child(serviceId)
+                                  .update({'status': 'rejected'});
                               Navigator.pop(context);
                             },
                           ),
