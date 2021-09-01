@@ -15,7 +15,7 @@ class AppValidations {
   }
 
   static bool isPlateValid(String? plate) {
-    if (plate != null) {      
+    if (plate != null) {
       return plate.length == 8;
     } else {
       return false;
