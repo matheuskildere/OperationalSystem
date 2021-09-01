@@ -1,4 +1,6 @@
+import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/modules/historic/presenter/controller/historic_controller.dart';
+import 'package:feelps/app/modules/historic/presenter/pages/delivery_detail_page.dart';
 import 'package:feelps/app/modules/historic/presenter/pages/historic_page.dart';
 import 'package:feelps/app/modules/historic/repositories/historic_repository.dart';
 import 'package:feelps/app/modules/home/presenter/controllers/home_controller.dart';
@@ -26,5 +28,9 @@ class HomeModule extends Module {
         ChildRoute('/', child: (_, args) => HomePage()),
         ChildRoute('my-data', child: (_, args) => MyDataPage()),
         ChildRoute('historic', child: (_, args) => HistoricPage()),
+        ChildRoute('detail',
+            child: (_, args) => DeliveryDetailPage(
+                  service: args.data as ServiceEntity,
+                )),
       ];
 }

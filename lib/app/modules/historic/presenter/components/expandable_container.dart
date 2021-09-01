@@ -4,6 +4,7 @@ import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ExpandableContainer extends StatefulWidget {
   final ServiceEntity service;
@@ -179,7 +180,10 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Modular.to.pushNamed(AppRoutes.detail,
+                                        arguments: widget.service);
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: AppColors.blue,
