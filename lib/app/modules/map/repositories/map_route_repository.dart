@@ -43,20 +43,17 @@ class MapRouteRepository implements IMapRouteRepository {
     }
     final reference = _database.reference();
 
-    await reference
-        .child(tableName)
-        .child(serviceId)
-        .update({'status': 'Aceito'});
+    await reference.child(tableName).child(serviceId).update({
+      'dateInit': DateParser.getDateStringEn(DateTime.now()),
+      'status': 'Aceito'
+    });
 
     await reference
         .child(tableName)
         .child(serviceId)
         .update({'status': 'A caminho da retirada'});
 
-    await reference
-        .child(tableNameDeliveryMan)
-        .child(deliveryManId)
-        .update({'isAvaliable': false});
+    await updateDeliveryMan(serviceId: serviceId, deliveryManId: deliveryManId);
 
     final snapshotService =
         await reference.child(tableName).child(serviceId).once();
@@ -109,6 +106,12 @@ class MapRouteRepository implements IMapRouteRepository {
           .child(request.serviceId)
           .update({'status': request.status});
     }
+    if (request.status == 'Finalizado') {
+      await reference
+          .child(tableName)
+          .child(request.serviceId)
+          .update({'dateEnd': DateParser.getDateStringEn(DateTime.now())});
+    }
     final snapshotService =
         await reference.child(tableName).child(request.serviceId).once();
     if (snapshotService.value == null) {
@@ -137,5 +140,27 @@ class MapRouteRepository implements IMapRouteRepository {
     }
 
     return Right(unit);
+  }
+
+  Future<void> updateDeliveryMan(
+      {required String serviceId, required String deliveryManId}) async {
+    final reference = _database.reference();
+    final snapDeliveryMan =
+        await reference.child(tableNameDeliveryMan).child(deliveryManId).once();
+
+    if (snapDeliveryMan.value['servicesHistory'] != null) {
+      await reference.child(tableNameDeliveryMan).child(deliveryManId).update({
+        'isAvaliable': false,
+        'servicesHistory': [
+          serviceId,
+          ...snapDeliveryMan.value['servicesHistory']
+        ]
+      });
+    } else {
+      await reference.child(tableNameDeliveryMan).child(deliveryManId).update({
+        'isAvaliable': false,
+        'servicesHistory': [serviceId]
+      });
+    }
   }
 }

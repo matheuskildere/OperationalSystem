@@ -4,7 +4,7 @@ import 'package:feelps/app/core/enum/status_enum.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/modules/map/models/last_location_request.dart';
 import 'package:feelps/app/modules/map/models/status_update_model.dart';
-import 'package:feelps/app/modules/map/presenter/repository/map_route_repository.dart';
+import 'package:feelps/app/modules/map/repositories/map_route_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';

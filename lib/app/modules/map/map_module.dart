@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:feelps/app/modules/map/presenter/controller/map_route_controller.dart';
 import 'package:feelps/app/modules/map/presenter/pages/map_route_page.dart';
-import 'package:feelps/app/modules/map/presenter/repository/map_route_repository.dart';
+import 'package:feelps/app/modules/map/repositories/map_route_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MapModule extends Module {

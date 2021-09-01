@@ -8,7 +8,7 @@ import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/validations/app_validations.dart';
 import 'package:feelps/app/modules/motorcycle/models/register_motorcycle_request.dart';
-import 'package:feelps/app/modules/motorcycle/repository/motorcycle_repository.dart';
+import 'package:feelps/app/modules/motorcycle/repositories/motorcycle_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

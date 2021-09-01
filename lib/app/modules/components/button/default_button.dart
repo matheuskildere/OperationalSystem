@@ -91,7 +91,6 @@ class _DefaultButtonState extends State<DefaultButton>
                   setState(() {
                     _isLoading = false;
                   });
-                  rethrow;
                 }
               }
             : null,

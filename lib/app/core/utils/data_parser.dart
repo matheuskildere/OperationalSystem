@@ -24,4 +24,10 @@ class DateParser {
       {required DateTime start, required DateTime end}) {
     return '${DateFormat(intervalFormat).format(start)}${DateFormat(intervalFormat2).format(end)}';
   }
+
+  static String getTimeOfService(
+      {required DateTime start, required DateTime end}) {
+    final minutes = end.difference(start).inMinutes.toString();
+    return minutes;
+  }
 }
