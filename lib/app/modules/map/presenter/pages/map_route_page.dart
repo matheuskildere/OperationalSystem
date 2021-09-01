@@ -253,13 +253,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
         icon: await BitmapDescriptor.fromAssetImage(
             ImageConfiguration(devicePixelRatio: 2.0),
             AppImages.establishmentLocation)));
-    // _markers.add(
-    //   Marker(
-    //       markerId: MarkerId('location'),
-    //       position: pinPosition,
-    //   icon: await BitmapDescriptor.fromAssetImage(
-    //     ImageConfiguration(devicePixelRatio: 2.0),
-    //         AppImages.establishmentLocation)));
     setPolylines();
   }
 
@@ -303,8 +296,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
     final pinPosition =
         LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
 
-    //sourcePinInfo.location = pinPosition;
-
     // the trick is to remove the marker (by id)
     // and add it again at the updated location
     _markers.removeWhere((m) => m.markerId.value == 'sourcePin');
@@ -320,13 +311,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
         icon: await BitmapDescriptor.fromAssetImage(
             ImageConfiguration(devicePixelRatio: 2.0),
             AppImages.deliveryManLocation)));
-    // if (lastLocation != null &&
-    //   lastLocation!.latitude == currentLocation!.latitude &&
-    //   lastLocation!.longitude == currentLocation!.longitude) {
     polylineCoordinates.clear();
     setPolylines();
-    //   lastLocation = currentLocation;
-    // }
     setState(() {});
   }
 }
