@@ -191,6 +191,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   padding: const EdgeInsets.only(bottom: 26),
                   child: DefaultTextField(
                       textCapitalization: TextCapitalization.characters,
+                      mask: '*** 0*00',
                       labelText: 'Placa',
                       action: TextInputAction.done,
                       onChanged: (value) {
