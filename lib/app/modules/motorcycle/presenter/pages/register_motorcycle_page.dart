@@ -193,7 +193,6 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                       textCapitalization: TextCapitalization.characters,
                       mask: 'AAA 0*00',
                       labelText: 'Placa',
-                      mask: '*******',
                       action: TextInputAction.done,
                       onChanged: (value) {
                         controller.plate = value;
