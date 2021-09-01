@@ -60,10 +60,37 @@ class ServiceModel extends ServiceEntity {
       observations: map['observations'] == null
           ? []
           : (map['observations'] as List)
-              .map((e) => ObservationModel.fromMap(e as Map<String, dynamic>))
+              .map((e) =>
+                  ObservationModel.fromMap(Map<String, dynamic>.from(e as Map)))
               .toList(),
       establishment: EstablishmentModel.fromMap(
           Map<String, dynamic>.from(map['establishment'] as Map)),
+    );
+  }
+
+  ServiceModel copyWith({
+    String? id,
+    DateTime? dateInit,
+    DateTime? dateEnd,
+    String? serviceName,
+    double? price,
+    DeliveryStatusEnum? status,
+    DeliveryAdressModel? deliveryAddress,
+    DeliveryManServiceModel? deliveryMan,
+    List<ObservationModel>? observations,
+    EstablishmentModel? establishment,
+  }) {
+    return ServiceModel(
+      id: id ?? this.id,
+      dateInit: dateInit ?? this.dateInit,
+      dateEnd: dateEnd ?? this.dateEnd,
+      serviceName: serviceName ?? this.serviceName,
+      price: price ?? this.price,
+      status: status ?? this.status,
+      deliveryAddress: deliveryAddress ?? this.deliveryAddress,
+      deliveryMan: deliveryMan ?? this.deliveryMan,
+      observations: observations ?? this.observations,
+      establishment: establishment ?? this.establishment,
     );
   }
 }

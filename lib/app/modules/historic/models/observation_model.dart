@@ -15,7 +15,7 @@ class ObservationModel extends ObservationEntity {
   factory ObservationModel.fromMap(Map<String, dynamic> map) {
     return ObservationModel(
       status: map['status'] as String,
-      observation: map['observation'] as String,
+      observation: map['description'] as String,
       createdAt: DateParser.getDateTime(map['createdAt'].toString()),
     );
   }

@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
+import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/modules/components/components.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_modular/flutter_modular.dart';
@@ -76,7 +79,7 @@ class DefaultAlertDialog {
                   ),
                 ),
               ));
-  static String count = '60';
+  static String count = '10';
   static bool instaceCreated = false;
   static Future showService(
           {required String value,
@@ -91,7 +94,7 @@ class DefaultAlertDialog {
             if (!instaceCreated) {
               instaceCreated = true;
               final interval = const Duration(seconds: 1);
-              final int timerMaxSeconds = 60;
+              final int timerMaxSeconds = 10;
               int currentSeconds = 0;
               final duration = interval;
               Timer.periodic(duration, (timer) {
@@ -101,8 +104,24 @@ class DefaultAlertDialog {
                     .padLeft(2, '0');
                 if (timer.tick >= timerMaxSeconds) timer.cancel();
                 if (instaceCreated) {
+                  print("bateu aqui");
                   (context as Element).markNeedsBuild();
+                  if (count == "00") {
+                    print("bateu aqui 2");
+                    count = '10';
+                    instaceCreated = false;
+                    FirebaseDatabase.instance
+                        .reference()
+                        .child('service-${appFlavor!.title}')
+                        .child(serviceId)
+                        .update({
+                      'status':
+                          'rejected-${FirebaseAuth.instance.currentUser!.uid}'
+                    });
+                    Navigator.pop(context);
+                  }
                 } else {
+                  print("aqui bateu só no final");
                   timer.cancel();
                 }
               });
@@ -238,9 +257,14 @@ class DefaultAlertDialog {
                             title: "Recusar ($count s)",
                             invertColors: true,
                             smallTitle: true,
-                            onPressed: () {
-                              count = '60';
+                            onPressed: () async {
+                              count = '10';
                               instaceCreated = false;
+                              await FirebaseDatabase.instance
+                                  .reference()
+                                  .child('service-${appFlavor!.title}')
+                                  .child(serviceId)
+                                  .update({'status': 'rejected'});
                               Navigator.pop(context);
                             },
                           ),
@@ -252,7 +276,7 @@ class DefaultAlertDialog {
                             smallTitle: true,
                             successColor: true,
                             onPressed: () {
-                              count = '60';
+                              count = '10';
                               instaceCreated = false;
                               Navigator.pop(context);
                               Modular.to
