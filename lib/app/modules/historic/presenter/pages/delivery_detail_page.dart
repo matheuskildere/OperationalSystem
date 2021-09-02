@@ -34,6 +34,8 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
   final pagecontroller = Modular.get<HistoricController>();
   bool isSmall = false;
 
+  late CameraPosition initialCamera;
+
   late double size = 300;
 
   @override
@@ -41,6 +43,10 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
     polylinePoints = PolylinePoints();
     pagecontroller.serviceId = widget.service.id;
     getDirections();
+    initialCamera = CameraPosition(
+              zoom: 14.5,
+                target: LatLng(widget.service.establishment.location.latitude,
+                    widget.service.establishment.location.longitude));
     super.initState();
   }
 
@@ -62,6 +68,9 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
           color: AppColors.secondary,
           width: 7,
           points: polylineCoordinates));
+      initialCamera = CameraPosition(
+              zoom: 14.5,
+                target: _polylines.first.points.last);
       setState(() {});
     }
   }
@@ -80,15 +89,11 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
             onCameraMoveStarted: () {
               setState(() {});
             },
-            initialCameraPosition: CameraPosition(
-                target: LatLng(widget.service.establishment.location.latitude,
-                    widget.service.establishment.location.longitude)),
+            initialCameraPosition: initialCamera,
             onMapCreated: (GoogleMapController controllerMap) async {
               controllerMap.setMapStyle(Utils.mapStyles);
               _controller.complete(controllerMap);
               await addmarkers();
-              controllerMap.animateCamera(CameraUpdate.newLatLngBounds(
-                  pagecontroller.directions!.bounds, 100));
               setState(() {});
             },
           ),
