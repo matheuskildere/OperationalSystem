@@ -5,17 +5,27 @@ import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ExpandableContainer extends StatefulWidget {
   final ServiceEntity service;
-  bool isClicked;
+  final bool isClicked;
 
-  ExpandableContainer({required this.service, this.isClicked = false});
+  const ExpandableContainer({required this.service, this.isClicked = false});
   @override
   _ExpandableContainerState createState() => _ExpandableContainerState();
 }
 
 class _ExpandableContainerState extends State<ExpandableContainer> {
+  late bool isClicked = false;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      isClicked = widget.isClicked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +33,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
       child: InkWell(
         onTap: () {
           setState(() {
-            widget.isClicked = !widget.isClicked;
+            isClicked = !isClicked;
           });
         },
         child: SizedBox(
@@ -87,14 +97,14 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                               SizedBox(
                                 width: AppColumns.column6(context: context),
                                 child: Text(
-                                  "widget.service.asdsadasdasdasdsadasdas",
+                                  widget.service.serviceName,
                                   style: AppTypography.buttonText
                                       .copyWith(fontSize: 12),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               Text(
-                                  widget.isClicked
+                                  isClicked
                                       ? widget.service.establishment.name
                                       : '',
                                   overflow: TextOverflow.ellipsis,
@@ -146,7 +156,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                   ),
                 ),
               ),
-              if (!widget.isClicked)
+              if (!isClicked)
                 Container()
               else
                 Column(
@@ -186,7 +196,10 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Modular.to.pushNamed(AppRoutes.detail,
+                                        arguments: widget.service);
+                                  },
                                   child: Container(
                                     decoration: BoxDecoration(
                                         color: AppColors.blue,
@@ -251,7 +264,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                     fit: BoxFit.fitHeight,
                                     onTap: () {
                                       setState(() {
-                                        widget.isClicked = false;
+                                        isClicked = false;
                                       });
                                     },
                                   ))

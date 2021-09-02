@@ -2,6 +2,7 @@ import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/modules/historic/repositories/historic_repository.dart';
+import 'package:feelps/app/modules/map/models/directions_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -22,6 +23,12 @@ abstract class _HistoricController with Store {
 
   @observable
   String? errorMessage;
+
+  @observable
+  String? serviceId;
+
+  @observable
+  DirectionsModel? directions;
 
   @action
   Future<void> getServices() async {
