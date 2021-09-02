@@ -13,7 +13,8 @@ import 'package:firebase_database/firebase_database.dart';
 
 abstract class IHistoricRepository {
   Future<Either<Failure, List<ServiceEntity>>> getHistoric(String userId);
-  Future<Either<Failure,DirectionsModel>> getRoute({required String serviceId});
+  Future<Either<Failure, DirectionsModel>> getRoute(
+      {required String serviceId});
 }
 
 class HistoricRepository extends IHistoricRepository {
@@ -21,8 +22,8 @@ class HistoricRepository extends IHistoricRepository {
   final FirebaseDatabase _database;
   final String tableNameServices = 'service-${appFlavor!.title}';
   final String tableNameDelMan = 'deliveryman-${appFlavor!.title}';
-    final Dio _dio;
-    static const String _baseUrl =
+  final Dio _dio;
+  static const String _baseUrl =
       'https://maps.googleapis.com/maps/api/directions/json?';
 
   HistoricRepository(this._connectivityService, this._database, this._dio);
@@ -71,8 +72,7 @@ class HistoricRepository extends IHistoricRepository {
     }
   }
 
-
-    Future<Either<Failure, DirectionsModel>> getRoute(
+  Future<Either<Failure, DirectionsModel>> getRoute(
       {required String serviceId}) async {
     @override
     final result = await _connectivityService.isOnline;
@@ -83,7 +83,10 @@ class HistoricRepository extends IHistoricRepository {
 
     try {
       final service = ServiceModel.fromMap(Map<String, dynamic>.from(
-        (await reference.child(tableNameServices).child(serviceId.toString()).once())
+          (await reference
+                  .child(tableNameServices)
+                  .child(serviceId.toString())
+                  .once())
               .value as Map));
 
       final mapResponse = await _dio.get(
@@ -103,12 +106,11 @@ class HistoricRepository extends IHistoricRepository {
         return Left(GetDirectionsInfoError(
             title: "Não foi possível continuar",
             message: 'Ocorreu um erro ao buscar os dados da entrega.'));
-      }}
-
-      
- catch (e) {
+      }
+    } catch (e) {
       return Left(GetDirectionsInfoError(
           title: "Não foi possível continuar",
           message: 'Ocorreu um erro ao buscar os dados da entrega.'));
     }
-      }}
+  }
+}

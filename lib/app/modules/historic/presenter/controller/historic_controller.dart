@@ -27,11 +27,10 @@ abstract class _HistoricController with Store {
   String? errorMessage;
 
   @observable
-String? serviceId;
+  String? serviceId;
 
-@observable
+  @observable
   DirectionsModel? directions;
-
 
   @action
   Future<void> getServices() async {
@@ -79,11 +78,10 @@ String? serviceId;
 
     // Generating the list of coordinates to be used for
     // drawing the polylines
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    final PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       'AIzaSyCEwNIYKlBVix67Im1MVTMWLGMg7vfK8d4', // Google Maps API Key
       PointLatLng(startLatitude, startLongitude),
       PointLatLng(destinationLatitude, destinationLongitude),
-      travelMode: TravelMode.driving,
       avoidHighways: true,
     );
 
@@ -93,9 +91,5 @@ String? serviceId;
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     }
-
-     }
+  }
 }
-
-
-

@@ -31,7 +31,8 @@ void main() {
   setUp(() async {
     firebaseDatabase = MockFirebaseDatabase.instance;
     appFlavor = Flavor.dev;
-    repository = HistoricRepository(connectivityService, firebaseDatabase, _dio);
+    repository =
+        HistoricRepository(connectivityService, firebaseDatabase, _dio);
 
     // initialize locale to convert String to Datetime
     await initializeDateFormatting('p t_BR');

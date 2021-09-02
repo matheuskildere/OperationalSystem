@@ -7,6 +7,7 @@ import 'package:feelps/app/core/theme/app_icons.dart';
 import 'package:feelps/app/core/theme/app_images.dart';
 import 'package:feelps/app/core/theme/app_typography.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
+import 'package:feelps/app/modules/historic/presenter/components/expandable_container.dart';
 import 'package:feelps/app/modules/historic/presenter/controller/historic_controller.dart';
 import 'package:feelps/app/modules/map/presenter/pages/map_route_page.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,6 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
   final Set<Marker> _markers = <Marker>{};
   late PolylinePoints polylinePoints;
   List<LatLng> polylineCoordinates = [];
-  final Set<Polyline> _polylines = <Polyline>{};
   final pagecontroller = Modular.get<HistoricController>();
   bool isSmall = false;
 
@@ -50,6 +50,7 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           GoogleMap(
             polylines: {
@@ -80,24 +81,28 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
                     pagecontroller.directions!.bounds, 100));
               });
               setState(() {});
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return BottomSheet(
-                      builder: (
-                        context,
-                      ) {
-                        return ConstrainedBox(
-                          constraints: BoxConstraints(minHeight: 50, maxHeight: 300),
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
-                            child: contentColumn(),
-                          ),
-                        );
-                      },
-                      onClosing: () {},
-                    );
-                  });
+              // showModalBottomSheet(
+              //     context: context,
+              //     builder: (context) {
+              //       return BottomSheet(
+              //         builder: (
+              //           context,
+              //         ) {
+              //           return GestureDetector(
+              //             onVerticalDragDown: (details) {
+              //               print('aquiiiiiiii');
+              //               isSmall = !isSmall;
+              //               setState(() {});
+              //             },
+              //             child: AnimatedContainer(
+              //               duration: Duration(milliseconds: 500),
+              //               child: contentColumn(),
+              //             ),
+              //           );
+              //         },
+              //         onClosing: () {},
+              //       );
+              // });
             },
           ),
           Positioned(
@@ -120,7 +125,14 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
                     ),
                   )),
             ),
-          )
+          ),
+          GestureDetector(
+            child: ExpandableContainer(
+              service: widget.service,
+              isClicked: true,
+              fromdetail: true,
+            ),
+          ),
         ],
       ),
     );
