@@ -117,15 +117,15 @@ class _MapRoutePageState extends State<MapRoutePage> {
   @override
   Widget build(BuildContext context) {
     CameraPosition initialCameraPosition = CameraPosition(
-        zoom: 20,
-        tilt: 50,
+        zoom: 18.5,
+        tilt: 30,
         bearing: 30,
         target: LatLng(-26.910421537584813, -49.092771326985265));
     if (currentLocation != null) {
       initialCameraPosition = CameraPosition(
         target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
-        zoom: 20,
-        tilt: 50,
+        zoom: 18.5,
+        tilt: 30,
         bearing: 30,
       );
     }
@@ -215,11 +215,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
                             popAction();
                             if (controller.serviceEntity!.status ==
                                 DeliveryStatusEnum.completed) {
-                              await DefaultAlertDialog.show(
-                                  dialogData: DialogDataEntity(
-                                      title: "Parabêns",
-                                      description:
-                                          "Entrega realizada com sucesso!"));
                               backToHome();
                             }
                           });
@@ -235,14 +230,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
   }
 
   Future<void> backToHome() async {
+    await DefaultAlertDialog.show(
+        dialogData: DialogDataEntity(
+            title: "Parabêns", description: "Entrega realizada com sucesso!"));
     Modular.to.navigate(AppRoutes.home);
   }
 
   Future<void> showPinsOnMap() async {
-    // get a LatLng for the source location
-    // from the LocationData currentLocation object
-    // final pinPosition =
-    //     LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
     // get a LatLng out of the LocationData object
     final destPosition =
         LatLng(destinationLocation!.latitude!, destinationLocation!.longitude!);
@@ -284,8 +278,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
     // every time the location changes, so the camera
     // follows the pin as it moves with an animation
     final CameraPosition cPosition = CameraPosition(
-      zoom: 20,
-      tilt: 50,
+      zoom: 18.5,
+      tilt: 30,
       bearing: 30,
       target: LatLng(currentLocation!.latitude!, currentLocation!.longitude!),
     );
