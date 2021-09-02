@@ -26,8 +26,10 @@ class DirectionsModel {
     );
     return DirectionsModel(
       bounds: bounds,
-      destination:
-         data['desLatitude']==null|| data['desLongitude']==null?null: LatLng(data['desLatitude'] as double, data['desLongitude'] as double),
+      destination: data['desLatitude'] == null || data['desLongitude'] == null
+          ? null
+          : LatLng(
+              data['desLatitude'] as double, data['desLongitude'] as double),
       polylinepoints: PolylinePoints()
           .decodePolyline(data['overview_polyline']['points'].toString()),
       distance: 'aaaaa',

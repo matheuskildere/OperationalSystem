@@ -17,7 +17,7 @@ class HomeModule extends Module {
         Bind((i) => HistoricController(i())),
         Bind<IHomeRepository>((i) => HomeRepository(i(), i())),
         Bind<IHistoricRepository>(
-          (i) => HistoricRepository(i(), i(), i()),
+          (i) => HistoricRepository(i(), i()),
         ),
         Bind<Dio>((i) => Dio(i())),
         Bind((i) => BaseOptions()),
