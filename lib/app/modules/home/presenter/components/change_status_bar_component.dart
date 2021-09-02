@@ -1,4 +1,5 @@
 import 'package:feelps/app/core/theme/app_colors.dart';
+import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,10 +23,9 @@ class ChangeSatatusBarComponent extends StatelessWidget {
           children: <Widget>[
             Text(
                 "Ficar ${!isAvaliable ? 'disponível' : 'indisponível'} para entregas",
-                style: Theme.of(context)
-                    .textTheme
-                    .button!
-                    .copyWith(fontSize: 16, color: AppColors.white)),
+                style: Theme.of(context).textTheme.button!.copyWith(
+                    fontSize: AppColumns.column1(context: context) * 0.5,
+                    color: AppColors.white)),
             Switch.adaptive(
               value: isAvaliable,
               onChanged: onChangedAvaliable,

@@ -1,9 +1,11 @@
+import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_icons.dart';
 import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/core/utils/formatter.dart';
+import 'package:feelps/app/modules/components/components.dart';
 import 'package:feelps/app/modules/components/scaffold/default_scaffold.dart';
 import 'package:feelps/app/modules/home/presenter/components/change_status_bar_component.dart';
 import 'package:feelps/app/modules/home/presenter/components/home_button_component.dart';
@@ -12,6 +14,7 @@ import 'package:feelps/app/modules/home/presenter/controllers/home_controller.da
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:location/location.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,6 +31,28 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     controller.getStatusAvaliable();
     super.initState();
+    requestPermission();
+  }
+
+  Future<void> requestPermission() async {
+    var permissionStatus = await Location.instance.hasPermission();
+    if (permissionStatus != PermissionStatus.granted &&
+        permissionStatus != PermissionStatus.grantedLimited) {
+      while (permissionStatus != PermissionStatus.granted &&
+          permissionStatus != PermissionStatus.grantedLimited &&
+          permissionStatus != PermissionStatus.deniedForever) {
+        permissionStatus = await Location.instance.requestPermission();
+        setState(() {});
+      }
+    }
+    if (permissionStatus == PermissionStatus.deniedForever) {
+      DefaultAlertDialog.show(
+          dialogData: DialogDataEntity(
+              title: "Ops.",
+              description:
+                  "Você não poderá realizar entregas sem permitir o uso da localização." +
+                      "\nEntre nas configurações do seu celular em gerenciador de aplicativos, procure por Feelps e em seguida ative a localização!"));
+    }
   }
 
   @override
@@ -91,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     ));
               }),
               Positioned(
-                  top: 204,
+                  top: AppColumns.column6(context: context),
                   left: 49,
                   right: 49,
                   child: Column(
@@ -140,8 +165,12 @@ class _HomePageState extends State<HomePage> {
                   height: 0,
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: 16, left: 26, right: 19, bottom: 33),
+                  padding: EdgeInsets.only(
+                      top: 16,
+                      left: 26,
+                      right: 19,
+                      bottom:
+                          MediaQuery.of(context).size.width > 350 ? 33 : 12),
                   child: Observer(builder: (context) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,8 +241,20 @@ class _HomePageState extends State<HomePage> {
                   child: Observer(builder: (context) {
                     return ChangeSatatusBarComponent(
                       isAvaliable: controller.isAvaliable,
-                      onChangedAvaliable: (value) async =>
-                          controller.isAvaliableChanged(value: value),
+                      onChangedAvaliable: (value) async {
+                        final permissionStatus =
+                            await Location.instance.hasPermission();
+                        if (permissionStatus == PermissionStatus.denied) {
+                          DefaultAlertDialog.show(
+                              dialogData: DialogDataEntity(
+                                  title: "Ops.",
+                                  description:
+                                      "Você não poderá realizar entregas sem permitir o uso da localização." +
+                                          "\nEntre nas configurações do seu celular em gerenciador de aplicativos, procure por Feelps e em seguida ative a localização!"));
+                        } else {
+                          await controller.isAvaliableChanged(value: value);
+                        }
+                      },
                     );
                   }),
                 )

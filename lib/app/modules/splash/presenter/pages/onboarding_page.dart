@@ -14,6 +14,7 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
+    print(AppColumns.column12(context: context));
     return DefaultScaffold(
       withScroll: false,
       body: Expanded(
@@ -41,10 +42,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           borderRadius: BorderRadius.circular(5)),
                       child: Text(
                         "Feelps Delivery!",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline1!
-                            .copyWith(color: AppColors.black),
+                        style: Theme.of(context).textTheme.headline1!.copyWith(
+                            fontSize:
+                                AppColumns.column1(context: context) * 0.95,
+                            color: AppColors.black),
                       ),
                     ),
                   ],
@@ -92,7 +93,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     },
                     title: 'Tenho uma conta'),
                 SizedBox(
-                  height: 40,
+                  height: AppColumns.column1(context: context),
                 )
               ],
             )

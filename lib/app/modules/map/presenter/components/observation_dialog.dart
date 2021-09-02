@@ -16,7 +16,7 @@ class ObservationDialog {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               insetPadding: EdgeInsets.all(33),
-              child: Padding(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
