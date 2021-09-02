@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/modules/historic/presenter/controller/historic_controller.dart';
 import 'package:feelps/app/modules/historic/presenter/pages/delivery_detail_page.dart';
@@ -16,11 +17,10 @@ class HomeModule extends Module {
         Bind((i) => HistoricController(i())),
         Bind<IHomeRepository>((i) => HomeRepository(i(), i())),
         Bind<IHistoricRepository>(
-          (i) => HistoricRepository(
-            i(),
-            i(),
-          ),
+          (i) => HistoricRepository(i(), i(), i()),
         ),
+        Bind<Dio>((i) => Dio(i())),
+        Bind((i) => BaseOptions()),
       ];
 
   @override

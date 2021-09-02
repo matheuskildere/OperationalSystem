@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -25,11 +26,12 @@ void main() {
   late FirebaseDatabase firebaseDatabase;
   final connectivityService = ConnectivityServiceMock();
   late HistoricRepository repository;
+  final Dio _dio = Dio();
 
   setUp(() async {
     firebaseDatabase = MockFirebaseDatabase.instance;
     appFlavor = Flavor.dev;
-    repository = HistoricRepository(connectivityService, firebaseDatabase);
+    repository = HistoricRepository(connectivityService, firebaseDatabase, _dio);
 
     // initialize locale to convert String to Datetime
     await initializeDateFormatting('p t_BR');
