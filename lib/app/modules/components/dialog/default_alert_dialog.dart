@@ -263,7 +263,10 @@ class DefaultAlertDialog {
                                 .reference()
                                 .child('service-${appFlavor!.title}')
                                 .child(serviceId)
-                                .update({'status': 'rejected'});
+                                .update({
+                              'status':
+                                  'rejected-${FirebaseAuth.instance.currentUser!.uid}'
+                            });
                             Navigator.pop(context, true);
                           },
                         ),

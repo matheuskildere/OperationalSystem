@@ -2,6 +2,7 @@ import 'package:feelps/app/core/entities/service_entity.dart';
 import 'package:feelps/app/core/enum/status_enum.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/theme.dart';
+import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:flutter/material.dart';
 
@@ -83,10 +84,14 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(
-                                widget.service.serviceName,
-                                style: AppTypography.buttonText
-                                    .copyWith(fontSize: 12),
+                              SizedBox(
+                                width: AppColumns.column6(context: context),
+                                child: Text(
+                                  "widget.service.asdsadasdasdasdsadasdas",
+                                  style: AppTypography.buttonText
+                                      .copyWith(fontSize: 12),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                               Text(
                                   widget.isClicked
@@ -99,41 +104,43 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                           ),
                         ],
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 6.5,
-                                backgroundColor: widget.service.status ==
-                                        DeliveryStatusEnum.accepted
-                                    ? AppColors.error
-                                    : AppColors.success,
-                              ),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              SizedBox(
-                                width: 90,
-                                child: Text(
-                                  widget.service.status.getDescription(),
-                                  overflow: TextOverflow.fade,
-                                  style: AppTypography.cardText.copyWith(
-                                      fontSize: 10.5,
-                                      color: widget.service.status ==
-                                              DeliveryStatusEnum.accepted
-                                          ? AppColors.error
-                                          : AppColors.success),
+                      Flexible(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 6.5,
+                                  backgroundColor: widget.service.status ==
+                                          DeliveryStatusEnum.accepted
+                                      ? AppColors.error
+                                      : AppColors.success,
                                 ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            'R\$${widget.service.price.toStringAsFixed(2)}',
-                            style: AppTypography.cardText,
-                          ),
-                        ],
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                  child: Text(
+                                    widget.service.status.getDescription(),
+                                    overflow: TextOverflow.fade,
+                                    style: AppTypography.cardText.copyWith(
+                                        fontSize: 10.5,
+                                        color: widget.service.status ==
+                                                DeliveryStatusEnum.accepted
+                                            ? AppColors.error
+                                            : AppColors.success),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              'R\$${widget.service.price.toStringAsFixed(2)}',
+                              style: AppTypography.cardText,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
