@@ -9,24 +9,35 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app/core/services/receive_messaging_service.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  ReceiveMessagingService.onReceiveMessage(message);
-}
-
+final receiveMessagingService = ReceiveMessagingService();
 Future<void> _firebaseMessagingForograundHandler(RemoteMessage message) async {
-  ReceiveMessagingService.onReceiveMessage(message);
+  receiveMessagingService.onReceiveMessage(
+      event: message, fromBackground: true);
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  appFlavor = Flavor.dev;
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getToken();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingForograundHandler);
   FirebaseMessaging.onMessageOpenedApp.listen((event) {
-    ReceiveMessagingService.onReceiveMessage(event);
+    receiveMessagingService.onReceiveMessage(
+      event: event,
+      fromBackground: false,
+    );
   });
-  FirebaseMessaging.onMessage.listen(_firebaseMessagingForograundHandler);
+  FirebaseMessaging.onMessage
+      .listen((event) => receiveMessagingService.onReceiveMessage(
+            event: event,
+            fromBackground: false,
+          ));
   await initializeDateFormatting('p t_BR');
-  appFlavor = Flavor.dev;
   runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
