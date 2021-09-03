@@ -16,14 +16,15 @@ class Formatter {
         .trim();
   }
 
-  static String removeDiacritics(String word) {
-    var withDia =
-        'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
-    var withoutDia =
-        'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
-    for (int i = 0; i < withDia.length; i++) {
-      word = word.replaceAll(withDia[i], withoutDia[i]);
-    }
-    return word;
+  static String cpfWithOutFormatter(String cpf) {
+    return cpf.replaceAll('.', '').replaceAll('-', '').trim();
+  }
+
+  static String upperCaseAllFirstLetters(String value) {
+    final list = value.split(' ');
+    final listUper = list
+        .map((e) => e.substring(0, 1).toUpperCase() + e.substring(1))
+        .toList();
+    return listUper.join(' ');
   }
 }

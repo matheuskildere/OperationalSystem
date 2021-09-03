@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "817575105303",
+    "project_id": "feelps-73bc9",
+    "storage_bucket": "feelps-73bc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817575105303:android:9bffea444a6425ddbf5d52",
+        "android_client_info": {
+          "package_name": "com.youdevelop.app.feelps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817575105303-o319n4rkuugblm7btnqs0fv4cpqfssbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.youdevelop.app.feelps",
+            "certificate_hash": "efd695ab6fc796638121cc885b5f05c559beeb94"
+          }
+        },
+        {
+          "client_id": "817575105303-tgoesq308uehlpt315b21dp1quetrr67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDytN1V9xO0dOMrMry4V237zHxqDB0p__Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817575105303-tgoesq308uehlpt315b21dp1quetrr67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

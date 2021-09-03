@@ -1,0 +1,95 @@
+{
+    "deliveryMan": {
+        "birthday": "",
+        "cpf": "",
+        "email": "",
+        "fullName": "",
+        "id": "",
+        "password": "",
+        "phoneNumber": "",
+        "photoUrl": "",
+        "status": "actived",
+        "notificationToken": "",
+        "createdAt": "",
+        "lastLocation": {
+            "latitude": "",
+            "longitude": ""
+        },
+        "servicesHistory": [
+            "id", "id"
+        ],
+        "motorcycle": {
+            "brand": "",
+            "model": "",
+            "year": "",
+            "photoUrl": "",
+            "color": "",
+            "plate": ""
+        }
+    },
+    "establishment": {
+        "name": "",
+        "corporateName": "",
+        "address": {
+            "completed": "",
+            "latitude": "",
+            "longitude": ""
+        },
+        "cnpj": "",
+        "id": "",
+        "email": "",
+        "phoneNumber": "",
+        "logo": "",
+        "createdAt": "",
+        "fee": {
+            "perService": 0,
+            "perKM": 0
+        },
+        "servicesHistory": [
+            "id", "id"
+        ]
+    },
+    "services": [
+        {
+            "id": "",
+            "date_init": "",
+            "date_end": "",
+            "serviceName": "",
+            "contactNumber": "",
+            "price": "",
+            "status": "",
+            "observations": [
+                {
+                    "createdAt": "",
+                    "description": "",
+                    "status": ""
+                }
+            ],
+            "deliveryAddress":  {
+                "receiver": "user receiver",
+                "address": "",
+                "latitude": "",
+                "longitude": ""
+            },
+            "deliveryMan": {
+                "id": "",
+                "fullName": "",
+                "photoUrl": "",
+                "notificationToken": "ashkdjasdkasd",
+                "location": {
+                    "latitude": "",
+                    "longitude": ""
+                }
+            },
+            "establishment": {
+                "id": "",
+                "name": "",
+                "address": "address",
+                "location": {
+                  "latitude": -6.0734862262354845,
+                  "longitude": -49.89554485547499
+                }
+            }
+        }
+    ]
+}
