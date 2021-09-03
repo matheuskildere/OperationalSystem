@@ -85,7 +85,6 @@ abstract class _MapRouteController with Store {
 
     result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
-      return null;
     }, (r) {});
   }
 }

@@ -4,6 +4,7 @@ import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/modules/home/errors/home_errors.dart';
 import 'package:feelps/app/modules/home/models/change_status_request.dart';
+import 'package:feelps/app/modules/home/models/last_location_request.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 abstract class IHomeRepository {
@@ -11,6 +12,8 @@ abstract class IHomeRepository {
       {required ChangeStatusRequest request});
   Future<Either<Failure, bool>> getStatusAvaliable(
       {required String deliveryManId});
+  Future<Either<Failure, Unit>> updateLastLocation(
+      {required LastLocationRequest request});
 }
 
 class HomeRepository extends IHomeRepository {
@@ -63,5 +66,22 @@ class HomeRepository extends IHomeRepository {
           title: "Ocorreu um erro",
           message: 'Não buscar seu status de disponibilidade'));
     }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateLastLocation(
+      {required LastLocationRequest request}) async {
+    final reference = _database.reference();
+
+    try {
+      await reference
+          .child(tableName)
+          .child(request.deliveryManId)
+          .update({'lastLocation': request.toMap()});
+    } catch (e) {
+      print(e);
+    }
+
+    return Right(unit);
   }
 }

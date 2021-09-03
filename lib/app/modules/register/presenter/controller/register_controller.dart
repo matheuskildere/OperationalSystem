@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:camera_camera/camera_camera.dart';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
+import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/utils/formatter.dart';
 import 'package:feelps/app/core/validations/app_validations.dart';
 import 'package:feelps/app/modules/register/models/register_request.dart';
@@ -64,7 +65,7 @@ abstract class _RegisterController with Store {
 
     final UploadTask task = FirebaseStorage.instance
         .ref()
-        .child('profile$rand')
+        .child('deliveryman-${appFlavor!.title}/profile$rand')
         .putFile(uploadphoto);
     final TaskSnapshot tasksnapshot = await task.whenComplete(() => null);
     final String url = await tasksnapshot.ref.getDownloadURL();
