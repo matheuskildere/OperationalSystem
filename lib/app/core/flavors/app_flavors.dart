@@ -1,4 +1,4 @@
-enum Flavor { dev, prod }
+enum Flavor { dev, stage, prod }
 
 Flavor? appFlavor;
 
@@ -7,6 +7,8 @@ extension FlavoreExt on Flavor {
     switch (this) {
       case Flavor.prod:
         return 'Production';
+      case Flavor.stage:
+        return 'Stage';
       case Flavor.dev:
       default:
         return 'Develop';
@@ -15,4 +17,5 @@ extension FlavoreExt on Flavor {
 
   bool get isDev => this == Flavor.dev;
   bool get isProd => this == Flavor.prod;
+  bool get isStage => this == Flavor.stage;
 }

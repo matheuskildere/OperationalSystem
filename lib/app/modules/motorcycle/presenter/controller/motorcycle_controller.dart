@@ -167,6 +167,9 @@ abstract class _MotorcycleController with Store {
           photoUrl: url,
           color: color!,
           plate: plate!);
+      Modular.get<AuthStore>().deliveryman = Modular.get<AuthStore>()
+          .deliveryman!
+          .copyWith(motorcycle: motorcycle);
       currentPhoto = newPhoto;
       cleanFields();
       Modular.to.pop();
@@ -212,6 +215,10 @@ abstract class _MotorcycleController with Store {
     }, (r) async {
       motorcycle = null;
       currentPhoto = null;
+      final deliveryMan = Modular.get<AuthStore>().deliveryman;
+      if (deliveryMan!.motorcycle != null) {
+        Modular.get<AuthStore>().deliveryman = deliveryMan.copyWith();
+      }
       errorMessage =
           'Oops, parece que você ainda não\npossui uma motocicleta cadastrada.';
     });

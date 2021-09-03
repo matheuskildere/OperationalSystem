@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
 
 class DeliverymanEntity extends Equatable {
@@ -32,4 +33,34 @@ class DeliverymanEntity extends Equatable {
 
   @override
   List<Object?> get props => [email, password, fullName];
+
+  DeliverymanEntity copyWith({
+    String? id,
+    String? email,
+    String? password,
+    String? fullName,
+    String? phoneNumber,
+    DateTime? birthday,
+    DateTime? createdAt,
+    String? cpf,
+    String? photoUrl,
+    bool? isAvaliable,
+    bool? status,
+    MotorcycleEntity? motorcycle,
+  }) {
+    return DeliverymanEntity(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      fullName: fullName ?? this.fullName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      birthday: birthday ?? this.birthday,
+      createdAt: createdAt ?? this.createdAt,
+      cpf: cpf ?? this.cpf,
+      photoUrl: photoUrl ?? this.photoUrl,
+      isAvaliable: isAvaliable ?? this.isAvaliable,
+      status: status ?? this.status,
+      motorcycle: motorcycle,
+    );
+  }
 }

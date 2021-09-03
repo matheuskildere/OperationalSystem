@@ -40,7 +40,7 @@ class RegisterRequest extends DeliverymanEntity {
       'cpf': cpf,
       'photoUrl': photoUrl,
       'isAvaliable': false,
-      'status': true,
+      'status': false,
       'createdAt': DateParser.getDateStringEn(DateTime.now()),
     };
   }

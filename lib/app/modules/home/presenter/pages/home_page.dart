@@ -27,14 +27,27 @@ class _HomePageState extends State<HomePage> {
   final authStore = Modular.get<AuthStore>();
   final controller = Modular.get<HomeController>();
 
+  late Location location;
+
   @override
   void initState() {
     controller.getStatusAvaliable();
+    location = Location();
     super.initState();
-    requestPermission();
+    requestPermission().then((value) {
+      if (value) {
+        location.changeSettings(
+          interval: 20000,
+        );
+        location.onLocationChanged.listen((event) async {
+          controller.updateLastLocation(
+              latitude: event.latitude!, longitude: event.longitude!);
+        });
+      }
+    });
   }
 
-  Future<void> requestPermission() async {
+  Future<bool> requestPermission() async {
     var permissionStatus = await Location.instance.hasPermission();
     if (permissionStatus != PermissionStatus.granted &&
         permissionStatus != PermissionStatus.grantedLimited) {
@@ -52,7 +65,9 @@ class _HomePageState extends State<HomePage> {
               description:
                   "Você não poderá realizar entregas sem permitir o uso da localização." +
                       "\nEntre nas configurações do seu celular em gerenciador de aplicativos, procure por Feelps e em seguida ative a localização!"));
+      return false;
     }
+    return true;
   }
 
   @override
@@ -252,7 +267,25 @@ class _HomePageState extends State<HomePage> {
                                       "Você não poderá realizar entregas sem permitir o uso da localização." +
                                           "\nEntre nas configurações do seu celular em gerenciador de aplicativos, procure por Feelps e em seguida ative a localização!"));
                         } else {
-                          await controller.isAvaliableChanged(value: value);
+                          if (authStore.deliveryman!.motorcycle != null) {
+                            if (authStore.deliveryman!.status!) {
+                              await controller.isAvaliableChanged(value: value);
+                            } else {
+                              DefaultAlertDialog.show(
+                                  dialogData: DialogDataEntity(
+                                      title: "Ops.",
+                                      description:
+                                          "Você ainda não está habilitado a realizar entregas." +
+                                              "\nSeu cadastro está sendo verificado!"));
+                            }
+                          } else {
+                            DefaultAlertDialog.show(
+                                dialogData: DialogDataEntity(
+                                    title: "Ops.",
+                                    description:
+                                        "Você ainda não está habilitado a realizar entregas." +
+                                            "\nCadastre uma motocicleta!"));
+                          }
                         }
                       },
                     );

@@ -44,9 +44,9 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
     pagecontroller.serviceId = widget.service.id;
     getDirections();
     initialCamera = CameraPosition(
-              zoom: 14.5,
-                target: LatLng(widget.service.establishment.location.latitude,
-                    widget.service.establishment.location.longitude));
+        zoom: 14.5,
+        target: LatLng(widget.service.establishment.location.latitude,
+            widget.service.establishment.location.longitude));
     super.initState();
   }
 
@@ -68,9 +68,8 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
           color: AppColors.secondary,
           width: 7,
           points: polylineCoordinates));
-      initialCamera = CameraPosition(
-              zoom: 14.5,
-                target: _polylines.first.points.last);
+      initialCamera =
+          CameraPosition(zoom: 14.5, target: _polylines.first.points.last);
       setState(() {});
     }
   }
