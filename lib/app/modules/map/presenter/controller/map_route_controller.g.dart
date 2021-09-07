@@ -69,6 +69,24 @@ mixin _$MapRouteController on _MapRouteController, Store {
     return _$getServiceAsyncAction.run(() => super.getService());
   }
 
+  final _$updateStatusAsyncAction =
+      AsyncAction('_MapRouteController.updateStatus');
+
+  @override
+  Future<void> updateStatus(String? observation) {
+    return _$updateStatusAsyncAction.run(() => super.updateStatus(observation));
+  }
+
+  final _$updateLastLocationAsyncAction =
+      AsyncAction('_MapRouteController.updateLastLocation');
+
+  @override
+  Future<void> updateLastLocation(
+      {required double latitude, required double longitude}) {
+    return _$updateLastLocationAsyncAction.run(() =>
+        super.updateLastLocation(latitude: latitude, longitude: longitude));
+  }
+
   @override
   String toString() {
     return '''

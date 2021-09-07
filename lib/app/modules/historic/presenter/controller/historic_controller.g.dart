@@ -54,6 +54,36 @@ mixin _$HistoricController on _HistoricController, Store {
     });
   }
 
+  final _$serviceIdAtom = Atom(name: '_HistoricController.serviceId');
+
+  @override
+  String? get serviceId {
+    _$serviceIdAtom.reportRead();
+    return super.serviceId;
+  }
+
+  @override
+  set serviceId(String? value) {
+    _$serviceIdAtom.reportWrite(value, super.serviceId, () {
+      super.serviceId = value;
+    });
+  }
+
+  final _$directionsAtom = Atom(name: '_HistoricController.directions');
+
+  @override
+  DirectionsModel? get directions {
+    _$directionsAtom.reportRead();
+    return super.directions;
+  }
+
+  @override
+  set directions(DirectionsModel? value) {
+    _$directionsAtom.reportWrite(value, super.directions, () {
+      super.directions = value;
+    });
+  }
+
   final _$getServicesAsyncAction =
       AsyncAction('_HistoricController.getServices');
 
@@ -67,7 +97,9 @@ mixin _$HistoricController on _HistoricController, Store {
     return '''
 dialogData: ${dialogData},
 services: ${services},
-errorMessage: ${errorMessage}
+errorMessage: ${errorMessage},
+serviceId: ${serviceId},
+directions: ${directions}
     ''';
   }
 }

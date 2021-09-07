@@ -1,5 +1,4 @@
-import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
-import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
+import 'package:feelps/app/core/entities/motorcycle_entity.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_icons.dart';
@@ -171,7 +170,7 @@ class _ManageMotorcyclePageState extends State<ManageMotorcyclePage> {
                               subtitle: controller.motorcycle!.color.getCor(),
                               trailing: CircleAvatar(
                                   backgroundColor:
-                                      controller.motorcycle!.color.getColor),
+                                      controller.motorcycle!.color.getColor()),
                             ),
                             MotorcycleDataComponent(
                               title: 'Placa',

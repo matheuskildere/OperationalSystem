@@ -36,7 +36,7 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
 
   late CameraPosition initialCamera;
 
-  late double size = 300;
+  late double size = 350;
 
   @override
   void initState() {

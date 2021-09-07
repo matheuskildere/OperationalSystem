@@ -145,6 +145,14 @@ mixin _$RegisterController on _RegisterController, Store {
     });
   }
 
+  final _$uploadPhotoAsyncAction =
+      AsyncAction('_RegisterController.uploadPhoto');
+
+  @override
+  Future<String> uploadPhoto() {
+    return _$uploadPhotoAsyncAction.run(() => super.uploadPhoto());
+  }
+
   final _$makeRegisterAsyncAction =
       AsyncAction('_RegisterController.makeRegister');
 
