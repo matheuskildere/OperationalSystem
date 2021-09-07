@@ -87,6 +87,7 @@ class DefaultAlertDialog {
       required String serviceId,
       required String pickupAddress,
       required String deliveryAddress,
+      required String establishment,
       bool barrierDismissible = false}) async {
     return asuka.showDialog(
         barrierDismissible: barrierDismissible,
@@ -177,6 +178,17 @@ class DefaultAlertDialog {
                         ),
                         Text(
                           "Distância: $distance",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(color: AppColors.black, fontSize: 18),
+                          textAlign: TextAlign.start,
+                        ),
+                        const SizedBox(
+                          height: 3,
+                        ),
+                        Text(
+                          "Estabelecimento: $establishment",
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!

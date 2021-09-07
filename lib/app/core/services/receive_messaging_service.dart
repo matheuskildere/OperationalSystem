@@ -14,7 +14,7 @@ class ReceiveMessagingService {
   static bool instaceBackgrountCreated = false;
   Future<void> onReceiveMessage(
       {required RemoteMessage event, required bool fromBackground}) async {
-    appFlavor = Flavor.stage;
+    appFlavor = Flavor.dev;
     await Firebase.initializeApp();
     final notificationAt = DateTime.fromMillisecondsSinceEpoch(
         int.parse(event.data['notificationAt'].toString()));
@@ -25,7 +25,8 @@ class ReceiveMessagingService {
             distance: event.data['distance'].toString(),
             serviceId: event.data['serviceId'] as String,
             pickupAddress: event.data['pickup_address'].toString(),
-            deliveryAddress: event.data['delivery_address'].toString());
+            deliveryAddress: event.data['delivery_address'].toString(),
+            establishment: event.data['establishment'].toString());
       }
     } else {
       for (var i = 0; i < 20; i++) {

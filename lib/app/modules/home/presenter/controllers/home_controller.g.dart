@@ -42,6 +42,16 @@ mixin _$HomeController on _HomeController, Store {
         .run(() => super.getStatusAvaliable());
   }
 
+  final _$updateLastLocationAsyncAction =
+      AsyncAction('_HomeController.updateLastLocation');
+
+  @override
+  Future<void> updateLastLocation(
+      {required double latitude, required double longitude}) {
+    return _$updateLastLocationAsyncAction.run(() =>
+        super.updateLastLocation(latitude: latitude, longitude: longitude));
+  }
+
   @override
   String toString() {
     return '''

@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
-import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
+import 'package:feelps/app/core/entities/motorcycle_entity.dart';
 import 'package:feelps/app/core/errors/failure.dart';
 import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/modules/motorcycle/errors/motorcycle_errors.dart';
+import 'package:feelps/app/modules/motorcycle/models/motorcicly_color_model.dart';
 import 'package:feelps/app/modules/motorcycle/models/register_motorcycle_request.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -14,6 +14,7 @@ abstract class IMotorcycleRepository {
       {required RegisterMotorcycleRequest data});
   Future<Either<Failure, MotorcycleEntity?>> getMotorcycle();
   Future<Either<Failure, Unit>> deleteMotorcycle();
+  Future<Either<Failure, List<MotorciclyColorEntity>>> getColors();
 }
 
 class MotorcycleRepository implements IMotorcycleRepository {
@@ -65,15 +66,16 @@ class MotorcycleRepository implements IMotorcycleRepository {
           .child('motorcycle')
           .once();
       if (a.value == null) {
-        return right(null);
+        return Right(null);
       }
       final Map<String, dynamic> b = Map<String, dynamic>.from(a.value as Map);
-      return right(MotorcycleEntity(
+      return Right(MotorcycleEntity(
         brand: b['brand'] as String,
         model: b['model'] as String,
         year: b['year'] as int,
         photoUrl: b['photoUrl'] as String,
-        color: MotorcycleColorsExt.getByString(b['color'] as String),
+        color: MotorciclyColorModel.fromMap(
+            Map<String, dynamic>.from(b['color'] as Map)),
         plate: b['plate'] as String,
       ));
     } catch (e) {
@@ -106,5 +108,35 @@ class MotorcycleRepository implements IMotorcycleRepository {
     }
 
     return Right(unit);
+  }
+
+  @override
+  Future<Either<Failure, List<MotorciclyColorEntity>>> getColors() async {
+    final reference = _database.reference();
+
+    try {
+      final DataSnapshot a = await reference
+          .child('parameters')
+          .child('motorcycle')
+          .child('color')
+          .once();
+      if (a.value == null) {
+        return Left(GetColorsMotorcycleError(
+            title: "Não foi possível resgatar as cores",
+            message:
+                'Entre em contato com o suporte, pois não há cores disponíveis!'));
+      }
+      final List<MotorciclyColorModel> colors = [];
+      for (final item in a.value) {
+        colors.add(MotorciclyColorModel.fromMap(
+            Map<String, dynamic>.from(item as Map)));
+      }
+      return Right(colors);
+    } catch (e) {
+      return Left(GetColorsMotorcycleError(
+          title: "Não foi possível resgatar as cores",
+          message:
+              'Ocorreu um erro ao buscar as cores para cadastro de motocicleta.'));
+    }
   }
 }

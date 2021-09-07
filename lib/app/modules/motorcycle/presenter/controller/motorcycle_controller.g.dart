@@ -57,13 +57,13 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
   final _$colorAtom = Atom(name: '_MotorcycleController.color');
 
   @override
-  MotorcycleColorsEnum? get color {
+  MotorciclyColorEntity? get color {
     _$colorAtom.reportRead();
     return super.color;
   }
 
   @override
-  set color(MotorcycleColorsEnum? value) {
+  set color(MotorciclyColorEntity? value) {
     _$colorAtom.reportWrite(value, super.color, () {
       super.color = value;
     });
@@ -144,6 +144,21 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     });
   }
 
+  final _$colorsAtom = Atom(name: '_MotorcycleController.colors');
+
+  @override
+  List<MotorciclyColorEntity> get colors {
+    _$colorsAtom.reportRead();
+    return super.colors;
+  }
+
+  @override
+  set colors(List<MotorciclyColorEntity> value) {
+    _$colorsAtom.reportWrite(value, super.colors, () {
+      super.colors = value;
+    });
+  }
+
   final _$errorMessageAtom = Atom(name: '_MotorcycleController.errorMessage');
 
   @override
@@ -192,6 +207,13 @@ mixin _$MotorcycleController on _MotorcycleController, Store {
     return _$getMotorcycleAsyncAction.run(() => super.getMotorcycle());
   }
 
+  final _$getColorsAsyncAction = AsyncAction('_MotorcycleController.getColors');
+
+  @override
+  Future<void> getColors() {
+    return _$getColorsAsyncAction.run(() => super.getColors());
+  }
+
   final _$_MotorcycleControllerActionController =
       ActionController(name: '_MotorcycleController');
 
@@ -218,6 +240,7 @@ newPhoto: ${newPhoto},
 currentPhoto: ${currentPhoto},
 dialogData: ${dialogData},
 motorcycle: ${motorcycle},
+colors: ${colors},
 errorMessage: ${errorMessage}
     ''';
   }

@@ -17,7 +17,7 @@ Future<void> _firebaseMessagingForograundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  appFlavor = Flavor.stage;
+  appFlavor = Flavor.dev;
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getToken();
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
