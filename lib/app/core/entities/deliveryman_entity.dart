@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
+import 'package:feelps/app/core/entities/motorcycle_entity.dart';
 
 class DeliverymanEntity extends Equatable {
   final String? id;

@@ -1,41 +1,71 @@
 {
   "project_info": {
-    "project_number": "817575105303",
-    "project_id": "feelps-73bc9",
-    "storage_bucket": "feelps-73bc9.appspot.com"
+    "project_number": "556987069658",
+    "firebase_url": "https://feelps-app-default-rtdb.firebaseio.com",
+    "project_id": "feelps-app",
+    "storage_bucket": "feelps-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:817575105303:android:9bffea444a6425ddbf5d52",
+        "mobilesdk_app_id": "1:556987069658:android:25d182ad1f1e8108e721e3",
         "android_client_info": {
           "package_name": "com.youdevelop.app.feelps"
         }
       },
       "oauth_client": [
         {
-          "client_id": "817575105303-o319n4rkuugblm7btnqs0fv4cpqfssbs.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.youdevelop.app.feelps",
-            "certificate_hash": "efd695ab6fc796638121cc885b5f05c559beeb94"
-          }
-        },
-        {
-          "client_id": "817575105303-tgoesq308uehlpt315b21dp1quetrr67.apps.googleusercontent.com",
+          "client_id": "556987069658-0jpl4shm7q2gss8hedle71b53q2meq87.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDytN1V9xO0dOMrMry4V237zHxqDB0p__Y"
+          "current_key": "AIzaSyC-M_9ZuNo97CyAhdHQLnJ0o-BFnNFs2gs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "817575105303-tgoesq308uehlpt315b21dp1quetrr67.apps.googleusercontent.com",
+              "client_id": "556987069658-0jpl4shm7q2gss8hedle71b53q2meq87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556987069658:android:04eb3aae87ae2a1fe721e3",
+        "android_client_info": {
+          "package_name": "com.youdevelop.feelps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556987069658-er664nbjttj3lmi8ijdd3m9cqmomp079.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.youdevelop.feelps",
+            "certificate_hash": "efd695ab6fc796638121cc885b5f05c559beeb94"
+          }
+        },
+        {
+          "client_id": "556987069658-0jpl4shm7q2gss8hedle71b53q2meq87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-M_9ZuNo97CyAhdHQLnJ0o-BFnNFs2gs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556987069658-0jpl4shm7q2gss8hedle71b53q2meq87.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

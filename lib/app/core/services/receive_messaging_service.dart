@@ -25,7 +25,8 @@ class ReceiveMessagingService {
             distance: event.data['distance'].toString(),
             serviceId: event.data['serviceId'] as String,
             pickupAddress: event.data['pickup_address'].toString(),
-            deliveryAddress: event.data['delivery_address'].toString());
+            deliveryAddress: event.data['delivery_address'].toString(),
+            establishment: event.data['establishment'].toString());
       }
     } else {
       for (var i = 0; i < 20; i++) {

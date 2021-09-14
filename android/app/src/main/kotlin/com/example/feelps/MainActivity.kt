@@ -1,4 +1,4 @@
-package com.youdevelop.app.feelps
+package com.youdevelop.feelps
 
 import io.flutter.embedding.android.FlutterActivity
 

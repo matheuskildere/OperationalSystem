@@ -1,6 +1,4 @@
 class AppParameters {
   static String get appVersion => "V1.0.0";
-  static String get apiGoogleMaps => "AIzaSyDUhzdLOrNSTpRfccn0qrj6o70YU1KeHTs";
-  static String get smsDevKey =>
-      "I45N45FYARVV5ETG80OUIWIPO0BJV56NWMOZU1YKJZZLSYDCXLZVRGN75G6ZALM7DKU0FS1SZNGBVW1MMAEMLTU12VY5NKSXJUM8QF5W9G6MCPTRQKMVFG9FFT53CUPI";
+  static String get apiGoogleMaps => "AIzaSyBdwJ_d5aHRy8t9xaPpl0heJIXl2ezgM1E";
 }

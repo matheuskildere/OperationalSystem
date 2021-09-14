@@ -1,8 +1,8 @@
-import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
 import 'package:feelps/app/core/theme/app_colors.dart';
 import 'package:feelps/app/core/theme/app_icons.dart';
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/modules/components/components.dart';
+import 'package:feelps/app/modules/motorcycle/models/motorcicly_color_model.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/components/big_title_component.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/components/color_menu_item_component.dart';
 import 'package:feelps/app/modules/motorcycle/presenter/controller/motorcycle_controller.dart';
@@ -126,41 +126,21 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                   child: PopupMenuButton(
                     elevation: 2,
                     onSelected: (value) {
-                      controller.color = value! as MotorcycleColorsEnum;
+                      controller.color = value! as MotorciclyColorModel;
                       colorController.text = controller.color!.getCor();
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        value: MotorcycleColorsEnum.black,
+                    itemBuilder: (context) =>
+                        List.generate(controller.colors.length, (index) {
+                      return PopupMenuItem(
+                        value: controller.colors[index],
                         child: ColorMenuItem(
-                          color: MotorcycleColorsEnum.black.getColor,
-                          colorName: MotorcycleColorsEnum.black.getCor(),
+                          color: controller.colors[index].getColor(),
+                          colorName: controller.colors[index].getCor(),
                         ),
-                      ),
-                      PopupMenuItem(
-                        value: MotorcycleColorsEnum.red,
-                        child: ColorMenuItem(
-                          color: MotorcycleColorsEnum.red.getColor,
-                          colorName: MotorcycleColorsEnum.red.getCor(),
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: MotorcycleColorsEnum.blue,
-                        child: ColorMenuItem(
-                          color: MotorcycleColorsEnum.blue.getColor,
-                          colorName: MotorcycleColorsEnum.blue.getCor(),
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: MotorcycleColorsEnum.grey,
-                        child: ColorMenuItem(
-                          color: MotorcycleColorsEnum.grey.getColor,
-                          colorName: MotorcycleColorsEnum.grey.getCor(),
-                        ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                     child: Row(
                       children: [
                         Expanded(
@@ -178,7 +158,7 @@ class _RegisterMotorcyclePageState extends State<RegisterMotorcyclePage> {
                             return CircleAvatar(
                               backgroundColor: controller.color == null
                                   ? AppColors.background
-                                  : controller.color!.getColor,
+                                  : controller.color!.getColor(),
                               radius: 25,
                             );
                           },

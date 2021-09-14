@@ -3,10 +3,10 @@ import 'dart:math';
 
 import 'package:camera_camera/camera_camera.dart';
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
-import 'package:feelps/app/core/entities/mtorcycle_entity.dart';
-import 'package:feelps/app/core/enum/motorcycle_colors_enum.dart';
+import 'package:feelps/app/core/entities/motorcycle_entity.dart';
 import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/stores/auth_store.dart';
+import 'package:feelps/app/modules/motorcycle/models/motorcicly_color_model.dart';
 import 'package:feelps/app/modules/motorcycle/models/register_motorcycle_request.dart';
 import 'package:feelps/app/modules/motorcycle/repositories/motorcycle_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -38,7 +38,7 @@ abstract class _MotorcycleController with Store {
   int? year;
 
   @observable
-  MotorcycleColorsEnum? color;
+  MotorciclyColorEntity? color;
 
   @observable
   String? plate;
@@ -54,6 +54,9 @@ abstract class _MotorcycleController with Store {
 
   @observable
   MotorcycleEntity? motorcycle;
+
+  @observable
+  List<MotorciclyColorEntity> colors = [];
 
   @observable
   String? errorMessage;
@@ -154,7 +157,7 @@ abstract class _MotorcycleController with Store {
           model: model!,
           year: year!,
           photoUrl: url,
-          color: color!,
+          color: MotorciclyColorModel(color: color!.color, name: color!.name),
           plate: plate!),
     );
     result.fold((l) {
@@ -178,6 +181,7 @@ abstract class _MotorcycleController with Store {
 
   @action
   Future<void> getMotorcycle() async {
+    await getColors();
     final result = await _repository.getMotorcycle();
     result.fold((l) {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
@@ -196,6 +200,14 @@ abstract class _MotorcycleController with Store {
         errorMessage =
             'Oops, parece que você ainda não\npossui uma motocicleta cadastrada.';
       }
+    });
+  }
+
+  @action
+  Future<void> getColors() async {
+    final result = await _repository.getColors();
+    result.fold((l) {}, (r) async {
+      colors = r;
     });
   }
 
