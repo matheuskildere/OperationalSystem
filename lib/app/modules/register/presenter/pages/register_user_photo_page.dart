@@ -52,7 +52,7 @@ class _RegisterUserPhotoPageState extends State<RegisterUserPhotoPage> {
               onPressed: () async {
                 await controller.getImage(isFromGalery: false);
               },
-              title: "Tirar uma Self",
+              title: "Tirar uma Selfie",
               invertColors: true,
             ),
           ),
