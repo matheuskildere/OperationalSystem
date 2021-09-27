@@ -74,7 +74,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
       interval: 5000,
     );
     location.onLocationChanged.listen((event) async {
-      if (controller.serviceEntity!.status != DeliveryStatusEnum.completed) {
+      if (controller.serviceEntity!.status != DeliveryStatusEnum.completed &&
+          controller.serviceEntity!.status != DeliveryStatusEnum.canceled) {
         currentLocation = event;
         updatePinOnMap();
         controller.updateLastLocation(
@@ -90,6 +91,10 @@ class _MapRoutePageState extends State<MapRoutePage> {
           }
         }
         setState(() {});
+        controller.verifyServiceStatus();
+      } else if (controller.dialogData != null) {
+        await backToHome(dialog: controller.dialogData);
+        controller.dialogData = null;
       }
     });
 
@@ -134,7 +139,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
         body: Observer(builder: (context) {
           if (controller.dialogData != null) {
             return Container(
-              width: 332,
+              width: double.maxFinite,
               decoration: BoxDecoration(
                   color: AppColors.background,
                   borderRadius: BorderRadius.circular(10)),
@@ -176,9 +181,12 @@ class _MapRoutePageState extends State<MapRoutePage> {
                   },
                   initialCameraPosition: initialCameraPosition,
                   onMapCreated: (GoogleMapController controllerMap) {
-                    controllerMap.setMapStyle(Utils.mapStyles);
-                    _controller.complete(controllerMap);
-                    showPinsOnMap();
+                    if (controller.serviceEntity!.status !=
+                        DeliveryStatusEnum.canceled) {
+                      controllerMap.setMapStyle(Utils.mapStyles);
+                      _controller.complete(controllerMap);
+                      showPinsOnMap();
+                    }
                   },
                 ),
                 Align(
@@ -229,11 +237,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
     );
   }
 
-  Future<void> backToHome() async {
-    await DefaultAlertDialog.show(
-        dialogData: DialogDataEntity(
-            title: "Parabêns", description: "Entrega realizada com sucesso!"));
+  Future<void> backToHome({DialogDataEntity? dialog}) async {
     Modular.to.navigate(AppRoutes.home);
+    DefaultAlertDialog.show(
+        dialogData: dialog ??
+            DialogDataEntity(
+                title: "Parabêns",
+                description: "Entrega realizada com sucesso!"));
   }
 
   Future<void> showPinsOnMap() async {

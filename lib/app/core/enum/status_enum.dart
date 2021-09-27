@@ -5,6 +5,7 @@ enum DeliveryStatusEnum {
   pickedUp,
   waytoDeliver,
   completed,
+  canceled,
 }
 
 extension DeliveryStatusExt on DeliveryStatusEnum {
@@ -22,7 +23,8 @@ extension DeliveryStatusExt on DeliveryStatusEnum {
         return "A caminho da entrega";
       case DeliveryStatusEnum.completed:
         return "Finalizado";
-
+      case DeliveryStatusEnum.canceled:
+        return "Cancelado";
       default:
         return "Ocorreu um erro";
     }
@@ -42,6 +44,8 @@ extension DeliveryStatusExt on DeliveryStatusEnum {
         return DeliveryStatusEnum.waytoDeliver;
       case "Finalizado":
         return DeliveryStatusEnum.completed;
+      case "Cancelado":
+        return DeliveryStatusEnum.canceled;
       default:
         return DeliveryStatusEnum.serchingDeliveryMan;
     }

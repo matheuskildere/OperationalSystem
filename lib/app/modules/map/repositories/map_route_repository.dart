@@ -18,6 +18,8 @@ abstract class IMapRouteRepository {
       {required StatusUpdateModel request});
   Future<Either<Failure, Unit>> updateLastLocation(
       {required LastLocationRequest request});
+  Future<Either<Failure, Unit>> verifyServiceStatus(
+      {required String serviceId});
 }
 
 class MapRouteRepository implements IMapRouteRepository {
@@ -64,7 +66,7 @@ class MapRouteRepository implements IMapRouteRepository {
     }
     final snapMap = Map<String, dynamic>.from(snapshotService.value as Map);
     var service = ServiceModel.fromMap(snapMap);
-    service = service.copyWith(status: DeliveryStatusEnum.wayToPickup);
+    service = service.copyWithModel(status: DeliveryStatusEnum.wayToPickup);
     return Right(service);
   }
 
@@ -162,5 +164,22 @@ class MapRouteRepository implements IMapRouteRepository {
         'servicesHistory': [serviceId]
       });
     }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> verifyServiceStatus(
+      {required String serviceId}) async {
+    final reference = _database.reference();
+    final result = await reference
+        .child(tableName)
+        .child(serviceId)
+        .child('status')
+        .once();
+    if (result.value.toString().toLowerCase() == "cancelado") {
+      return Left(ServiceCanceledError(
+          title: "Sentimos muito!",
+          message: "O serviço foi cancelado pelo estabelecimento!"));
+    }
+    return Right(unit);
   }
 }

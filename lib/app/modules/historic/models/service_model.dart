@@ -68,7 +68,7 @@ class ServiceModel extends ServiceEntity {
     );
   }
 
-  ServiceModel copyWith({
+  ServiceModel copyWithModel({
     String? id,
     DateTime? dateInit,
     DateTime? dateEnd,

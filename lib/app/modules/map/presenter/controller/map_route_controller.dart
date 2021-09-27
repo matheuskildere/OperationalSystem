@@ -87,4 +87,19 @@ abstract class _MapRouteController with Store {
       dialogData = DialogDataEntity(title: l.title, description: l.message);
     }, (r) {});
   }
+
+  @action
+  Future<void> verifyServiceStatus() async {
+    if (serviceEntity!.status == DeliveryStatusEnum.wayToPickup) {
+      dialogData = null;
+      final result =
+          await _repository.verifyServiceStatus(serviceId: serviceEntity!.id);
+
+      result.fold((l) {
+        dialogData = DialogDataEntity(title: l.title, description: l.message);
+        serviceEntity =
+            serviceEntity!.copyWith(status: DeliveryStatusEnum.canceled);
+      }, (r) {});
+    }
+  }
 }

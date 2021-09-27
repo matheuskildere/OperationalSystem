@@ -77,9 +77,12 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                     height: 10,
                                   ),
                                   Text(
-                                    DateParser.getTimeInterval(
-                                        start: widget.service.dateInit!,
-                                        end: widget.service.dateEnd!),
+                                    widget.service.dateEnd != null
+                                        ? DateParser.getTimeInterval(
+                                            start: widget.service.dateInit!,
+                                            end: widget.service.dateEnd!)
+                                        : DateParser.getDateString(
+                                            widget.service.dateInit),
                                     style: AppTypography.labelText
                                         .copyWith(fontSize: 10.5),
                                   ),
@@ -123,7 +126,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                 CircleAvatar(
                                   radius: 6.5,
                                   backgroundColor: widget.service.status ==
-                                          DeliveryStatusEnum.accepted
+                                          DeliveryStatusEnum.canceled
                                       ? AppColors.error
                                       : AppColors.success,
                                 ),
@@ -138,7 +141,7 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                     style: AppTypography.cardText.copyWith(
                                         fontSize: 10.5,
                                         color: widget.service.status ==
-                                                DeliveryStatusEnum.accepted
+                                                DeliveryStatusEnum.canceled
                                             ? AppColors.error
                                             : AppColors.success),
                                   ),
@@ -246,12 +249,13 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
                                 padding: EdgeInsets.all(4),
                                 child: Row(
                                   children: [
-                                    Text(
-                                      "Tempo de corrida: ${DateParser.getTimeOfService(start: widget.service.dateInit!, end: widget.service.dateEnd!)} min",
-                                      style: AppTypography.cardText.copyWith(
-                                          fontSize: 10.5,
-                                          color: AppColors.white),
-                                    ),
+                                    if (widget.service.dateEnd != null)
+                                      Text(
+                                        "Tempo de corrida: ${DateParser.getTimeOfService(start: widget.service.dateInit!, end: widget.service.dateEnd!)} min",
+                                        style: AppTypography.cardText.copyWith(
+                                            fontSize: 10.5,
+                                            color: AppColors.white),
+                                      ),
                                   ],
                                 ),
                               ),

@@ -238,7 +238,7 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
                               CircleAvatar(
                                 radius: 6.5,
                                 backgroundColor: widget.service.status ==
-                                        DeliveryStatusEnum.accepted
+                                        DeliveryStatusEnum.canceled
                                     ? AppColors.error
                                     : AppColors.success,
                               ),
@@ -253,7 +253,7 @@ class _DeliveryDetailPageState extends State<DeliveryDetailPage> {
                                   style: AppTypography.cardText.copyWith(
                                       fontSize: 10.5,
                                       color: widget.service.status ==
-                                              DeliveryStatusEnum.accepted
+                                              DeliveryStatusEnum.canceled
                                           ? AppColors.error
                                           : AppColors.success),
                                 ),

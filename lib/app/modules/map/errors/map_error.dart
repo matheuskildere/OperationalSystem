@@ -11,3 +11,9 @@ class NoRouteAvailableError extends Failure {
   final String message;
   NoRouteAvailableError({required this.title, required this.message});
 }
+
+class ServiceCanceledError extends Failure {
+  final String title;
+  final String message;
+  ServiceCanceledError({required this.title, required this.message});
+}

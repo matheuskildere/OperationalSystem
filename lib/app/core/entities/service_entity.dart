@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'package:feelps/app/core/enum/status_enum.dart';
 
 class ServiceEntity extends Equatable {
@@ -27,6 +28,32 @@ class ServiceEntity extends Equatable {
 
   @override
   List<Object?> get props => [id];
+
+  ServiceEntity copyWith({
+    String? id,
+    DateTime? dateInit,
+    DateTime? dateEnd,
+    String? serviceName,
+    double? price,
+    DeliveryStatusEnum? status,
+    DeliveryAdressEntity? deliveryAddress,
+    DeliveryManServiceEntity? deliveryMan,
+    List<ObservationEntity>? observations,
+    EstablishmentEntity? establishment,
+  }) {
+    return ServiceEntity(
+      id: id ?? this.id,
+      dateInit: dateInit ?? this.dateInit,
+      dateEnd: dateEnd ?? this.dateEnd,
+      serviceName: serviceName ?? this.serviceName,
+      price: price ?? this.price,
+      status: status ?? this.status,
+      deliveryAddress: deliveryAddress ?? this.deliveryAddress,
+      deliveryMan: deliveryMan ?? this.deliveryMan,
+      observations: observations ?? this.observations,
+      establishment: establishment ?? this.establishment,
+    );
+  }
 }
 
 class DeliveryAdressEntity {
