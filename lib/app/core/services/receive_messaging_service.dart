@@ -14,7 +14,7 @@ class ReceiveMessagingService {
   static bool instaceBackgrountCreated = false;
   Future<void> onReceiveMessage(
       {required RemoteMessage event, required bool fromBackground}) async {
-    appFlavor = Flavor.stage;
+    appFlavor = Flavor.prod;
     await Firebase.initializeApp();
     final notificationAt = DateTime.fromMillisecondsSinceEpoch(
         int.parse(event.data['notificationAt'].toString()));
