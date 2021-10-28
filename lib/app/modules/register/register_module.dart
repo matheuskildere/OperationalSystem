@@ -1,9 +1,9 @@
+import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
 import 'package:feelps/app/modules/register/presenter/pages/register_personal_data_page.dart';
 import 'package:feelps/app/modules/register/presenter/pages/register_user_data_page.dart';
 import 'package:feelps/app/modules/register/presenter/pages/register_user_photo_page.dart';
 import 'package:feelps/app/modules/register/repositories/resgister_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
 
 class RegisterModule extends Module {
   @override

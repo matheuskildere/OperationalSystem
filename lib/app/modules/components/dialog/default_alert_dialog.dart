@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:asuka/asuka.dart' as asuka;
 import 'package:feelps/app/core/entities/dialog_data_entity.dart';
 import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/theme/theme.dart';
@@ -8,7 +9,6 @@ import 'package:feelps/app/modules/components/components.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_modular/flutter_modular.dart';
 
 class DefaultAlertDialog {
@@ -79,7 +79,7 @@ class DefaultAlertDialog {
                   ),
                 ),
               ));
-  static String count = '10';
+  static String count = '120';
   static bool instaceCreated = false;
   static Future showService(
       {required String value,
@@ -93,24 +93,22 @@ class DefaultAlertDialog {
         barrierDismissible: barrierDismissible,
         builder: (context) {
           if (!instaceCreated) {
-            print("ALOWWWWWWWWWWWWWWWWWWW");
             instaceCreated = true;
             final interval = const Duration(seconds: 1);
-            final int timerMaxSeconds = 10;
+            final int timerMaxSeconds = 120;
             int currentSeconds = 0;
             final duration = interval;
             Timer.periodic(duration, (timer) {
               currentSeconds = timer.tick;
-              count = ((timerMaxSeconds - currentSeconds) % 60)
+              count = ((timerMaxSeconds - currentSeconds) % 120)
                   .toString()
                   .padLeft(2, '0');
               if (timer.tick >= timerMaxSeconds) timer.cancel();
               if (instaceCreated) {
                 (context as Element).markNeedsBuild();
                 if (count == "00") {
-                  print("bateu aqui 2");
                   Navigator.pop(context);
-                  count = '10';
+                  count = '120';
                   instaceCreated = false;
                   FirebaseDatabase.instance
                       .reference()
@@ -269,7 +267,7 @@ class DefaultAlertDialog {
                           invertColors: true,
                           smallTitle: true,
                           onPressed: () async {
-                            count = '10';
+                            count = '120';
                             instaceCreated = false;
                             await FirebaseDatabase.instance
                                 .reference()
@@ -290,7 +288,7 @@ class DefaultAlertDialog {
                           smallTitle: true,
                           successColor: true,
                           onPressed: () {
-                            count = '10';
+                            count = '120';
                             instaceCreated = false;
                             Navigator.pop(context);
                             Modular.to

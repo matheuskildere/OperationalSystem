@@ -12,11 +12,11 @@ import 'package:feelps/app/modules/motorcycle/repositories/motorcycle_repository
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
-import 'package:image/image.dart' as img;
 
 part 'motorcycle_controller.g.dart';
 

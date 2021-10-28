@@ -1,8 +1,8 @@
 import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/utils/data_parser.dart';
 import 'package:feelps/app/modules/components/components.dart';
-import 'package:flutter/material.dart';
 import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

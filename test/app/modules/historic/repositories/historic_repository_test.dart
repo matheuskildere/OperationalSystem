@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:feelps/app/core/entities/service_entity.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:firebase_database_mock/firebase_database_mock.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
 import 'package:feelps/app/core/flavors/app_flavors.dart';
 import 'package:feelps/app/core/services/connectivity_service.dart';
 import 'package:feelps/app/modules/historic/repositories/historic_repository.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database_mock/firebase_database_mock.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:mocktail/mocktail.dart';
 
 class ConnectivityServiceMock extends Mock implements ConnectivityService {}
 

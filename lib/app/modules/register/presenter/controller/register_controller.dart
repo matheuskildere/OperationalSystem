@@ -11,10 +11,10 @@ import 'package:feelps/app/modules/register/repositories/resgister_repository.da
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:image/image.dart' as img;
 
 part 'register_controller.g.dart';
 

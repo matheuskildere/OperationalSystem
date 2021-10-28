@@ -4,11 +4,11 @@ import 'package:feelps/app/core/theme/app_icons.dart';
 import 'package:feelps/app/core/theme/app_routes.dart';
 import 'package:feelps/app/core/utils/app_columns.dart';
 import 'package:feelps/app/modules/components/components.dart';
+import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
 import 'package:feelps/app/modules/register/presenter/pages/components/photo_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
 
 class RegisterUserPhotoPage extends StatefulWidget {
   const RegisterUserPhotoPage({Key? key}) : super(key: key);

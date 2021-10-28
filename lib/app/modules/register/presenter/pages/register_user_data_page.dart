@@ -1,8 +1,8 @@
 import 'package:feelps/app/core/theme/theme.dart';
 import 'package:feelps/app/modules/components/components.dart';
+import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
 
 class RegisterUserDataPage extends StatefulWidget {
   const RegisterUserDataPage({Key? key}) : super(key: key);

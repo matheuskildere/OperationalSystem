@@ -1,7 +1,7 @@
 import 'package:feelps/app/modules/auth/presenter/controller/auth_controller.dart';
 import 'package:feelps/app/modules/auth/presenter/pages/auth_page.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:feelps/app/modules/register/presenter/controller/register_controller.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'presenter/pages/recover_password_page.dart';
 
